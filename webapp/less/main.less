@@ -1,0 +1,113 @@
+@import "reset";
+
+body {
+    background-color: #2c3e50;
+    font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+header, main, footer {
+    width: 1024px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #2ecc71;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 100px;
+    text-shadow: 1px 1px 1px #27ae60;
+}
+
+h2 {
+    color: #a468bd;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 60px;
+    text-shadow: 1px 1px 1px #8e44ad;
+}
+
+input {
+    background-color: #2c3e50;
+    border: 3px solid #f1c40f;
+    width: 100%;
+    color: #f1c40f;
+    padding: 10px;
+    font-size: 24px;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+ul#known {
+    padding-bottom: 20px;
+    list-style: none;
+
+    li {
+        display: inline-block;
+        background-color: #f1c40f;
+        padding: 10px 20px;
+        font-size: 20px;
+        line-height: 20px;
+        border-radius: 20px;
+        margin-right: 10px;
+        
+        a {
+            display: none;
+        }
+        
+        &:hover {
+            padding: 10px 10px;
+            a {
+                display: inline-block;
+                width: 20px;
+                padding-left: 10px;
+                text-align: center;
+                box-sizing: border-box;
+                color: #000;
+                text-decoration: none;
+            }
+        }
+    }
+    
+}
+
+ul#predictions {
+    list-style: none;
+    line-height: 30px;
+    width: 100%;
+    
+    li {
+        display: block;
+        background-color: #f1c40f;
+        color: #2c3e50;
+        font-size: 24px;
+        box-sizing: border-box;
+        padding-left: 20px;
+        margin: 0 10px;
+    }
+}
+
+ul#suggested {
+    font-size: 20px;
+    color: #f1c40f;
+    list-style: none;
+    
+    a {
+        text-decoration: none;
+        color: #389adc;
+        
+        &:hover {
+            color: #2980b9;
+        }
+    }
+}
+
+footer {
+    color: #bdc3c7;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}

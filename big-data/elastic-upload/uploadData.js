@@ -14,7 +14,6 @@ var i = 0;
 var previous = null;
 
 lr.on('line', function (line) {
-    //if (i % 20 === 0) lr.pause();
 
     var variables = line.split('\t');
     var t1 = variables[0];
@@ -32,7 +31,6 @@ lr.on('line', function (line) {
         }
     }).then(function (body, res) {
             console.log("" + i + " - " + line.toString());
-            //if (i % 20 === 0) lr.resume();
             i++;
         }
     );
