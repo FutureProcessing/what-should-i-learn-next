@@ -1,0 +1,8 @@
+{
+  "name": "what-should-i-learn-next-elastic-upload",
+  "version": "0.0.1",
+  "dependencies": {
+    "elasticsearch":"4.1.x",
+    "line-by-line":"0.1.x"
+  }
+}

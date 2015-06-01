@@ -1,0 +1,23 @@
+{
+  "name": "what-should-i-learn-next-elastic-upload",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "1.3.x",
+    "express": "4.12.x",
+    "express-handlebars": "2.0.x",
+    "grunt-protractor-runner": "^2.x.x",
+    "morgan": "1.5.x",
+    "request": "^2.55.0",
+    "underscore": "1.8.x",
+    "webdriver-manager": "^5.2.0",
+    "elasticsearch":"4.1.x"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-browserify": "3.5.x",
+    "grunt-contrib-less": "1.0.x",
+    "grunt-contrib-watch": "0.6.x",
+    "grunt-express-server": "0.4.x",
+    "grunt-keepalive": "0.0.1"
+  }
+}
