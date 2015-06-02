@@ -1,14 +1,16 @@
 var LineByLineReader = require('line-by-line');
-var elasticSearch = require('elasticsearch');
-var hostAdress = process.argv[2];
+var elasticSearch = require('elasticsearch')
+
+var hostAddress = process.argv[2];
+var filePath = process.argv[3];
 
 var client = new elasticSearch.Client({
-    host: hostAdress,
+    host: hostAddress,
     minSockets: 200,
     maxSockets: 500
 });
 
-var lr = new LineByLineReader('./part-r-00000');
+var lr = new LineByLineReader(filePath);
 
 var i = 0;
 var previous = null;
@@ -20,7 +22,7 @@ lr.on('line', function (line) {
     var t2 = variables[1];
     var v = parseInt(variables[2]);
 
-    client.index({
+    /*client.index({
         index: "technologies",
         type: "relations",
         id: t1 + "_" + t2,
@@ -33,7 +35,7 @@ lr.on('line', function (line) {
             console.log("" + i + " - " + line.toString());
             i++;
         }
-    );
+    );*/
 
     if (previous !== t1) {
         previous = t1;
