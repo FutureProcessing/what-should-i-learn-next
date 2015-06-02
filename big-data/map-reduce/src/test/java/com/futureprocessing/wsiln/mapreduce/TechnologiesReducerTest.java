@@ -26,4 +26,19 @@ public class TechnologiesReducerTest {
                 .runTest();
     }
 
+    @Test
+    public void shouldNotCountNotPopularTechnologies() throws IOException {
+        //given
+        List<Text> input = Arrays.asList(new Text("mongo"), new Text("mongo"), new Text("mongo"), new Text("spring"));
+
+        //when
+        new ReduceDriver<Text, Text, Text, IntWritable>()
+                .withReducer(new TechnologiesReducer())
+                .withInput(new Text("java"), input)
+
+                        //then
+                .withOutput(new Text("java\tmongo"), new IntWritable(3))
+                .runTest();
+    }
+
 }
