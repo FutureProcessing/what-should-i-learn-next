@@ -22,7 +22,7 @@ lr.on('line', function (line) {
     var t2 = variables[1];
     var v = parseInt(variables[2]);
 
-    /*client.index({
+    client.index({
         index: "technologies",
         type: "relations",
         id: t1 + "_" + t2,
@@ -35,7 +35,7 @@ lr.on('line', function (line) {
             console.log("" + i + " - " + line.toString());
             i++;
         }
-    );*/
+    );
 
     if (previous !== t1) {
         previous = t1;
