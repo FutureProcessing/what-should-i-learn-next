@@ -11,6 +11,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.IOException;
+
+import static com.futureprocessing.wsiln.mapreduce.TechnologiesFormatter.removeVersionFromName;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
@@ -40,7 +42,7 @@ public class TechnologiesMapperTest {
     public void shouldMapTagsFromRowWithoutVersionNumber(String technologies, String formattedTechnologies) throws IOException {
         //given
         //when
-        String formatted = TechnologiesFormatter.removeVersionFromName(technologies);
+        String formatted = removeVersionFromName(technologies);
 
         //then
         assertThat(formatted).isEqualTo(formattedTechnologies);

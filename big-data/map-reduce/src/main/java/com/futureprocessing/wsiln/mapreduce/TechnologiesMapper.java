@@ -6,6 +6,8 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
+import static com.futureprocessing.wsiln.mapreduce.TechnologiesFormatter.removeVersionFromName;
+
 public class TechnologiesMapper extends Mapper<LongWritable, Text, Text, Text> {
     private Text outputKey = new Text();
     private Text outputValue = new Text();
@@ -29,11 +31,11 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, Text, Text> {
         String[] elements = cutOffLine.split("&gt;&lt;");
 
         for (int i = 0; i < elements.length; i++) {
-            outputKey.set(TechnologiesFormatter.removeVersionFromName(elements[i]));
+            outputKey.set(removeVersionFromName(elements[i]));
 
             for (int j = 0; j < elements.length; j++) {
                 if (i != j) {
-                    outputValue.set(TechnologiesFormatter.removeVersionFromName(elements[j]));
+                    outputValue.set(removeVersionFromName(elements[j]));
                     context.write(outputKey, outputValue);
                 }
             }

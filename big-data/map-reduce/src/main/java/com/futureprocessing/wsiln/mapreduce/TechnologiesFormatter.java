@@ -8,14 +8,13 @@ import java.util.regex.Pattern;
 public class TechnologiesFormatter {
     static Logger log = Logger.getLogger(TechnologiesFormatter.class);
 
-    static String VERSION_PATTERN = "-\\d";
+    private static final String VERSION_PATTERN = "-\\d";
+    private static final Pattern pattern = Pattern.compile(VERSION_PATTERN);
 
     public static String removeVersionFromName(String text) {
-
-        Pattern pattern = Pattern.compile(VERSION_PATTERN);
         Matcher matcher = pattern.matcher(text);
         if (matcher.find()) {
-            log.info("Removed " + text.substring(matcher.start()) + " from " + text);
+            log.debug("Removed " + text.substring(matcher.start()) + " from " + text);
             return text.substring(0, matcher.start());
         }
         return text;
