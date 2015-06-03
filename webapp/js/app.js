@@ -9,14 +9,24 @@ angular.module('whatToLearnNext', [
 .controller('mainController', ['$scope', 'technologyService', function ($scope, technologyService) {
     
     $scope.knownTechnologies = [];
+    $scope.avoidTechnologies = [];
     $scope.suggestedTechnologies = [];
     
     $scope.removeKnown = function (tech) {
         $scope.knownTechnologies = _($scope.knownTechnologies).without(tech);
     };
+
+    $scope.removeAvoid = function (tech) {
+        $scope.avoidTechnologies = _($scope.avoidTechnologies).without(tech);
+    };
     
     $scope.alreadyKnow = function (tech) {
         $scope.knownTechnologies.push(tech);
+        $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
+    };
+
+    $scope.avoid = function (tech) {
+        $scope.avoidTechnologies.push(tech);
         $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
     };
     
@@ -40,10 +50,19 @@ angular.module('whatToLearnNext', [
             $scope.technologyPredictions = _(technologies).difference($scope.knownTechnologies);
         });
     });
-    
+
+
     $scope.$watch('knownTechnologies', function (knownTechnologies) {
         if(knownTechnologies && knownTechnologies.length > 0) {
-            technologyService.getTechnologySuggestions(knownTechnologies).then(function (technologies) {
+            technologyService.getTechnologySuggestions(knownTechnologies, $scope.avoidTechnologies).then(function (technologies) {
+                $scope.suggestedTechnologies = technologies;
+            });
+        }
+    }, true);
+
+    $scope.$watch('avoidTechnologies', function (avoidTechnologies) {
+        if(avoidTechnologies && avoidTechnologies.length > 0) {
+            technologyService.getTechnologySuggestions($scope.knownTechnologies, avoidTechnologies).then(function (technologies) {
                 $scope.suggestedTechnologies = technologies;
             });
         }

@@ -23,6 +23,15 @@
                 <span ng-bind="t"></span><a href="" ng-click="removeKnown(t)">&Chi;</a>
             </li>
         </ul>
+
+        <h2 ng-if="avoidTechnologies.length > 0">What you don't want know?</h2>
+
+        <ul ng-if="avoidTechnologies.length > 0" id="avoid" >
+            <li ng-repeat="t in avoidTechnologies">
+                <span ng-bind="t"></span><a href="" ng-click="removeAvoid(t)">&Chi;</a>
+            </li>
+        </ul>
+
         <form>
             <input type="text" ng-model="query" ng-keypress="keyPress($event)"/>
         </form>
@@ -34,7 +43,9 @@
             
         <ul id="suggested" ng-if="suggestedTechnologies.length > 0">
             <li ng-repeat="t in suggestedTechnologies">
-                <span ng-bind="t"></span> - <a href="" ng-click="alreadyKnow(t)">I already know that</a>
+                <span ng-bind="t"></span>
+                - <a href="" ng-click="alreadyKnow(t)">I already know that</a>
+                - <a href="" ng-click="avoid(t)">I don't want to know that</a>
             </li>
         </ul>
     </main>
