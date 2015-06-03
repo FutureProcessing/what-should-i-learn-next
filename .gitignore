@@ -1,5 +1,4 @@
-﻿.idea/
+.idea/
 *.iml
 node_modules/
 build/
-
