@@ -1,14 +1,16 @@
 var LineByLineReader = require('line-by-line');
-var elasticSearch = require('elasticsearch');
-var hostAdress = process.argv[2];
+var elasticSearch = require('elasticsearch')
+
+var hostAddress = process.argv[2];
+var filePath = process.argv[3];
 
 var client = new elasticSearch.Client({
-    host: hostAdress,
+    host: hostAddress,
     minSockets: 200,
     maxSockets: 500
 });
 
-var lr = new LineByLineReader('./part-r-00000');
+var lr = new LineByLineReader(filePath);
 
 var i = 0;
 var previous = null;

@@ -1,1 +1,5 @@
-﻿Git ignored files.idea*.imlnode_modules
+﻿.idea/
+*.iml
+node_modules/
+build/
+
