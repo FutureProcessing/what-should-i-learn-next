@@ -9,8 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class TechnologiesReducer extends Reducer<Text, Text, Text, IntWritable>{
+public class TechnologiesReducer extends Reducer<Text, Text, Text, IntWritable> {
 
+    private static final Integer MIN_NUMBER_OF_CONECTION = 2;
     private Text outputKey = new Text();
     private IntWritable outputValue = new IntWritable();
 
@@ -18,21 +19,23 @@ public class TechnologiesReducer extends Reducer<Text, Text, Text, IntWritable>{
     protected void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
         Map<String, Integer> map = new HashMap<String, Integer>();
 
-        for(Text value: values) {
+        for (Text value : values) {
             String v = value.toString();
 
             Integer count = map.get(v);
-            if(count == null) {
+            if (count == null) {
                 count = 0;
             }
 
             map.put(v, count + 1);
         }
 
-        for(Map.Entry<String, Integer> entry : map.entrySet()) {
-            outputKey.set(key.toString() + "\t" + entry.getKey());
-            outputValue.set(entry.getValue());
-            context.write(outputKey, outputValue);
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (entry.getValue() >= MIN_NUMBER_OF_CONECTION) {
+                outputKey.set(key.toString() + "\t" + entry.getKey());
+                outputValue.set(entry.getValue());
+                context.write(outputKey, outputValue);
+            }
         }
     }
 }
