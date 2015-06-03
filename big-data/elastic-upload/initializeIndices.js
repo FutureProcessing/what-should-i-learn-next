@@ -1,5 +1,6 @@
 var elasticSearch = require('elasticsearch');
 var hostAdress = process.argv[2];
+var indexName = process.argv[3];
 
 var client = new elasticSearch.Client({
     host: hostAdress
@@ -8,7 +9,7 @@ var client = new elasticSearch.Client({
 
 var createRelationsMapping = function () {
     return client.indices.putMapping({
-        index: 'technologies',
+        index: indexName,
         type: 'relations',
         body: {
             relations: {
@@ -23,7 +24,7 @@ var createRelationsMapping = function () {
 
 var createListMapping = function () {
     return client.indices.putMapping({
-        index: 'technologies',
+        index: indexName,
         type: 'list',
         body: {
             list: {
@@ -39,7 +40,7 @@ var createListMapping = function () {
 };
 
 client.indices.create({
-    index: 'technologies',
+    index: indexName,
     body: {
         settings: {
             analysis: {
