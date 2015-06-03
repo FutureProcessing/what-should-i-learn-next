@@ -15,10 +15,11 @@ angular.module('whatToLearnNext.technologyService', [])
             });
         },
         
-        getTechnologySuggestions: function (knownTechnologies) {
+        getTechnologySuggestions: function (knownTechnologies, avoidTechnologies) {
             return $http.get('/technologySuggestions', {
                 params: {
-                    known: knownTechnologies
+                    known: knownTechnologies,
+                    avoid: avoidTechnologies
                 }
             }).then(function (response) {
                 return response.data.technologies;

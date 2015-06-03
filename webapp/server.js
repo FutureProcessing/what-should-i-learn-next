@@ -66,8 +66,13 @@ app.get('/technologyPredictions', function (req, res) {
 
 app.get('/technologySuggestions', function (req, res) {
     var known = req.query.known;
-    if(!Array.isArray(known)) {
+    if(known && !Array.isArray(known)) {
         known = [known];
+    }
+
+    var avoid = req.query.avoid;
+    if(avoid && !Array.isArray(avoid)) {
+        avoid = [avoid];
     }
 
     client.search({
@@ -86,7 +91,7 @@ app.get('/technologySuggestions', function (req, res) {
                             {
                                 not: {
                                     terms: {
-                                        t2: known
+                                        t2: _.union(known, avoid)
                                     }
                                 }
                             }
