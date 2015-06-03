@@ -1,13 +1,19 @@
 package com.futureprocessing.wsiln.mapreduce;
 
 
+import junitparams.JUnitParamsRunner;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mrunit.mapreduce.MapDriver;
 import org.junit.Test;
+import junitparams.Parameters;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.io.IOException;
+import static org.fest.assertions.api.Assertions.assertThat;
 
+@RunWith(JUnitParamsRunner.class)
 public class TechnologiesMapperTest {
 
     @Test
@@ -25,21 +31,19 @@ public class TechnologiesMapperTest {
                 .withOutput(new Text("spring"), new Text("java"))
                 .runTest();
     }
-
     @Test
-    public void shouldMapTagsFromRowWithoutVersionNumber() throws IOException {
+    @Parameters({
+            "java-8, java",
+            "spring-3b21, spring",
+            "mongo-12-2332-342, mongo"
+    })
+    public void shouldMapTagsFromRowWithoutVersionNumber(String technologies, String formattedTechnologies) throws IOException {
         //given
-        Text input = new Text("<row value=\"blabla\" Tags=\"&lt;java-7&gt;&lt;spring-3b41-3-52&gt;\" title=\"Java is awesome\" />");
-
         //when
-        new MapDriver<LongWritable, Text, Text, Text>()
-                .withMapper(new TechnologiesMapper())
-                .withInput(new LongWritable(1l), input)
+        String formatted = TechnologiesFormatter.removeVersionFromName(technologies);
 
-                        //then
-                .withOutput(new Text("java"), new Text("spring"))
-                .withOutput(new Text("spring"), new Text("java"))
-                .runTest();
+        //then
+        assertThat(formatted).isEqualTo(formattedTechnologies);
     }
 
 }
