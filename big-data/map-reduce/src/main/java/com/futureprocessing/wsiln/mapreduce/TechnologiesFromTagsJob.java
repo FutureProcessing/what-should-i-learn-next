@@ -13,10 +13,14 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.futureprocessing.wsiln.mapreduce.ConfigurationConstants.*;
 
 public class TechnologiesFromTagsJob extends Configured implements Tool {
+
+    private static Logger log = LoggerFactory.getLogger(TechnologiesFromTagsJob.class);
 
     public int run(String[] args) throws Exception {
         Job job = Job.getInstance(getConf());
@@ -26,8 +30,6 @@ public class TechnologiesFromTagsJob extends Configured implements Tool {
         FileInputFormat.addInputPath(job, new Path(args[0]));
 
         parseElasticArguments(args, job.getConfiguration());
-
-        System.out.println(job.getConfiguration());
 
         job.setMapperClass(TechnologiesMapper.class);
         job.setMapOutputKeyClass(Text.class);
@@ -39,7 +41,17 @@ public class TechnologiesFromTagsJob extends Configured implements Tool {
         job.setOutputValueClass(IntWritable.class);
         job.setOutputFormatClass(ElasticOutputFormat.class);
 
+        logConfiguration(job);
+
         return job.waitForCompletion(true) ? 0 : 1;
+    }
+
+    private void logConfiguration(Job job) {
+        Configuration configuration = job.getConfiguration();
+        log.info("Starting job with following configuration: ");
+        log.info("Elastic host: {}", configuration.get(ELASTIC_HOST));
+        log.info("Elastic port: {}", configuration.get(ELASTIC_PORT));
+        log.info("Elastic index name: {}", configuration.get(ELASTIC_INDEX_NAME));
     }
 
     private void parseElasticArguments(String[] args, Configuration configuration) {
@@ -57,9 +69,6 @@ public class TechnologiesFromTagsJob extends Configured implements Tool {
         configuration.setInt(ELASTIC_PORT, optionSet.valueOf(portOption));
         configuration.set(ELASTIC_INDEX_NAME, optionSet.valueOf(indexNameOption));
 
-        System.out.println(configuration.get(ELASTIC_HOST));
-        System.out.println(configuration.get(ELASTIC_PORT));
-        System.out.println(configuration.get(ELASTIC_INDEX_NAME));
     }
 
 
