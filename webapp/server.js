@@ -23,14 +23,6 @@ app.get('', function (req, res) {
     res.render('index');
 });
 
-var technologies = [
-    'java',
-    'javaScript',
-    'spring',
-    'maven',
-    'gradle'
-];
-
 app.get('/technologyPredictions', function (req, res) {
     var query = req.query.q;
 
@@ -127,3 +119,4 @@ app.get('/technologySuggestions', function (req, res) {
 });
 
 app.listen(config.http.port);
+console.log("Listening on port: " + config.http.port)
