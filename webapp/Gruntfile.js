@@ -83,7 +83,7 @@ module.exports = function (grunt) {
 
         run: {
             dev: {
-                cmd: 'node app.js',
+                cmd: 'node server/server.js',
                 options: {
                     wait: false,
                     ready: false
@@ -131,11 +131,10 @@ module.exports = function (grunt) {
                     archive: 'distribution/app.zip'
                 },
                 files: [
-                    {app: ['build/**']},
-                    {app: ['view/**']},
+                    {app: ['server/**']},
+                    {app: ['client/**']},
                     {app: ['config.json']},
-                    {app: ['package.json']},
-                    {app: ['server.js']}
+                    {app: ['package.json']}
                 ]
             }
         },
