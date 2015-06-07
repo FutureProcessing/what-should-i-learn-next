@@ -20,7 +20,6 @@ module.exports = function (grunt) {
                     'client/generated/app.js': ['client/js/app.js']
                 },
                 options: {
-                    // TODO add remapify
                     browserifyOptions: {
                         debug: true
                     },
@@ -30,6 +29,29 @@ module.exports = function (grunt) {
             prod: {
                 files: {
                     'client/generated/app.js': ['client/js/app.js']
+                },
+                options: {
+                    browserifyOptions: {
+                        debug: true // required by minifyify
+                    },
+                    plugin: [
+                        [
+                            'remapify',
+                            [{
+                                src: 'client/js/**/*.js',
+                                expose: '',
+                                cwd: __dirname
+                            }]
+                        ],
+                        [
+                            'minifyify',
+                            [{
+                                options: {
+                                    map: false
+                                }
+                            }]
+                        ]
+                    ]
                 }
             }
         },
