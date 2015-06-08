@@ -44,18 +44,48 @@ module.exports = {
                 query: {
                     filtered: {
                         filter: {
-                            and: [
+                            or: [
                                 {
-                                    terms: {
-                                        t1: known
-                                    }
+                                    and: [
+                                        {
+                                            term: {
+                                                plus: true
+                                            }
+                                        },
+                                        {
+                                            terms: {
+                                                t1: known
+                                            }
+                                        },
+                                        {
+                                            not: {
+                                                terms: {
+                                                    t2: _.union(known, avoid)
+                                                }
+                                            }
+                                        }
+                                    ]
                                 },
                                 {
-                                    not: {
-                                        terms: {
-                                            t2: _.union(known, avoid)
+                                    and: [
+                                        {
+                                            term: {
+                                                plus: false
+                                            }
+                                        },
+                                        {
+                                            terms: {
+                                                t1: avoid
+                                            }
+                                        },
+                                        {
+                                            not: {
+                                                terms: {
+                                                    t2: _.union(known, avoid)
+                                                }
+                                            }
                                         }
-                                    }
+                                    ]
                                 }
                             ]
                         }
@@ -68,7 +98,7 @@ module.exports = {
                             order: {
                                 total: 'desc'
                             },
-                            size: 5
+                            size: 10
                         },
                         aggs: {
                             total: {
