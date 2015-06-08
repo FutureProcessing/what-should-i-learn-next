@@ -15,17 +15,11 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         browserify: {
-            dist: {
-                files: {
-                    'build/app.js': ['js/app.js']
-                }
-            },
             dev: {
                 files: {
-                    'build/static/app.js': ['js/app.js']
+                    'client/generated/app.js': ['client/js/app.js']
                 },
                 options: {
-                    // TODO add remapify
                     browserifyOptions: {
                         debug: true
                     },
@@ -34,7 +28,30 @@ module.exports = function (grunt) {
             },
             prod: {
                 files: {
-                    'build/static/app.js': ['js/app.js']
+                    'client/generated/app.js': ['client/js/app.js']
+                },
+                options: {
+                    browserifyOptions: {
+                        debug: true // required by minifyify
+                    },
+                    plugin: [
+                        [
+                            'remapify',
+                            [{
+                                src: 'client/js/**/*.js',
+                                expose: '',
+                                cwd: __dirname
+                            }]
+                        ],
+                        [
+                            'minifyify',
+                            [{
+                                options: {
+                                    map: false
+                                }
+                            }]
+                        ]
+                    ]
                 }
             }
         },
@@ -42,7 +59,7 @@ module.exports = function (grunt) {
         express: {
             dev: {
                 options: {
-                    script: './server.js'
+                    script: './server/server.js'
 
                 }
             }
@@ -51,19 +68,22 @@ module.exports = function (grunt) {
         less: {
             dev: {
                 files: {
-                    'build/static/main.css': ['less/main.less']
+                    'client/generated/main.css': ['client/less/main.less']
                 }
             },
             prod: {
                 files: {
-                    'build/static/main.css': ['less/main.less']
+                    'client/generated/main.css': ['client/less/main.less']
+                },
+                options: {
+                    compress: true
                 }
             }
         },
 
         run: {
             dev: {
-                cmd: 'node app.js',
+                cmd: 'node server/server.js',
                 options: {
                     wait: false,
                     ready: false
@@ -76,7 +96,7 @@ module.exports = function (grunt) {
                 atBegin: true
             },
             express: {
-                files: 'server.js',
+                files: 'server/server.js',
                 tasks: ['express:dev'],
                 options: {
                     spawn: false,
@@ -85,7 +105,7 @@ module.exports = function (grunt) {
                 }
             },
             less: {
-                files: 'less/**/*.less',
+                files: 'client/less/**/*.less',
                 tasks: ['less:dev']
             }
         },
@@ -111,16 +131,16 @@ module.exports = function (grunt) {
                     archive: 'distribution/app.zip'
                 },
                 files: [
-                    {app: ['build/**']},
-                    {app: ['view/**']},
+                    {app: ['server/**']},
+                    {app: ['client/**']},
                     {app: ['config.json']},
-                    {app: ['package.json']},
-                    {app: ['server.js']}
+                    {app: ['package.json']}
                 ]
             }
         },
+
         clean: {
-            build: ["build/static/*.*"]
+            build: ["client/generated/*.*"]
         }
 
     });

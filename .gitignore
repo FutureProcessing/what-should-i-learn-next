@@ -2,4 +2,5 @@
 *.iml
 node_modules/
 build/
-distribution/app.zip
+generated/
+webapp/distribution/app.zip

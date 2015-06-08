@@ -1,5 +1,4 @@
 var express = require('express');
-var expHbs  = require('express-handlebars');
 var morgan = require('morgan');
 var _ = require('underscore');
 var config = require("./config.json");
@@ -11,17 +10,11 @@ var elasticAddress = config.elastic.address;
 var app = express();
 var client = new elasticSearch.Client({ host: elasticAddress });
 
-app.engine('html', expHbs());
-
-app.set('views', __dirname + '/view');
-app.set('view engine', 'html');
-
 app.use(morgan('combined'));
-app.use(express.static(__dirname + '/build/static'));
 
-app.get('', function (req, res) {
-    res.render('index');
-});
+app.use(express.static(__dirname + '/build/static'));
+app.use(express.static(__dirname + '/../client/generated'));
+app.use(express.static(__dirname + '/../client/html'));
 
 app.get('/technologyPredictions', function (req, res) {
     var query = req.query.q;
