@@ -35,7 +35,7 @@ RUN cd /app/app && npm install
 
 EXPOSE 8081	
 	
-ENTRYPOINT ["/usr/local/bin/start.sh"]
+CMD ["/usr/local/bin/start.sh"]
     
 
 
