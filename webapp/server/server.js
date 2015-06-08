@@ -5,6 +5,7 @@ var config = require("./config.json");
 var elasticSearch = require('elasticsearch');
 
 var elasticAddress = config.elastic.address;
+var indexName = config.elastic.indexName;
 
 'use strict';
 var app = express();
@@ -20,7 +21,7 @@ app.get('/technologyPredictions', function (req, res) {
     var query = req.query.q;
 
     client.search({
-        index: 'technologies',
+        index: indexName,
         type: 'list',
         body: {
             query: {
@@ -61,7 +62,7 @@ app.get('/technologySuggestions', function (req, res) {
     }
 
     client.search({
-        index: 'technologies',
+        index: indexName,
         type: 'relations',
         body: {
             query: {

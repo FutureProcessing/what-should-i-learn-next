@@ -15,7 +15,8 @@ var createRelationsMapping = function () {
             relations: {
                 properties: {
                     t1: {type: 'string', index: 'not_analyzed'},
-                    t2: {type: 'string', index: 'not_analyzed'}
+                    t2: {type: 'string', index: 'not_analyzed'},
+                    plus: {type: 'boolean'}
                 }
             }
         }

@@ -44,16 +44,29 @@ public class ElasticRecordWriter extends RecordWriter<Text, IntWritable> {
         String t1 = scanner.next();
         String t2 = scanner.next();
 
+        final String elasticKey = t1 + "_" + t2;
+
         semaphore.acquire();
-        client.prepareIndex(indexName, "relations", t1 + "_" + t2)
+        client.prepareIndex(indexName, "relations", elasticKey + "1")
                 .setSource(jsonBuilder()
                                 .startObject()
                                 .field("t1", t1)
                                 .field("t2", t2)
+                                .field("plus", true)
                                 .field("v", value.get())
                 )
                 .execute().addListener(elasticResponseHandler);
 
+        semaphore.acquire();
+        client.prepareIndex(indexName, "relations", elasticKey + "0")
+                .setSource(jsonBuilder()
+                                .startObject()
+                                .field("t1", t1)
+                                .field("t2", t2)
+                                .field("plus", false)
+                                .field("v", 0 - value.get())
+                )
+                .execute().addListener(elasticResponseHandler);
 
         semaphore.acquire();
         client.prepareIndex(indexName, "list", t1)
