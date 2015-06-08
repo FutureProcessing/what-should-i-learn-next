@@ -1,7 +1,7 @@
 Map-reduce algorithm:
 ========================
 
-Algorithm working on all Posts.xml files (270 files, 40,8 gigabytes of data). Each files contain multiple posts, each post in one row.
+Algorithm working on stackoverflow.com-Posts/Posts.xml file (32,2 gigabytes of data). This file contain all posts from stackoverflow, each post in one row.
 Attribute "Tags" contain tags data, attribute "Body" contain post text.
 
 #Map
