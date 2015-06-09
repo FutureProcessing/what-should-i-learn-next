@@ -9,6 +9,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-keepalive');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-mocha-cli');
 
 
     grunt.initConfig({
@@ -79,6 +80,10 @@ module.exports = function (grunt) {
                     compress: true
                 }
             }
+        },
+
+        mochacli: {
+            all: ['test/*.js']
         },
 
         run: {
@@ -153,9 +158,9 @@ module.exports = function (grunt) {
      });*/
 
     //grunt.registerTask('e2e-test', ['protractor:e2e']);
+
+    grunt.registerTask('test', ['mochacli']);
     grunt.registerTask('develop', ['browserify:dev', 'watch']);
-
-
     grunt.registerTask('build', ['clean', 'browserify:prod', 'less:prod', 'compress']);
 
 

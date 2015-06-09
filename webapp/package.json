@@ -23,7 +23,10 @@
     "grunt-keepalive": "0.0.1",
     "grunt-contrib-compress": "^0.13.0",
     "grunt-contrib-less": "1.0.x",
-    "grunt-contrib-clean": "^0.6.0"
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-mocha-cli": "1.13.0",
+    "chai": "3.0.x",
+    "mocha": "2.2.x"
   },
   "scripts": {
     "start": "npm install && node server/server.js"
