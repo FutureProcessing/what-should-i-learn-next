@@ -5,29 +5,32 @@ Example showing how to install simple Master-Slave cluster on two Ubuntu machine
 
 # On Master and Slave instances
 
-## Add hadoop user with SU privileges
+## Prerequisites
+ 
+### Add hadoop user with SU privileges
 
-## Configure passwordless ssh to localhost
+### Configure passwordless ssh to localhost
 ``` bash
 ssh-keygen -q -N "" -t rsa -f /home/hadoop/.ssh/id_rsa
 cp /home/hadoop/.ssh/id_rsa.pub /home/hadoop/.ssh/authorized_keys
 ```
 
-## Configure passwordless ssh to to other mashines from master to slaves
+### Configure passwordless ssh to to other mashines from master to slaves
 Append `/home/hadoop/.ssh/id_rsa.pub` from master to `/home/hadoop/.ssh/authorized_keys` on slave nodes 
 
-## Install Hadoop and its dependencies
+### Install Java
 ```  bash
 sudo apt-get update
-sudo apt-get install curl -y
-
-# install Java
 sudo apt-get install openjdk-7-jdk
-
 ```
 
-### Define following environment variables:
+### Make sure there isn't an entry for your hostname mapped to 127.0.0.1 or 127.0.1.1 in /etc/hosts
+Otherwise the ConnectionRefused exception will occur when nodemanagers from slaves try to connect to master.
+More explanation here: http://wiki.apache.org/hadoop/ConnectionRefused
 
+## Hadoop Instalation
+
+### Define following environment variables:
 ``` 
 JAVA_HOME="/path/to/your/java/home"
 HADOOP_HOME=/usr/local/hadoop
@@ -40,7 +43,7 @@ HADOOP_CONF_DIR="/usr/local/hadoop/etc/hadoop"
 YARN_CONF_DIR="/usr/local/hadoop/etc/hadoop"
 ```
 
-### Download Hadoop
+### Install Hadoop
 ``` bash   
 # hadoop
 sudo wget http://www.eu.apache.org/dist/hadoop/common/hadoop-2.7.0/hadoop-2.7.0.tar.gz 
@@ -69,7 +72,7 @@ sudo chown hadoop hadoop-2.7.0
 sudo chown hadoop hadoop
 ```
 
-## Configure Hadoop
+## Hadoop Configuration
 
 Edit `$HADOOP_PREFIX/etc/hadoop/core-site.xml` and put there host name of your master machine
 ``` XML 
@@ -100,13 +103,11 @@ Edit `$HADOOP_PREFIX/etc/hadoop/hdfs-site.xml`:
         <value>0.0.0.0</value>          
     </property>
         
-
     <!-- WHY this?  Here's the answer: http://log.rowanto.com/why-datanode-is-denied-communication-with-namenode/ -->    
     <property>
         <name>dfs.namenode.datanode.registration.ip-hostname-check</name>
         <value>false</value>
     </property>
-
 </configuration>
 ```
 
@@ -118,9 +119,7 @@ Edit `$HADOOP_PREFIX/etc/hadoop/mapred-site.xml`:
         <value>yarn</value>
     </property>
 </configuration>
-
 ```
-
 
 Edit `$HADOOP_PREFIX/etc/hadoop/yarn-site.xml`: with your master hostname.
 
@@ -144,32 +143,15 @@ Edit `$HADOOP_PREFIX/etc/hadoop/yarn-site.xml`: with your master hostname.
     </property>
 
     <property>
-    <description>
-      Number of seconds after an application finishes before the nodemanager's
-      DeletionService will delete the application's localized file directory
-      and log directory.
-
-      To diagnose Yarn application problems, set this property's value large
-      enough (for example, to 600 = 10 minutes) to permit examination of these
-      directories. After changing the property's value, you must restart the
-      nodemanager in order for it to have an effect.
-
-      The roots of Yarn applications' work directories is configurable with
-      the yarn.nodemanager.local-dirs property (see below), and the roots
-      of the Yarn applications' log directories is configurable with the
-      yarn.nodemanager.log-dirs property (see also below).
-    </description>
-    <name>yarn.nodemanager.delete.debug-delay-sec</name>
-    <value>600</value>
-  </property>
-
+      <name>yarn.nodemanager.delete.debug-delay-sec</name>
+      <value>600</value>
+    </property>
 </configuration>
 ```
 
 # Only On Master
 
-
-## Make hadoop master node aware of slave nodes 
+## Make hadoop master-node aware of slave nodes 
 Edit `$HADOOP_PREFIX/etc/hadoop/slaves` and put there your slave hosts.
 ``` bash
 localhost
@@ -177,12 +159,11 @@ slave-host
 ```
 
 ## Start and Initialize HDFS
-```
+``` bash
 $HADOOP_PREFIX/bin/hdfs namenode -format
 
 $HADOOP_PREFIX/sbin/start-dfs.sh
 $HADOOP_PREFIX/bin/hdfs dfs -mkdir -p /user/hadoop
-
 ```
 
 ## Start YARN
@@ -208,4 +189,4 @@ $HADOOP_PREFIX/sbin/start-yarn.sh
 ```
 
 You can also visit `http://master-host:50070` to verify hdfs configuration and nodes.
-Chekcout `http://master-host:8088` to verify resource manager works correctly and has all child nodes attached
+Checkout `http://master-host:8088` to verify resource manager works correctly and has all child nodes attached
