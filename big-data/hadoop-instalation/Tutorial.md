@@ -3,25 +3,18 @@ How to install Hadoop in cluster
 
 Example showing how to install simple Master-Slave cluster on two Ubuntu machines.
 
-On Master and Slave instances
------------------------------
+# On Master and Slave instances
 
-## Create hadoop user
+## Add hadoop user with SU privileges
+
+## Configure passwordless ssh to localhost
+``` bash
+ssh-keygen -q -N "" -t rsa -f /home/hadoop/.ssh/id_rsa
+cp /home/hadoop/.ssh/id_rsa.pub /home/hadoop/.ssh/authorized_keys
 ```
-sudo adduser hadoop
 
-#Add sudo privileges for hadoop user 
-sudo visudo
-
-#In file type:
-hadoop  ALL=(ALL:ALL)   ALL
-#Save by CTRL+X, followed by 'Y'
-
-# Change shell for hadoop user
-
-sudo chsh -s /bin/bash hadoop
-
-```
+## Configure passwordless ssh to to other mashines from master to slaves
+Append `/home/hadoop/.ssh/id_rsa.pub` from master to `/home/hadoop/.ssh/authorized_keys` on slave nodes 
 
 ## Install Hadoop and its dependencies
 ```  bash
@@ -30,24 +23,14 @@ sudo apt-get install curl -y
 
 # install Java
 sudo apt-get install openjdk-7-jdk
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
-# download native support
-mkdir -p /tmp/native
-curl -Ls http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64-2.7.0.tar | tar -x -C /tmp/native
+```
 
-# hadoop
-sudo curl -s http://www.eu.apache.org/dist/hadoop/common/hadoop-2.7.0/hadoop-2.7.0.tar.gz | sudo tar -xz -C /usr/local/
-cd /usr/local
-sudo ln -s ./hadoop-2.7.0 hadoop
+### Define following environment variables:
 
-
-#Edit file `/etc/environment` 
-vim /etc/environment
-
-#and add there following environment variables:
-
-JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64"
+``` 
+JAVA_HOME="/path/to/your/java/home"
+HADOOP_HOME=/usr/local/hadoop
 HADOOP_PREFIX="/usr/local/hadoop"
 HADOOP_COMMON_HOME="/usr/local/hadoop"
 HADOOP_HDFS_HOME="/usr/local/hadoop"
@@ -55,11 +38,21 @@ HADOOP_MAPRED_HOME="/usr/local/hadoop"
 HADOOP_YARN_HOME="/usr/local/hadoop"
 HADOOP_CONF_DIR="/usr/local/hadoop/etc/hadoop"
 YARN_CONF_DIR="/usr/local/hadoop/etc/hadoop"
-PATH=(... leave as it is ...)
-#..........
+```
 
-sudo sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64\nexport HADOOP_PREFIX=/usr/local/hadoop\nexport HADOOP_HOME=/usr/local/hadoop\n:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
-sudo sed -i '/^export HADOOP_CONF_DIR/ s:.*:export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop/:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
+### Download Hadoop
+``` bash   
+# hadoop
+sudo wget http://www.eu.apache.org/dist/hadoop/common/hadoop-2.7.0/hadoop-2.7.0.tar.gz 
+sudo tar -xzf hadoop-2.7.0.tar.gz -C /usr/local
+cd /usr/local
+sudo chown -R hadoop hadoop-2.7.0
+sudo ln -s ./hadoop-2.7.0 hadoop
+   
+# download native support
+mkdir -p /tmp/native
+wget http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64-2.7.0.tar
+tar -xf hadoop-native-64-2.7.0.tar -C /tmp/native
 
 # fixing the libhadoop.so like a boss
 sudo rm -rf /usr/local/hadoop/lib/native
@@ -70,7 +63,7 @@ ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
 sudo chmod +x /usr/local/hadoop/etc/hadoop/*-env.sh
 ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
 
-
+#Make hadoop owner of hadoop files
 cd /usr/local
 sudo chown hadoop hadoop-2.7.0
 sudo chown hadoop hadoop
@@ -78,7 +71,7 @@ sudo chown hadoop hadoop
 
 ## Configure Hadoop
 
-Edit `core-site.xml` and put there host name of your machine
+Edit `$HADOOP_PREFIX/etc/hadoop/core-site.xml` and put there host name of your master machine
 ``` XML 
  <configuration>
       <property>
@@ -88,14 +81,25 @@ Edit `core-site.xml` and put there host name of your machine
   </configuration>
 ```
 
-Edit `$HADOOP_PREFIX/etc/hadoop/hdfs-site.xml` 
+Edit `$HADOOP_PREFIX/etc/hadoop/hdfs-site.xml`: 
 ``` xml
 <configuration>    
     <property>
         <name>dfs.replication</name>
          <!-- put here value of how many nodes your want Hadoop to replicate data to -->
-        <value>1</value>          
+        <value>2</value>          
     </property>
+    
+    <property>
+        <name>dfs.namenode.rpc-bind-host</name>             
+        <value>0.0.0.0</value>          
+    </property>
+    
+    <property>
+        <name>dfs.namenode.servicerpc-bind-host</name>             
+        <value>0.0.0.0</value>          
+    </property>
+        
 
     <!-- WHY this?  Here's the answer: http://log.rowanto.com/why-datanode-is-denied-communication-with-namenode/ -->    
     <property>
@@ -106,7 +110,7 @@ Edit `$HADOOP_PREFIX/etc/hadoop/hdfs-site.xml`
 </configuration>
 ```
 
-Edit `$HADOOP_PREFIX/etc/hadoop/mapred-site.xml` with your hostname.
+Edit `$HADOOP_PREFIX/etc/hadoop/mapred-site.xml`:
 ```
 <configuration>
     <property>
@@ -118,7 +122,7 @@ Edit `$HADOOP_PREFIX/etc/hadoop/mapred-site.xml` with your hostname.
 ```
 
 
-Edit `$HADOOP_PREFIX/etc/hadoop/yarn-site.xml`: 
+Edit `$HADOOP_PREFIX/etc/hadoop/yarn-site.xml`: with your master hostname.
 
 ``` xml
 <configuration>
@@ -126,6 +130,13 @@ Edit `$HADOOP_PREFIX/etc/hadoop/yarn-site.xml`:
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
     </property> 
+    
+    <property>
+        <name>yarn.resourcemanager.hostname</name>
+        <!-- On master machine set MASTER_HOSTNAME to `0.0.0.0`. -->
+        <!-- On slave machines set MASTER_HOSTNAME to actual hostname of master -->
+        <value>MASTER_HOSTNAME</value>
+    </property>
 
     <property>
       <name>yarn.application.classpath</name>
@@ -155,6 +166,16 @@ Edit `$HADOOP_PREFIX/etc/hadoop/yarn-site.xml`:
 </configuration>
 ```
 
+# Only On Master
+
+
+## Make hadoop master node aware of slave nodes 
+Edit `$HADOOP_PREFIX/etc/hadoop/slaves` and put there your slave hosts.
+``` bash
+localhost
+slave-host
+```
+
 ## Start and Initialize HDFS
 ```
 $HADOOP_PREFIX/bin/hdfs namenode -format
@@ -169,3 +190,22 @@ $HADOOP_PREFIX/bin/hdfs dfs -mkdir -p /user/hadoop
 $HADOOP_PREFIX/sbin/start-yarn.sh
 ```
 
+## Verify running processes
+`jps` command on Master should result in something like:
+```
+13629 DataNode
+15059 ResourceManager
+15514 Jps
+13830 SecondaryNameNode
+15194 NodeManager
+```
+
+`jps` on slave:
+```
+10243 NodeManager
+10343 Jps
+9506 DataNode
+```
+
+You can also visit `http://master-host:50070` to verify hdfs configuration and nodes.
+Chekcout `http://master-host:8088` to verify resource manager works correctly and has all child nodes attached
