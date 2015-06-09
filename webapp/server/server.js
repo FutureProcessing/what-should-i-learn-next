@@ -26,14 +26,21 @@ app.get('/technologyPredictions', function (req, res) {
 
 app.get('/technologySuggestions', function (req, res) {
     var known = req.query.known;
-    if(known && !Array.isArray(known)) {
+    if(!known) {
+        known = [];
+    }
+    if(!Array.isArray(known)) {
         known = [known];
     }
 
     var avoid = req.query.avoid;
-    if(avoid && !Array.isArray(avoid)) {
+    if(!avoid) {
+        avoid = [];
+    }
+    if(!Array.isArray(avoid)) {
         avoid = [avoid];
     }
+
 
     technologies.getSuggestions(known, avoid).then(function (suggestions) {
         res.send({
