@@ -101,7 +101,7 @@ module.exports = function (grunt) {
                 atBegin: true
             },
             express: {
-                files: 'server/server.js',
+                files: 'server/**',
                 tasks: ['express:dev'],
                 options: {
                     spawn: false,
