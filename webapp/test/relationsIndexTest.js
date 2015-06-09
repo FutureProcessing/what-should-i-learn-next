@@ -89,4 +89,26 @@ describe('Relations Index', function () {
             });
     });
 
+    it('results should be ordered by v descending', function (done) {
+        // given
+        createRelation('java', 'spring', 1000)
+            .then(createRelation('java', 'maven', 700))
+            .then(createRelation('java', 'gradle', 900))
+
+            // when
+            .then(function () { return technologies.getSuggestionsRaw(['java'], ['scala']) })
+
+            // then
+            .then(function (results) {
+                var buckets = results.aggregations.rel.buckets;
+
+                expect(buckets).to.have.length(3);
+                expect(buckets[0].key).to.eql('spring');
+                expect(buckets[1].key).to.eql('gradle');
+                expect(buckets[2].key).to.eql('maven');;
+
+                done();
+            });
+    });
+
 });
