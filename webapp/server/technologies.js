@@ -1,117 +1,123 @@
 var elasticSearch = require('elasticsearch');
 var _ = require('underscore');
-var config = require("./config.json");
 
-var elasticAddress = config.elastic.address;
-var indexName = config.elastic.indexName;
+var Technologies = function (host, index) {
+    this.client = new elasticSearch.Client({ host: host });
+    this.index = index;
+};
 
-var client = new elasticSearch.Client({ host: elasticAddress });
+Technologies.prototype.getPredictionsRaw = function (query) {
+    return this.client.search({
+        index: this.index,
+        type: 'list',
+        body: {
+            query: {
+                bool: {
+                    should: [
+                        {
+                            match: {
+                                _id: query
+                            }
+                        },
+                        {
+                            match: {
+                                name: query
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    });
+};
 
-module.exports = {
-
-    getPredictions: function (query) {
-        return client.search({
-            index: indexName,
-            type: 'list',
-            body: {
-                query: {
-                    bool: {
-                        should: [
+Technologies.prototype.getSuggestionsRaw = function (known, avoid) {
+    return this.client.search({
+        index: this.index,
+        type: 'relations',
+        body: {
+            query: {
+                filtered: {
+                    filter: {
+                        or: [
                             {
-                                match: {
-                                    _id: query
-                                }
+                                and: [
+                                    {
+                                        term: {
+                                            plus: true
+                                        }
+                                    },
+                                    {
+                                        terms: {
+                                            t1: known
+                                        }
+                                    },
+                                    {
+                                        not: {
+                                            terms: {
+                                                t2: _.union(known, avoid)
+                                            }
+                                        }
+                                    }
+                                ]
                             },
                             {
-                                match: {
-                                    name: query
-                                }
+                                and: [
+                                    {
+                                        term: {
+                                            plus: false
+                                        }
+                                    },
+                                    {
+                                        terms: {
+                                            t1: avoid
+                                        }
+                                    },
+                                    {
+                                        not: {
+                                            terms: {
+                                                t2: _.union(known, avoid)
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         ]
                     }
                 }
-            }
-        }).then(function (result) {
-             return _(result.hits.hits).pluck('_id');
-        });
-    },
-
-    getSuggestions: function (known, avoid) {
-        return client.search({
-            index: indexName,
-            type: 'relations',
-            body: {
-                query: {
-                    filtered: {
-                        filter: {
-                            or: [
-                                {
-                                    and: [
-                                        {
-                                            term: {
-                                                plus: true
-                                            }
-                                        },
-                                        {
-                                            terms: {
-                                                t1: known
-                                            }
-                                        },
-                                        {
-                                            not: {
-                                                terms: {
-                                                    t2: _.union(known, avoid)
-                                                }
-                                            }
-                                        }
-                                    ]
-                                },
-                                {
-                                    and: [
-                                        {
-                                            term: {
-                                                plus: false
-                                            }
-                                        },
-                                        {
-                                            terms: {
-                                                t1: avoid
-                                            }
-                                        },
-                                        {
-                                            not: {
-                                                terms: {
-                                                    t2: _.union(known, avoid)
-                                                }
-                                            }
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    }
-                },
-                aggs: {
-                    rel: {
-                        terms: {
-                            field: 't2',
-                            order: {
-                                total: 'desc'
-                            },
-                            size: 10
+            },
+            aggs: {
+                rel: {
+                    terms: {
+                        field: 't2',
+                        order: {
+                            total: 'desc'
                         },
-                        aggs: {
-                            total: {
-                                sum: {
-                                    field: 'v'
-                                }
+                        size: 10
+                    },
+                    aggs: {
+                        total: {
+                            sum: {
+                                field: 'v'
                             }
                         }
                     }
                 }
             }
-        }).then(function (results) {
-            return _(results.aggregations.rel.buckets).pluck('key');
-        });
-    }
+        }
+    });
 };
+
+Technologies.prototype.getPredictions = function (query) {
+    return this.getPredictionsRaw(query).then(function (result) {
+        return _(result.hits.hits).pluck('_id');
+    });
+};
+
+Technologies.prototype.getSuggestions = function (known, avoid) {
+    return this.getSuggestionsRaw(known, avoid).then(function (results) {
+        return _(results.aggregations.rel.buckets).pluck('key');
+    });
+};
+
+module.exports = Technologies;

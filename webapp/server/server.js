@@ -1,10 +1,11 @@
 var express = require('express');
 var morgan = require('morgan');
-var technologies = require('./technologies.js');
+var Technologies = require('./technologies.js');
 var config = require("./config.json");
 
 
 var app = express();
+var technologies = new Technologies(config.elastic.address, config.elastic.indexName);
 
 app.use(morgan('combined'));
 
