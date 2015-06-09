@@ -1,9 +1,9 @@
 var elasticSearch = require('elasticsearch');
-var hostAdress = process.argv[2];
+var hostAddress = process.argv[2];
 var indexName = process.argv[3];
 
 var client = new elasticSearch.Client({
-    host: hostAdress
+    host: hostAddress
 });
 
 
