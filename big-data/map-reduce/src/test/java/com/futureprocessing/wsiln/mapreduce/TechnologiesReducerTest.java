@@ -1,5 +1,6 @@
 package com.futureprocessing.wsiln.mapreduce;
 
+import com.futureprocessing.wsiln.mapreduce.map.MappingType;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mrunit.mapreduce.ReduceDriver;
@@ -34,10 +35,10 @@ public class TechnologiesReducerTest {
         //when
         new ReduceDriver<Text, Text, Text, IntWritable>()
                 .withReducer(new TechnologiesReducer())
-                .withInput(new Text("java"), input)
+                .withInput(new Text("java"), input) //{{java, mongo}, {java, mongo}, {java, mongo}, {java, spring}}
 
                         //then
-                .withOutput(new Text("java\tmongo"), new IntWritable(3))
+                .withOutput(new Text("java\tmongo"), new IntWritable(3)) //{{java   mongo, 3},
                 .runTest();
     }
 
