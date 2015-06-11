@@ -1,8 +1,0 @@
-{
-  "http": {
-    "port": 8081
-  },
-  "elastic": {
-    "address": "fp-pc938:9200"
-  }
-}

@@ -1,0 +1,9 @@
+{
+  "http": {
+    "port": 8081
+  },
+  "elastic": {
+    "address": "fp-pc938:9200",
+    "indexName": "technologies01"
+  }
+}
