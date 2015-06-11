@@ -13,6 +13,9 @@ public class RelationKey extends BinaryComparable implements WritableComparable<
     String firstTechnology;
     String secondTechnology;
 
+    public RelationKey() {
+    }
+
     public RelationKey(String firstTechnology, String secondTechnology) {
         this.firstTechnology = firstTechnology;
         this.secondTechnology = secondTechnology;

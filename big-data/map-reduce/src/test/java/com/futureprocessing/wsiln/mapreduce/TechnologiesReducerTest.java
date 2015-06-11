@@ -1,6 +1,5 @@
 package com.futureprocessing.wsiln.mapreduce;
 
-import com.futureprocessing.wsiln.mapreduce.map.MappingType;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mrunit.mapreduce.ReduceDriver;
