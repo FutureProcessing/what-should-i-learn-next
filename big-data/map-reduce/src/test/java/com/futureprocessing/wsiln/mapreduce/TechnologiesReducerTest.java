@@ -1,5 +1,7 @@
 package com.futureprocessing.wsiln.mapreduce;
 
+import com.futureprocessing.wsiln.mapreduce.map.MappingType;
+import com.futureprocessing.wsiln.mapreduce.map.RelationKey;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mrunit.mapreduce.ReduceDriver;
@@ -14,12 +16,12 @@ public class TechnologiesReducerTest {
     @Test
     public void shouldCountTechnologies() throws IOException {
         //given
-        List<Text> input = Arrays.asList(new Text("spring"), new Text("spring"));
+        List<MappingType> input = Arrays.asList(MappingType.POST, MappingType.TAG);
 
         //when
-        new ReduceDriver<Text, Text, Text, IntWritable>()
+        new ReduceDriver<RelationKey, MappingType, Text, IntWritable>()
                 .withReducer(new TechnologiesReducer())
-                .withInput(new Text("java"), input)
+                .withInput(new RelationKey("java", "spring"), input)
 
                         //then
                 .withOutput(new Text("java\tspring"), new IntWritable(2))
@@ -29,16 +31,26 @@ public class TechnologiesReducerTest {
     @Test
     public void shouldNotCountNotPopularTechnologies() throws IOException {
         //given
-        List<Text> input = Arrays.asList(new Text("mongo"), new Text("mongo"), new Text("mongo"), new Text("spring"));
+        List<MappingType> input = Arrays.asList(MappingType.TAG);
 
         //when
-        new ReduceDriver<Text, Text, Text, IntWritable>()
+        new ReduceDriver<RelationKey, MappingType, Text, IntWritable>()
                 .withReducer(new TechnologiesReducer())
-                .withInput(new Text("java"), input) //{{java, mongo}, {java, mongo}, {java, mongo}, {java, spring}}
-
-                        //then
-                .withOutput(new Text("java\tmongo"), new IntWritable(3)) //{{java   mongo, 3},
+                .withInput(new RelationKey("java", "spring"), input)
                 .runTest();
+    }
+
+    @Test
+    public void shouldNotCountIfNotExistInTags() throws IOException {
+        List<MappingType> input = Arrays.asList(MappingType.POST, MappingType.POST, MappingType.POST, MappingType.POST, MappingType.POST);
+
+        //when
+        new ReduceDriver<RelationKey, MappingType, Text, IntWritable>()
+                .withReducer(new TechnologiesReducer())
+                .withInput(new RelationKey("java", "spring"), input)
+                        //then
+                .runTest();
+
     }
 
 }
