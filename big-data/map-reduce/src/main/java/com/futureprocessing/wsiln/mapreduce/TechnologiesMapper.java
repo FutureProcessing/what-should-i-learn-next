@@ -27,16 +27,16 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, 
 
     private boolean mapTags(String value, Context context) throws IOException, InterruptedException {
 
-        String[] elements = InputFormatter.splitInputString(value);
-        if (elements == null) {
+        String[] tags = InputFormatter.splitInputString(value);
+        if (tags == null) {
             return true;
         }
 
-        for (int i = 0; i < elements.length; i++) {
-            String firstTag = removeVersionFromName(elements[i]);
-            for (int j = 0; j < elements.length; j++) {
+        for (int i = 0; i < tags.length; i++) {
+            String firstTag = removeVersionFromName(tags[i]);
+            for (int j = 0; j < tags.length; j++) {
                 if (i != j) {
-                    String secondTag = removeVersionFromName(elements[j]);
+                    String secondTag = removeVersionFromName(tags[j]);
                         context.write(new RelationKey(firstTag, secondTag), MappingType.TAG);
                 }
             }
@@ -46,17 +46,17 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, 
 
     private boolean mapPosts(String value, Context context) throws IOException, InterruptedException {
 
-        String[] elements = InputFormatter.splitInputString(value);
-        if (elements == null) {
+        String[] words = InputFormatter.splitInputString(value);
+        if (words == null) {
             return true;
         }
 
-        for (int i = 0; i < elements.length; i++) {
-            String firstElement = removeVersionFromName(elements[i]).toLowerCase();
-            int scope = (i + MAPPING_SCOPE) < elements.length - 1 ? i + MAPPING_SCOPE : elements.length - 1;
+        for (int i = 0; i < words.length; i++) {
+            String firstElement = removeVersionFromName(words[i]).toLowerCase();
+            int scope = (i + MAPPING_SCOPE) < words.length - 1 ? i + MAPPING_SCOPE : words.length - 1;
             for (int j = i; j < scope + 1; j++) {
                 if (i != j) {
-                    String secondElement = removeVersionFromName(elements[j]);
+                    String secondElement = removeVersionFromName(words[j]);
                     if (!firstElement.equals(secondElement)) {
                         context.write(new RelationKey(firstElement, secondElement), MappingType.POST);
                         context.write(new RelationKey(secondElement, firstElement), MappingType.POST);

@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.io.StringReader;
 
 public class ParserXML {
-    String body;
-    String tags;
+    private String body;
+    private String tags;
 
     public ParserXML(String value) throws ParserConfigurationException, SAXException {
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
