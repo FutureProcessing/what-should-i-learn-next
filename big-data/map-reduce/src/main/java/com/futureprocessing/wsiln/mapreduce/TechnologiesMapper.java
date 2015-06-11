@@ -1,9 +1,7 @@
 package com.futureprocessing.wsiln.mapreduce;
 
 import com.futureprocessing.wsiln.mapreduce.map.MappingType;
-import com.futureprocessing.wsiln.mapreduce.map.MappingTypeWrapper;
 import com.futureprocessing.wsiln.mapreduce.map.RelationKey;
-import com.futureprocessing.wsiln.mapreduce.map.TechnologyMap;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -12,7 +10,7 @@ import java.io.IOException;
 
 import static com.futureprocessing.wsiln.mapreduce.TechnologiesFormatter.removeVersionFromName;
 
-public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, MappingTypeWrapper> {
+public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, MappingType> {
     private final static int MAPPING_SCOPE = 5;
 
 
@@ -39,9 +37,7 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, 
             for (int j = 0; j < elements.length; j++) {
                 if (i != j) {
                     String secondTag = removeVersionFromName(elements[j]);
-
-                        TechnologyMap map = new TechnologyMap(new RelationKey(firstTag, secondTag), new MappingTypeWrapper(MappingType.TAG));
-                        context.write(new RelationKey(firstTag, secondTag), new MappingTypeWrapper(MappingType.TAG));
+                        context.write(new RelationKey(firstTag, secondTag), MappingType.TAG);
                 }
             }
         }
@@ -62,8 +58,8 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, 
                 if (i != j) {
                     String secondElement = removeVersionFromName(elements[j]);
                     if (!firstElement.equals(secondElement)) {
-                        context.write(new RelationKey(firstElement, secondElement), new MappingTypeWrapper(MappingType.POST));
-                        context.write(new RelationKey(secondElement, firstElement), new MappingTypeWrapper(MappingType.POST));
+                        context.write(new RelationKey(firstElement, secondElement), MappingType.POST);
+                        context.write(new RelationKey(secondElement, firstElement), MappingType.POST);
                     }
                 }
             }
