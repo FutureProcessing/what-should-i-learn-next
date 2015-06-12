@@ -37,7 +37,9 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, 
             for (int j = 0; j < tags.length; j++) {
                 if (i != j) {
                     String secondTag = removeVersionFromName(tags[j]);
+                    if (!firstTag.equals(secondTag)) {
                         context.write(new RelationKey(firstTag, secondTag), MappingType.TAG);
+                    }
                 }
             }
         }
@@ -66,8 +68,6 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, 
         }
         return false;
     }
-
-
 
 
 }

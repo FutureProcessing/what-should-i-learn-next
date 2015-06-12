@@ -64,5 +64,4 @@ public class TechnologiesReducerTest {
                 .withInput(new RelationKey("java", "\t"), input)
                 .runTest();
     }
-
 }
