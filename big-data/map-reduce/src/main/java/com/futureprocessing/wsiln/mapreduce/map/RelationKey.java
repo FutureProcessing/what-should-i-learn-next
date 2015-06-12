@@ -40,10 +40,7 @@ public class RelationKey extends BinaryComparable implements WritableComparable<
     }
 
     public boolean hasCorrectData() {
-        if (firstTechnology != null && secondTechnology != null) {
-            return true;
-        }
-        return false;
+        return firstTechnology != null && secondTechnology != null;
     }
 
 
@@ -71,7 +68,6 @@ public class RelationKey extends BinaryComparable implements WritableComparable<
         if (scanner.hasNext()) {
             secondTechnology = scanner.next();
         } else {
-            firstTechnology = null;
             log.warn("Can't create key:'first\tsecond' from input stream: " + line);
         }
     }
