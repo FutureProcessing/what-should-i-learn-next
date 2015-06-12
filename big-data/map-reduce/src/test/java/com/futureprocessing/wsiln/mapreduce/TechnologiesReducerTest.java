@@ -41,4 +41,22 @@ public class TechnologiesReducerTest {
                 .runTest();
     }
 
+
+
+    @Test
+    public void shouldCountAllPopularTechnologies() throws IOException {
+        //given
+        List<Text> input = Arrays.asList(new Text("c#"), new Text("c#"), new Text("c#"), new Text("c#"), new Text("VB"), new Text("VB"));
+
+        //when
+        new ReduceDriver<Text, Text, Text, IntWritable>()
+                .withReducer(new TechnologiesReducer())
+                .withInput(new Text(".net"), input)
+
+                        //then
+                .withOutput(new Text(".net\tVB"), new IntWritable(2))
+                .withOutput(new Text(".net\tc#"), new IntWritable(4))
+                .runTest();
+    }
+
 }
