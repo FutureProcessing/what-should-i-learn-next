@@ -39,6 +39,22 @@ public class TechnologiesMapperTest {
                 .runTest();
     }
 
+
+    @Test
+    public void shouldNotMapTagsWithDuplicatedTechnologies() throws IOException {
+        //given
+        Text input = new Text("<row value=\"blabla\" Tags=\"&lt;java-7&gt;&lt;java-8&gt;\" title=\"Java is awesome\" />");
+        List<Pair<RelationKey, MappingType>> map = new ArrayList<Pair<RelationKey, MappingType>>();
+        //when
+        new MapDriver<LongWritable, Text, RelationKey, MappingType>()
+                .withMapper(new TechnologiesMapper())
+                .withInput(new LongWritable(1l), input)
+
+                        //then
+                .withAllOutput(map)
+                .runTest();
+    }
+
     @Test
     @Parameters({
             "java-8, java",
