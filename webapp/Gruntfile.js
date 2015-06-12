@@ -4,11 +4,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-express-server');
-    //grunt.loadNpmTasks('grunt-protractor-runner');
-    //grunt.loadNpmTasks('webdriver-manager');
     grunt.loadNpmTasks('grunt-keepalive');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-mocha-cli');
 
 
     grunt.initConfig({
@@ -81,6 +80,10 @@ module.exports = function (grunt) {
             }
         },
 
+        mochacli: {
+            all: ['test/*.js']
+        },
+
         run: {
             dev: {
                 cmd: 'node server/server.js',
@@ -96,7 +99,7 @@ module.exports = function (grunt) {
                 atBegin: true
             },
             express: {
-                files: 'server/server.js',
+                files: 'server/**',
                 tasks: ['express:dev'],
                 options: {
                     spawn: false,
@@ -109,21 +112,6 @@ module.exports = function (grunt) {
                 tasks: ['less:dev']
             }
         },
-
-        /*protractor: {
-         e2e: {
-         options: {
-         configFile: "../tests/conf.js",
-         // Stops Grunt process if a test fails
-         keepAlive: false
-         }
-         },
-         continuous: {
-         options: {
-         keepAlive: false
-         }
-         }
-         }*/
 
         compress: {
             main: {
@@ -144,18 +132,9 @@ module.exports = function (grunt) {
         }
 
     });
-    /*grunt.registerTask('test', function () {
-     var config = require("./config.json");
-     var request = require('request');
-     grunt.task.run('express:dev');
-     request.get('http://localhost:' + config.http.port);
-     grunt.task.run('e2e-test');
-     });*/
 
-    //grunt.registerTask('e2e-test', ['protractor:e2e']);
+    grunt.registerTask('test', ['mochacli']);
     grunt.registerTask('develop', ['browserify:dev', 'watch']);
-
-
     grunt.registerTask('build', ['clean', 'browserify:prod', 'less:prod', 'compress']);
 
 

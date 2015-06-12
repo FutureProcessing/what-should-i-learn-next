@@ -1,5 +1,7 @@
 package com.futureprocessing.wsiln.mapreduce;
 
+import com.futureprocessing.wsiln.mapreduce.map.MappingType;
+import com.futureprocessing.wsiln.mapreduce.map.RelationKey;
 import com.futureprocessing.wsiln.mapreduce.output.ElasticOutputFormat;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -32,12 +34,12 @@ public class TechnologiesFromTagsJob extends Configured implements Tool {
         parseElasticArguments(args, job.getConfiguration());
 
         job.setMapperClass(TechnologiesMapper.class);
-        job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(Text.class);
+        job.setMapOutputKeyClass(RelationKey.class);
+        job.setMapOutputValueClass(MappingType.class);
 
         job.setReducerClass(TechnologiesReducer.class);
 
-        job.setOutputKeyClass(Text.class);
+        job.setOutputKeyClass(RelationKey.class);
         job.setOutputValueClass(IntWritable.class);
         job.setOutputFormatClass(ElasticOutputFormat.class);
 

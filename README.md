@@ -23,6 +23,8 @@ Try to use this example yourself
 You can use Docker container to setup Hadoop very quickly for PoC. 
 This image will help you: [Hadoop on Docker](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/)
 
+If you want to install Hadoop manually, you can use [this  cheatsheet](big-data/hadoop-instalation/Hadoop Cluster - manual instalation cheatsheet.md).
+
 ### Install Elastic
 You can use this Docker image [Elastic](https://registry.hub.docker.com/_/elasticsearch/)
 Expose ports 9200 and 9300

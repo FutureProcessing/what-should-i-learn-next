@@ -16,7 +16,7 @@
 
     </header>
     <main>
-        <h2>What you already know?</h2>
+        <h2>What do you already know?</h2>
         
         <ul id="known" >
             <li ng-repeat="t in knownTechnologies">
@@ -24,7 +24,7 @@
             </li>
         </ul>
 
-        <h2 ng-if="avoidTechnologies.length > 0">What you don't want know?</h2>
+        <h2 ng-if="avoidTechnologies.length > 0">What you don't want to learn?</h2>
 
         <ul ng-if="avoidTechnologies.length > 0" id="avoid" >
             <li ng-repeat="t in avoidTechnologies">
@@ -45,7 +45,7 @@
             <li ng-repeat="t in suggestedTechnologies">
                 <span ng-bind="t"></span>
                 - <a href="" ng-click="alreadyKnow(t)">I already know that</a>
-                - <a href="" ng-click="avoid(t)">I don't want to know that</a>
+                - <a href="" ng-click="avoid(t)">I don't want to learn that</a>
             </li>
         </ul>
     </main>
