@@ -3,6 +3,7 @@ package com.futureprocessing.wsiln.mapreduce.map;
 import org.apache.hadoop.io.BinaryComparable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.WritableComparable;
+import org.apache.log4j.Logger;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class RelationKey extends BinaryComparable implements WritableComparable<BinaryComparable> {
+    static Logger log = Logger.getLogger(RelationKey.class);
     String firstTechnology;
     String secondTechnology;
 
@@ -37,6 +39,13 @@ public class RelationKey extends BinaryComparable implements WritableComparable<
         return firstTechnology + "\t" + secondTechnology;
     }
 
+    public boolean hasCorrectData() {
+        if (firstTechnology != null && secondTechnology != null) {
+            return true;
+        }
+        return false;
+    }
+
 
     @Override
     public int getLength() {
@@ -58,8 +67,12 @@ public class RelationKey extends BinaryComparable implements WritableComparable<
         String line = in.readLine();
         Scanner scanner = new Scanner(line);
         scanner.useDelimiter("\t");
-
-        firstTechnology = scanner.next();
-        secondTechnology = scanner.next();
+        firstTechnology = scanner.hasNext() ? scanner.next() : null;
+        if (scanner.hasNext()) {
+            secondTechnology = scanner.next();
+        } else {
+            firstTechnology = null;
+            log.warn("Can't create key:'first\tsecond' from input stream: " + line);
+        }
     }
 }
