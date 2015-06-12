@@ -53,4 +53,16 @@ public class TechnologiesReducerTest {
 
     }
 
+    @Test
+    public void shouldNotCountIfRelationKeyIsIncorrect() throws IOException {
+        //given
+        List<MappingType> input = Arrays.asList(MappingType.POST, MappingType.TAG);
+
+        //when
+        new ReduceDriver<RelationKey, MappingType, Text, IntWritable>()
+                .withReducer(new TechnologiesReducer())
+                .withInput(new RelationKey("java", "\t"), input)
+                .runTest();
+    }
+
 }
