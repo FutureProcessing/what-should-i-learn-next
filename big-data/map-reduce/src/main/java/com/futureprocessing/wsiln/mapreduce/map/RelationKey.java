@@ -46,6 +46,9 @@ public class RelationKey extends BinaryComparable implements WritableComparable<
 
     @Override
     public int getLength() {
+        if (firstTechnology == null || secondTechnology == null) {
+            return 0;
+        }
         return firstTechnology.length() + secondTechnology.length() + 1;
     }
 
