@@ -2,6 +2,8 @@ package com.futureprocessing.wsiln.mapreduce;
 
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,5 +20,14 @@ public class TechnologiesFormatter {
             return text.substring(0, matcher.start());
         }
         return text;
+    }
+
+
+    public static List removeVersion(String[] text) {
+      List result = new ArrayList();
+        for(String word: text){
+            result.add(removeVersionFromName(word));
+        }
+        return result;
     }
 }

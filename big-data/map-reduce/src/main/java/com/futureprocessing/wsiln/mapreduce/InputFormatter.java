@@ -1,8 +1,8 @@
 package com.futureprocessing.wsiln.mapreduce;
 
 public class InputFormatter {
-    private static final String REMOVE_REGEX = "<p>|</p>|&lt;|&gt;|&#xA;|/p|[ ;\"'\\/.,_=&<>]";
-    private static final String SPLIT_REGEX = "\\s+";
+    private static final String UNWANTED_CHARACTERS = "<p>|</p>|&lt;|&gt;|&#xA;|/p|[ ;\"'\\/.,_=&<>]";
+    private static final String WHITE_CHARACTERS = "\\s+";
 
 
     public static String[] splitInputString(String value) {
@@ -10,8 +10,8 @@ public class InputFormatter {
         if (value == null) {
             return null;
         }
-        String formattedString = value.replaceAll(REMOVE_REGEX, " ");
+        String formattedString = value.replaceAll(UNWANTED_CHARACTERS, " ");
         formattedString = formattedString.trim().toLowerCase();
-        return formattedString.split(SPLIT_REGEX);
+        return formattedString.split(WHITE_CHARACTERS);
     }
 }
