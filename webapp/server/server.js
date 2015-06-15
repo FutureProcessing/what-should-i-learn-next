@@ -12,6 +12,8 @@ app.use(morgan('combined'));
 app.use(express.static(__dirname + '/build/static'));
 app.use(express.static(__dirname + '/../client/generated'));
 app.use(express.static(__dirname + '/../client/html'));
+app.use('/fonts', express.static(__dirname + '/../client/fonts'));
+
 
 app.get('/technologyPredictions', function (req, res) {
     var query = req.query.q;
