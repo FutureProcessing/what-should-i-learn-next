@@ -67,7 +67,8 @@ module.exports = function (grunt) {
         less: {
             dev: {
                 files: {
-                    'client/generated/main.css': ['client/less/main.less']
+                    'client/generated/main.css': ['client/less/main.less'],
+                    'client/generated/mainNew.css': ['client/less/mainNew.less']
                 }
             },
             prod: {
