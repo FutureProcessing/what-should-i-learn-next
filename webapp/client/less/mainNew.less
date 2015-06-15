@@ -1,14 +1,39 @@
 @import "reset";
 @import "malleable";
 
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
 h1 {
     font-family: 'Malleable', 'PT Sans', Helvetica, Arial, sans-serif;
     font-size: 40px;
     font-weight: 400;
 }
 
+@topBottomBarHeight: 40px;
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: @topBottomBarHeight;
+}
+
 main {
     width: 100%;
+    position: fixed;
+    top: @topBottomBarHeight;
+    bottom: @topBottomBarHeight;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: @topBottomBarHeight;
 }
 
 .searchSection, .listsSections {
