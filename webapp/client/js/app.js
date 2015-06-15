@@ -9,11 +9,16 @@ angular.module('whatToLearnNext', [
 .controller('mainController', ['$scope', 'technologyService', function ($scope, technologyService) {
     
     $scope.knownTechnologies = [];
+    $scope.wantedTechnologies = [];
     $scope.avoidTechnologies = [];
     $scope.suggestedTechnologies = [];
     
     $scope.removeKnown = function (tech) {
         $scope.knownTechnologies = _($scope.knownTechnologies).without(tech);
+    };
+
+    $scope.removeWanted = function (tech) {
+        $scope.wantedTechnologies = _($scope.wantedTechnologies).without(tech);
     };
 
     $scope.removeAvoid = function (tech) {
@@ -22,6 +27,11 @@ angular.module('whatToLearnNext', [
     
     $scope.alreadyKnow = function (tech) {
         $scope.knownTechnologies.push(tech);
+        $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
+    };
+    
+    $scope.wanted = function (tech) {
+        $scope.wantedTechnologies.push(tech);
         $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
     };
 
@@ -47,14 +57,14 @@ angular.module('whatToLearnNext', [
         }
         
         technologyService.getTechnologyPredictions(query).then( function (technologies) {
-            $scope.technologyPredictions = _(technologies).difference($scope.knownTechnologies);
+            $scope.technologyPredictions = _(technologies).difference($scope.knownTechnologies.concat($scope.wantedTechnologies));
         });
     });
 
 
     $scope.$watch('knownTechnologies', function (knownTechnologies) {
         if(knownTechnologies && knownTechnologies.length > 0) {
-            technologyService.getTechnologySuggestions(knownTechnologies, $scope.avoidTechnologies).then(function (technologies) {
+            technologyService.getTechnologySuggestions(knownTechnologies.concat($scope.wantedTechnologies), $scope.avoidTechnologies).then(function (technologies) {
                 $scope.suggestedTechnologies = technologies;
             });
         }
@@ -62,7 +72,7 @@ angular.module('whatToLearnNext', [
 
     $scope.$watch('avoidTechnologies', function (avoidTechnologies) {
         if(avoidTechnologies && avoidTechnologies.length > 0) {
-            technologyService.getTechnologySuggestions($scope.knownTechnologies, avoidTechnologies).then(function (technologies) {
+            technologyService.getTechnologySuggestions($scope.knownTechnologies.concat($scope.wantedTechnologies), avoidTechnologies).then(function (technologies) {
                 $scope.suggestedTechnologies = technologies;
             });
         }

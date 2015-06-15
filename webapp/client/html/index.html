@@ -23,6 +23,14 @@
                 <span ng-bind="t"></span><a href="" ng-click="removeKnown(t)">&Chi;</a>
             </li>
         </ul>
+        
+        <h2>What you want</h2>
+        
+        <ul id="wanted" >
+            <li ng-repeat="t in wantedTechnologies">
+                <span ng-bind="t"></span><a href="" ng-click="removeWanted(t)">&Chi;</a>
+            </li>
+        </ul>
 
         <h2 ng-if="avoidTechnologies.length > 0">What you don't want to learn?</h2>
 
@@ -45,6 +53,7 @@
             <li ng-repeat="t in suggestedTechnologies">
                 <span ng-bind="t"></span>
                 - <a href="" ng-click="alreadyKnow(t)">I already know that</a>
+                - <a href="" ng-click="wanted(t)">I want to learn that</a>
                 - <a href="" ng-click="avoid(t)">I don't want to learn that</a>
             </li>
         </ul>
