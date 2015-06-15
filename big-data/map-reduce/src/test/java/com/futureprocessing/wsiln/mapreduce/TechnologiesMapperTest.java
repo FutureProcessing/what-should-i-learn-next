@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.futureprocessing.wsiln.mapreduce.TechnologiesFormatter.removeVersionFromName;
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
 public class TechnologiesMapperTest {
