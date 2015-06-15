@@ -3,16 +3,13 @@ package com.futureprocessing.wsiln.mapreduce;
 import com.futureprocessing.wsiln.mapreduce.map.MappingType;
 import com.futureprocessing.wsiln.mapreduce.map.RelationKey;
 import com.futureprocessing.wsiln.mapreduce.output.ElasticOutputFormat;
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-import joptsimple.OptionSpec;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 import org.slf4j.Logger;
@@ -29,9 +26,9 @@ public class TechnologiesFromTagsJob extends Configured implements Tool {
         job.setJarByClass(getClass());
         job.setJobName(getClass().getSimpleName());
 
-        FileInputFormat.addInputPath(job, new Path(args[0]));
+        ConfigurationWrapper configuration = parseArguments(args, job.getConfiguration());
 
-        parseElasticArguments(args, job.getConfiguration());
+        FileInputFormat.addInputPath(job, new Path(configuration.getInputPath()));
 
         job.setMapperClass(TechnologiesMapper.class);
         job.setMapOutputKeyClass(RelationKey.class);
@@ -39,13 +36,21 @@ public class TechnologiesFromTagsJob extends Configured implements Tool {
 
         job.setReducerClass(TechnologiesReducer.class);
 
-        job.setOutputKeyClass(RelationKey.class);
-        job.setOutputValueClass(IntWritable.class);
-        job.setOutputFormatClass(ElasticOutputFormat.class);
+        setUpOutput(job, configuration);
 
         logConfiguration(job);
 
         return job.waitForCompletion(true) ? 0 : 1;
+    }
+
+    private void setUpOutput(Job job, ConfigurationWrapper configuration) {
+        job.setOutputKeyClass(RelationKey.class);
+        job.setOutputValueClass(IntWritable.class);
+        if (configuration.isUseElastic()) {
+            job.setOutputFormatClass(ElasticOutputFormat.class);
+        } else {
+            FileOutputFormat.setOutputPath(job, new Path(configuration.getOutputPath()));
+        }
     }
 
     private void logConfiguration(Job job) {
@@ -56,23 +61,12 @@ public class TechnologiesFromTagsJob extends Configured implements Tool {
         log.info("Elastic index name: {}", configuration.get(ELASTIC_INDEX_NAME));
     }
 
-    private void parseElasticArguments(String[] args, Configuration configuration) {
+    private ConfigurationWrapper parseArguments(String[] args, Configuration configuration) {
+        ConfigurationWrapper configurationWrapper = new ConfigurationWrapper(configuration);
+        configurationWrapper.parseArguments(args);
 
-        OptionParser optionParser = new OptionParser();
-        optionParser.allowsUnrecognizedOptions();
-        OptionSpec<String> hostOption = optionParser.accepts(ELASTIC_HOST).withRequiredArg().ofType(String.class).defaultsTo("localhost");
-        OptionSpec<Integer> portOption = optionParser.accepts(ELASTIC_PORT).withRequiredArg().ofType(Integer.class).defaultsTo(9300);
-        OptionSpec<String> indexNameOption = optionParser.accepts(ELASTIC_INDEX_NAME).withOptionalArg().ofType(String.class).defaultsTo("indexName");
-
-
-        OptionSet optionSet = optionParser.parse(args);
-
-        configuration.set(ELASTIC_HOST, optionSet.valueOf(hostOption));
-        configuration.setInt(ELASTIC_PORT, optionSet.valueOf(portOption));
-        configuration.set(ELASTIC_INDEX_NAME, optionSet.valueOf(indexNameOption));
-
+        return configurationWrapper;
     }
-
 
     public static void main(String[] args) throws Exception {
         int rc = ToolRunner.run(new TechnologiesFromTagsJob(), args);
