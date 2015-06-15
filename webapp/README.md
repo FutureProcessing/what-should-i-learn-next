@@ -10,6 +10,7 @@ How to run on production
 ## Build
 To build application:
 ```
+npm install
 grunt build
 ```
 
