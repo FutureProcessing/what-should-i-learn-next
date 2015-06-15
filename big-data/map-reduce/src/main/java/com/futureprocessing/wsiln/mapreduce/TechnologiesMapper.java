@@ -54,7 +54,7 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, 
         }
 
         for (int i = 0; i < words.length; i++) {
-            String firstElement = removeVersionFromName(words[i]).toLowerCase();
+            String firstElement = removeVersionFromName(words[i]);
             int scope = (i + MAPPING_SCOPE) < words.length - 1 ? i + MAPPING_SCOPE : words.length - 1;
             for (int j = i; j < scope + 1; j++) {
                 if (i != j) {
