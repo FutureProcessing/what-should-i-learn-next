@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app="whatToLearnNext">
 
 <head>
@@ -31,11 +31,12 @@
                 <ul id="suggested" class="suggestedTags" ng-if="suggestedTechnologies.length > 0">
                     <li ng-repeat="t in suggestedTechnologies">
                         <div class="technologyTag">
-                            <span ng-bind="t">t</span>
+                            <span ng-bind="t"></span>
                         </div>
-                        <!--- <a href="" ng-click="alreadyKnow(t)">I already know that</a>
-                        - <a href="" ng-click="wanted(t)">I want to learn that</a>
-                        - <a href="" ng-click="avoid(t)">I don't want to learn that</a>-->
+                                                
+                        <a href="" class="listItemLink notInterestedLink" ng-click="avoid(t)"></a>
+                        <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(t)"></a>
+                        <a href="" class="listItemLink wantedLink" ng-click="wanted(t)"></a>                        
                     </li>
                 </ul>
             </div>
