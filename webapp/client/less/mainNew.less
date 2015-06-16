@@ -1,2 +1,50 @@
 @import "reset";
 
+@footerHeight: 140px;
+@footerColor: #3c3c3c;
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: @footerColor;
+}
+
+footer div {
+    width: 100%;
+    height: @footerHeight;
+    line-height: @footerHeight;
+    background: #ebebeb;
+}
+
+#footerCopyrights {
+    float: left;
+    width: auto;
+}
+
+#footerLinks {
+    float: right;
+    width: auto;
+}
+
+#footerLinks ul {
+    font-size: 0;
+}
+
+#footerLinks li {
+    width: auto;
+    font-size: 14px;
+    display: inline-block;
+}
+
+#footerLinks li a {
+    padding: 0px 10px;
+}
+
+#footerLinks li:not(:first-child) a {
+    border-left-width: 1px;
+    border-left-color: @footerColor;
+    border-left-style: solid;
+    line-height: 10px;
+}
