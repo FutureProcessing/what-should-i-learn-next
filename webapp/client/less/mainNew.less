@@ -1,7 +1,7 @@
 @import "reset";
 @import "malleable";
 
-@topBottomBarHeight: 40px;
+@headerHeight: 50px;
 @footerHeight: 40px;
 @footerColor: #3c3c3c;
 @activeColor: #ff9800;
@@ -23,14 +23,16 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: @topBottomBarHeight;
+    height: @headerHeight;
+    background-image: url(images/headerBackground.jpg);
+    background-attachment: fixed;
 }
 
 main {
     width: 100%;
     position: fixed;
-    top: @topBottomBarHeight;
-    bottom: @topBottomBarHeight;
+    top: @headerHeight;
+    bottom: @headerHeight;
 }
 
 .searchSection, .listsSections {
