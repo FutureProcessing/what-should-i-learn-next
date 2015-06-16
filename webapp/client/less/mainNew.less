@@ -1,6 +1,11 @@
 @import "reset";
 @import "malleable";
 
+@topBottomBarHeight: 40px;
+@footerHeight: 40px;
+@footerColor: #3c3c3c;
+@activeColor: #ff9800;
+
 html, body {
     width: 100%;
     height: 100%;
@@ -12,7 +17,7 @@ h1 {
     font-weight: 400;
 }
 
-@topBottomBarHeight: 40px;
+
 header {
     position: absolute;
     top: 0;
@@ -29,12 +34,28 @@ main {
     right: 10px;    
 }
 
+.searchSection, .listsSections {
+    width: 50%;
+    float: left;
+}
+
+.listSection {
+    width: 33.33%;
+    float: left;
+}
 footer {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: @topBottomBarHeight;
+    height: @footerHeight;
+    color: @footerColor;
+}
+footer div {
+    width: 100%;
+    height: @footerHeight;
+    line-height: @footerHeight;
+    background: #ebebeb;
 }
 
 /* Search section - START */
@@ -42,6 +63,8 @@ footer {
     width: 50%;
     height: 100%;
     float: left;
+footer a {
+    text-decoration: none;   
 }
 
 .searchSectionInnerBox {
@@ -52,7 +75,18 @@ footer {
 
 .listSection {
     width: 33.33%;
+footer a:link, a:visited {
+    color: @footerColor;
+}
+
+footer a:hover, a:active {
+    color: @activeColor;
+}
+
+#footerCopyrights {
     float: left;
+    width: auto;
+    margin-left: 25px;
 }
 
 .technologyTag {
@@ -67,4 +101,31 @@ footer {
     border-bottom: solid #d7d7d7 1px;
     padding: 8px 0;
     overflow: hidden;
+}
+
+#footerLinks {
+    float: right;
+    width: auto;
+    margin-right: 5px;
+}
+
+#footerLinks ul {
+    font-size: 0;
+}
+
+#footerLinks li {
+    width: auto;
+    font-size: 14px;
+    display: inline-block;
+}
+
+#footerLinks li a {
+    padding: 0px 10px;
+}
+
+#footerLinks li:not(:first-child) a {
+    border-left-width: 1px;
+    border-left-color: @footerColor;
+    border-left-style: solid;
+    line-height: 10px;
 }
