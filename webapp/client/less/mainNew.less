@@ -4,6 +4,7 @@
 @topBottomBarHeight: 40px;
 @footerHeight: 40px;
 @footerColor: #3c3c3c;
+@activeColor: #ff9800;
 
 html, body {
     width: 100%;
@@ -56,14 +57,28 @@ footer div {
     background: #ebebeb;
 }
 
+footer a {
+    text-decoration: none;   
+}
+
+footer a:link, a:visited {
+    color: @footerColor;
+}
+
+footer a:hover, a:active {
+    color: @activeColor;
+}
+
 #footerCopyrights {
     float: left;
     width: auto;
+    margin-left: 25px;
 }
 
 #footerLinks {
     float: right;
     width: auto;
+    margin-right: 5px;
 }
 
 #footerLinks ul {
