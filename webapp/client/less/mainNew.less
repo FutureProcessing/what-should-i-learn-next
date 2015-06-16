@@ -1,16 +1,54 @@
 @import "reset";
+@import "malleable";
 
-@footerHeight: 140px;
+@topBottomBarHeight: 40px;
+@footerHeight: 40px;
 @footerColor: #3c3c3c;
 
-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    color: @footerColor;
+html, body {
+    width: 100%;
+    height: 100%;
 }
 
+h1 {
+    font-family: 'Malleable', 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: @topBottomBarHeight;
+}
+
+main {
+    width: 100%;
+    position: fixed;
+    top: @topBottomBarHeight;
+    bottom: @topBottomBarHeight;
+}
+
+.searchSection, .listsSections {
+    width: 50%;
+    float: left;
+}
+
+.listSection {
+    width: 33.33%;
+    float: left;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: @footerHeight;
+    color: @footerColor;
+}
 footer div {
     width: 100%;
     height: @footerHeight;

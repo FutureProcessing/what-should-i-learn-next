@@ -12,13 +12,24 @@
 </head>
 
 <body ng-controller="mainController">
-    <header>
-        <h1>What to learn next?</h1>
-    </header>
-    <main>
-        <h2>What do you already know?</h2>
+    <main class="main">
+        <section class="searchSection" id="search">
+            <h1>What to learn next?</h1>  
+        </section>
+        <section class="listsSections" id="lists">
+            <section class="listSection" id="wantToLearn">
+                <h1>I want to learn that!</h1>  
+            </section>
+            <section class="listSection" id="knowThat">
+                <h1>I know that!</h1>  
+            </section>
+            <section class="listSection" id="notInterested">
+                <h1>I'm not interested</h1>  
+            </section>
+            <section class="downloadSection" id="download">
 
-
+            </section>
+        </section>   
     </main>
     <footer>
         <div>
@@ -31,12 +42,9 @@
             <!-- Links -->
             <div id="footerLinks">
                 <ul>
-                    <li><a href="https://github.com/FutureProcessing/what-should-i-learn-next/">Licence</a></li>
-                    <li><a href="https://github.com/FutureProcessing/what-should-i-learn-next/">GitHub Source</a></li>
-                    <li><a href="https://github.com/FutureProcessing/what-should-i-learn-next/">Contact</a></li>
-                    <li><a href="https://github.com/FutureProcessing/what-should-i-learn-next/">Contact</a></li>
-                    <li><a href="https://github.com/FutureProcessing/what-should-i-learn-next/">Contact</a></li>
-                    <li><a href="https://github.com/FutureProcessing/what-should-i-learn-next/">Contact</a></li>
+                    <li><a href="/licence">Licence</a></li>
+                    <li><a href="https://github.com/FutureProcessing/what-should-i-learn-next/" target="_blank">GitHub Source</a></li>
+                    <li><a href="/contact">Contact</a></li>
                 </ul>
             </div>
             
