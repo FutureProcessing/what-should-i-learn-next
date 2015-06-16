@@ -22,10 +22,11 @@ header {
 }
 
 main {
-    width: 100%;
     position: fixed;
     top: @topBottomBarHeight;
     bottom: @topBottomBarHeight;
+    left: 10px;
+    right: 10px;    
 }
 
 footer {
@@ -36,12 +37,34 @@ footer {
     height: @topBottomBarHeight;
 }
 
+/* Search section - START */
 .searchSection, .listsSections {
     width: 50%;
+    height: 100%;
     float: left;
 }
+
+.searchSectionInnerBox {
+    width: 80%;
+    margin: 70px auto 0 auto;
+}
+/* Search section - END */
 
 .listSection {
     width: 33.33%;
     float: left;
+}
+
+.technologyTag {
+    font-family: 'Malleable Regular', 'PT Sans', Helvetica, Arial, sans-serif;
+    background-color: #e5e5e5;    
+    font-weight: 400;
+    float: left;
+    padding: 5px;
+}
+
+.suggestedTags li {
+    border-bottom: solid #d7d7d7 1px;
+    padding: 8px 0;
+    overflow: hidden;
 }
