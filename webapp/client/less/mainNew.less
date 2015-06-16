@@ -63,8 +63,6 @@ footer div {
     width: 50%;
     height: 100%;
     float: left;
-footer a {
-    text-decoration: none;   
 }
 
 .searchSectionInnerBox {
@@ -75,19 +73,40 @@ footer a {
 
 .listSection {
     width: 33.33%;
-footer a:link, a:visited {
-    color: @footerColor;
 }
 
-footer a:hover, a:active {
-    color: @activeColor;
+.listItemLink {
+    float: right;
+    margin-left: 15px;
+    width: 16px;
+    height: 16px;
 }
 
-#footerCopyrights {
-    float: left;
-    width: auto;
-    margin-left: 25px;
+.alreadyKnowLink {
+    background-image: url('/images/POC_images_15.png');
+    width: 20px;
 }
+
+.alreadyKnowLink:hover {
+    background-image: url('/images/POC_images_15_orange.png');
+}
+
+.wantedLink {
+    background-image: url('/images/POC_images_17.png');
+}
+
+.wantedLink:hover {
+    background-image: url('/images/POC_images_17_orange.png');
+}
+
+.notInterestedLink {
+    background-image: url('/images/POC_images_19.png');
+}
+
+.notInterestedLink:hover {
+    background-image: url('/images/POC_images_19_orange.png');
+}
+
 
 .technologyTag {
     font-family: 'Malleable Regular', 'PT Sans', Helvetica, Arial, sans-serif;
@@ -101,6 +120,24 @@ footer a:hover, a:active {
     border-bottom: solid #d7d7d7 1px;
     padding: 8px 0;
     overflow: hidden;
+}
+
+footer a {
+    text-decoration: none;   
+}
+
+footer a:link, a:visited {
+    color: @footerColor;
+}
+
+footer a:hover, a:active {
+    color: @activeColor;
+}
+
+#footerCopyrights {
+    float: left;
+    width: auto;
+    margin-left: 25px;
 }
 
 #footerLinks {
