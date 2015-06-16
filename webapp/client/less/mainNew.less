@@ -17,21 +17,32 @@ h1 {
     font-weight: 400;
 }
 
-
 header {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: @headerHeight;
-    background-image: url(images/Stars_BG_FHD_01.jpg);
+    background-image: url(images/headerBackground.jpg);
     background-attachment: fixed;
+}
+
+#headerLogo {
+    width: auto;
+    margin-left: 24px;
+    height: @headerHeight;
+    line-height: @headerHeight;
+    float: left;
+}
+
+#headerLogo img {
+    vertical-align: middle;
 }
 
 main {
     position: fixed;
     top: @headerHeight;
-    bottom: @headerHeight;
+    bottom: @footerHeight;
     left: 10px;
     right: 10px;    
 }
