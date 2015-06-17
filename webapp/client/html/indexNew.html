@@ -55,11 +55,11 @@
                     <p>I want to learn that!</p>
                 </div>
                 <ul>
-                    <li ng-repeat="t in wantedTechnologies">
+                    <li class="technologyItem" ng-repeat="t in wantedTechnologies">
                         <div class="technologyTag removableTechnologyTag">
                             <span ng-bind="t"></span>
                         </div>
-                        <a href="" class="technologyRemoveButton" ng-click="removeWanted(t)">X</a>
+                        <a href="" class="technologyRemoveButton" ng-click="removeWanted(t)"></a>
                     </li>
                 </ul>
             </section>
@@ -70,7 +70,7 @@
                     <p>I know that!</p>
                 </div>
                 <ul>
-                    <li ng-repeat="t in knownTechnologies">
+                    <li class="technologyItem" ng-repeat="t in knownTechnologies">
                         <div class="technologyTag removableTechnologyTag">
                             <span ng-bind="t"></span>
                         </div>
@@ -86,14 +86,16 @@
                     <p>I'm not interested</p>
                 </div>
                 <ul>
-                    <li ng-repeat="t in avoidTechnologies">
+                    <li class="technologyItem" ng-repeat="t in avoidTechnologies">
                         <div class="technologyTag removableTechnologyTag">
                             <span ng-bind="t"></span>
                         </div>
-                        <a href="" class="technologyRemoveButton" ng-click="removeAvoid(t)">X</a>
+                        <a href="" class="technologyRemoveButton" ng-click="removeAvoid(t)"></a>
                     </li>
                 </ul>
             </section>
+            
+            <!-- download -->
             <section class="downloadSection" id="download">
 
             </section>
