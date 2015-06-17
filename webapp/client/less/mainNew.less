@@ -9,6 +9,8 @@
 @activeColor: #ff9800;
 @fontTitles: 'Malleable', 'PT Sans', Helvetica, Arial, sans-serif;
 @fontStandard: 'Source Sans Pro', sans-serif;
+@technologyTagHeight: 30px;
+@activeButtonBorderWidth: 2px;
 
 html, body {
     width: 100%;
@@ -97,15 +99,19 @@ footer {
 
 .listItemLink {
     float: right;
-    margin-left: 15px;
-    width: 16px;
-    height: 16px;
-    margin: 5px 0 5px 15px; 
+    width: 26px;
+    height: 26px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin: 5px 5px 5px 8px; 
+}
+
+.listItemLink:hover {
+    outline: @activeColor solid @activeButtonBorderWidth;
 }
 
 .alreadyKnowLink {
     background-image: url('/images/POC_images_15.png');
-    width: 20px;
 }
 
 .alreadyKnowLink:hover {
@@ -126,6 +132,31 @@ footer {
 
 .notInterestedLink:hover {
     background-image: url('/images/POC_images_19_orange.png');
+}
+
+.technologyRemoveButton {
+    float: left;
+    height: 26px;
+    width: 26px;
+    margin: @activeButtonBorderWidth 0 @activeButtonBorderWidth 0;
+    outline: @activeColor solid @activeButtonBorderWidth;
+    background-image: url('/images/POC_images_19_orange.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: none;
+}
+
+.technologyItemContent {
+    width: auto;
+    height: auto;
+}
+
+.technologyItemContent:hover .technologyRemoveButton {
+    display : block;
+}
+
+.technologyItemContent:hover .removableTechnologyTag {
+    background-color: #d3d3d3;
 }
 
 .technologyTitle {
@@ -157,12 +188,29 @@ footer {
     background-position: left center;
 }
 
+.technologiesList {
+    width: 100%;
+    float: left;
+    position: relative;
+}
+
+.technologyItem {
+    width: 100%;
+    float: left;
+}
+
 .technologyTag {
-    background-color: #e5e5e5;    
+    background-color: #e5e5e5;
     font-weight: 600;
     font-size: 17px;
     float: left;
-    padding: 5px 10px;
+    padding: 0px 10px;
+    height: @technologyTagHeight;
+    line-height: @technologyTagHeight;
+}
+
+.removableTechnologyTag {
+    margin-bottom: 5px;
 }
 
 .suggestedTags {
