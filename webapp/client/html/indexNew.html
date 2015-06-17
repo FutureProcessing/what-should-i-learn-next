@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="whatToLearnNext">
 
 <head>
@@ -12,6 +12,15 @@
 </head>
 
 <body ng-controller="mainController">
+    
+    <!-- header -->
+    <header>
+        <div id="headerLogo">
+            <img src="images/logo.png" alt="Project logo" />
+        </div>
+    </header>
+    
+    <!-- main -->
     <main class="main">
         <section class="searchSection" id="search">
             <div class="searchSectionInnerBox">
@@ -38,22 +47,54 @@
             </div>
         </section>
         <section class="listsSections" id="lists">
+            
+            <!-- wanted technologies -->
             <section class="listSection" id="wantToLearn">
-                <h1>I want to learn that!</h1>  
+                <h2>I want to learn that!</h2>  
+                <ul>
+                    <li ng-repeat="t in wantedTechnologies">
+                        <div class="technologyTag">
+                            <span ng-bind="t"></span>
+                        </div>
+                        <a href="" ng-click="removeWanted(t)">X</a>
+                    </li>
+                </ul>
             </section>
+            
+            <!-- known technologies -->
             <section class="listSection" id="knowThat">
-                <h1>I know that!</h1>  
+                <h2>I know that!</h2>
+                <ul>
+                    <li ng-repeat="t in knownTechnologies">
+                        <div class="technologyTag">
+                            <span ng-bind="t"></span>
+                        </div>
+                        <a href="" ng-click="removeKnown(t)">X</a>
+                    </li>
+                </ul>
             </section>
+            
+            <!-- avoided technologies -->
             <section class="listSection" id="notInterested">
-                <h1>I'm not interested</h1>  
+                <h2>I'm not interested</h2>
+                <ul>
+                    <li ng-repeat="t in avoidTechnologies">
+                        <div class="technologyTag">
+                            <span ng-bind="t"></span>
+                        </div>
+                        <a href="" ng-click="removeAvoid(t)">X</a>
+                    </li>
+                </ul>
             </section>
             <section class="downloadSection" id="download">
 
             </section>
         </section>   
     </main>
+    
+    <!-- footer -->
     <footer>
-        <div>
+        <div id="footerContent">
 
             <!-- Copyrights -->
             <div id="footerCopyrights">
@@ -74,4 +115,3 @@
 </body>
 
 </html>
-note

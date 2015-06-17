@@ -1,35 +1,53 @@
 @import "reset";
 @import "malleable";
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
 
-@topBottomBarHeight: 40px;
+@headerHeight: 50px;
 @footerHeight: 40px;
+@footerFontSize: 12px;
 @footerColor: #3c3c3c;
 @activeColor: #ff9800;
+@fontTitles: 'Malleable', 'PT Sans', Helvetica, Arial, sans-serif;
+@fontStandard: 'Source Sans Pro', sans-serif;
 
 html, body {
     width: 100%;
     height: 100%;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 h1 {
-    font-family: 'Malleable', 'PT Sans', Helvetica, Arial, sans-serif;
+    font-family: @fontTitles;
     font-size: 40px;
     font-weight: 400;
 }
-
 
 header {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: @topBottomBarHeight;
+    height: @headerHeight;
+    background-image: url(images/headerBackground.jpg);
+    background-attachment: fixed;
+}
+
+#headerLogo {
+    width: auto;
+    margin-left: 24px;
+    height: @headerHeight;
+    line-height: @headerHeight;
+    float: left;
+}
+
+#headerLogo img {
+    vertical-align: middle;
 }
 
 main {
     position: fixed;
-    top: @topBottomBarHeight;
-    bottom: @topBottomBarHeight;
+    top: @headerHeight;
+    bottom: @footerHeight;
     left: 10px;
     right: 10px;    
 }
@@ -43,6 +61,7 @@ main {
     width: 33.33%;
     float: left;
 }
+
 footer {
     position: absolute;
     bottom: 0;
@@ -51,7 +70,8 @@ footer {
     height: @footerHeight;
     color: @footerColor;
 }
-footer div {
+
+#footerContent {
     width: 100%;
     height: @footerHeight;
     line-height: @footerHeight;
@@ -110,7 +130,6 @@ footer div {
 
 
 .technologyTag {
-    font-family: 'Malleable Regular', 'PT Sans', Helvetica, Arial, sans-serif;
     background-color: #e5e5e5;    
     font-weight: 400;
     float: left;
@@ -128,7 +147,7 @@ footer div {
 }
 
 footer a {
-    text-decoration: none;   
+    text-decoration: none;
 }
 
 footer a:link, a:visited {
@@ -143,6 +162,7 @@ footer a:hover, a:active {
     float: left;
     width: auto;
     margin-left: 25px;
+    font-size: @footerFontSize;
 }
 
 #footerLinks {
@@ -153,11 +173,12 @@ footer a:hover, a:active {
 
 #footerLinks ul {
     font-size: 0;
+    height: @footerHeight;
 }
 
 #footerLinks li {
     width: auto;
-    font-size: 14px;
+    font-size: @footerFontSize;
     display: inline-block;
 }
 
