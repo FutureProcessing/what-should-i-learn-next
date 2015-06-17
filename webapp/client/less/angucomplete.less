@@ -16,20 +16,20 @@
 }
 
 .angucomplete-dropdown {
-    border-color: #ececec;
-    border-width: 1px;
+    border-color: #ff9800;
+    border-width: 0 2px 2px 2px;
     border-style: solid;
-    border-radius: 2px;
-    width: 250px;
-    padding: 6px;
+    padding: 6px 1px;
     cursor: pointer;
     z-index: 9999;
     position: absolute;
     /*top: 32px;
     left: 0px;
     */
-    margin-top: -6px;
-    background-color: #ffffff;
+    margin-top: 2px;
+    left: -2px;
+    right: -2px;
+    background-color: #ffffff;    
 }
 
 .angucomplete-searching {
@@ -49,7 +49,7 @@
 }
 
 .angucomplete-selected-row, .angucomplete-row:hover {
-    background-color: lightblue;
+    background-color: #d7d7d7;
     color: #ffffff;
 }
 
@@ -78,3 +78,44 @@
     height: 34px;
     width: 34px;
 }
+
+/* Additional search elements - START */
+.angucomplete-holder input
+{
+    height: 46px;     
+    border: 0;
+    padding: 0 50px 0 14px;     
+    width: 100%;
+    box-sizing: border-box;     
+}
+
+.angucomplete-holder input:focus
+{
+    outline: 2px solid black;
+}
+
+.magnifier {
+    background-image: url('/images/POC_images_11.png');
+    width: 32px;
+    height: 31px;
+    position: absolute;
+    right: 7px;
+    top: 8px;
+}
+
+.magnifier:hover {
+    background-image: url('/images/POC_images_11_orange.png');
+} 
+
+.searchInputContainer {
+    width: 100%;
+    border: 2px solid #d7d7d7;
+    position: relative;
+    margin-top: 50px;
+    height: 46px;
+}
+
+.searchInputContainer:focus {
+    border-color: black;
+}
+/* Additional search elements -  END */
