@@ -140,4 +140,29 @@ public class ConfigurationWrapperTest {
         Assertions.assertThat(configurationWrapper.isOmitPosts()).isTrue();
     }
 
+
+    @Test
+    public void shouldDefaultMappingScope() {
+        //given
+        String[] args = toArgs("s3://some/file/on/S3");
+
+        //when
+        configurationWrapper.parseArguments(args);
+
+        //then
+        Assertions.assertThat(configurationWrapper.getMappingScope()).isEqualTo(5);
+    }
+
+    @Test
+    public void shouldSetMappingScopeToFour() {
+        //given
+        String[] args = toArgs("s3://some/file/on/S3 --mappingScope=4");
+
+        //when
+        configurationWrapper.parseArguments(args);
+
+        //then
+        Assertions.assertThat(configurationWrapper.getMappingScope()).isEqualTo(4);
+    }
+
 }
