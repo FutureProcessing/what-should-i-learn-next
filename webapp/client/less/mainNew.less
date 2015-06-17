@@ -9,6 +9,8 @@
 @activeColor: #ff9800;
 @fontTitles: 'Malleable', 'PT Sans', Helvetica, Arial, sans-serif;
 @fontStandard: 'Source Sans Pro', sans-serif;
+@technologyTagHeight: 30px;
+@activeButtonBorderWidth: 2px;
 
 html, body {
     width: 100%;
@@ -97,14 +99,20 @@ footer {
 
 .listItemLink {
     float: right;
-    margin-left: 15px;
-    width: 16px;
-    height: 16px;
+    margin-left: 8px;
+    margin-right: 5px;
+    width: 26px;
+    height: 26px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.listItemLink:hover {
+    outline: @activeColor solid @activeButtonBorderWidth;
 }
 
 .alreadyKnowLink {
     background-image: url('/images/POC_images_15.png');
-    width: 20px;
 }
 
 .alreadyKnowLink:hover {
@@ -125,6 +133,17 @@ footer {
 
 .notInterestedLink:hover {
     background-image: url('/images/POC_images_19_orange.png');
+}
+
+.technologyRemoveButton {
+    float: left;
+    height: 26px;
+    width: 26px;
+    margin: @activeButtonBorderWidth;
+    outline: @activeColor solid @activeButtonBorderWidth;
+    background-image: url('/images/POC_images_19_orange.png');
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .technologyTitle {
@@ -157,11 +176,17 @@ footer {
 }
 
 .technologyTag {
-    background-color: #e5e5e5;    
+    background-color: #e5e5e5;
     font-weight: 600;
     font-size: 17px;
     float: left;
-    padding: 5px 10px;
+    padding: 0px 10px;
+    height: @technologyTagHeight;
+    line-height: @technologyTagHeight;
+}
+
+.removableTechnologyTag:hover {
+    background-color: #d3d3d3;
 }
 
 .suggestedTags li {

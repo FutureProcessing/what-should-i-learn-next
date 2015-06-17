@@ -55,7 +55,7 @@
                 </div>
                 <ul>
                     <li ng-repeat="t in wantedTechnologies">
-                        <div class="technologyTag">
+                        <div class="technologyTag removableTechnologyTag">
                             <span ng-bind="t"></span>
                         </div>
                         <a href="" ng-click="removeWanted(t)">X</a>
@@ -70,10 +70,11 @@
                 </div>
                 <ul>
                     <li ng-repeat="t in knownTechnologies">
-                        <div class="technologyTag">
+                        <div class="technologyTag removableTechnologyTag">
                             <span ng-bind="t"></span>
                         </div>
-                        <a href="" ng-click="removeKnown(t)">X</a>
+                        
+                        <a href="" class="technologyRemoveButton" ng-click="removeKnown(t)"></a>
                     </li>
                 </ul>
             </section>
@@ -85,7 +86,7 @@
                 </div>
                 <ul>
                     <li ng-repeat="t in avoidTechnologies">
-                        <div class="technologyTag">
+                        <div class="technologyTag removableTechnologyTag">
                             <span ng-bind="t"></span>
                         </div>
                         <a href="" ng-click="removeAvoid(t)">X</a>
