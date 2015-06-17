@@ -70,19 +70,27 @@ angular.module('whatToLearnNext', [
         }
     });
 
+    $scope.refreshTechnologies = function(){
+        technologyService.getTechnologySuggestions($scope.knownTechnologies.concat($scope.wantedTechnologies), $scope.avoidTechnologies).then(function (technologies) {
+            $scope.suggestedTechnologies = technologies;
+        });
+    };
+    
     $scope.$watch('knownTechnologies', function (knownTechnologies) {
         if(knownTechnologies && knownTechnologies.length > 0) {
-            technologyService.getTechnologySuggestions(knownTechnologies.concat($scope.wantedTechnologies), $scope.avoidTechnologies).then(function (technologies) {
-                $scope.suggestedTechnologies = technologies;
-            });
+            $scope.refreshTechnologies();
         }
     }, true);
 
     $scope.$watch('avoidTechnologies', function (avoidTechnologies) {
         if(avoidTechnologies && avoidTechnologies.length > 0) {
-            technologyService.getTechnologySuggestions($scope.knownTechnologies.concat($scope.wantedTechnologies), avoidTechnologies).then(function (technologies) {
-                $scope.suggestedTechnologies = technologies;
-            });
+            $scope.refreshTechnologies();
+        }
+    }, true);
+    
+    $scope.$watch('wantedTechnologies', function (wantedTechnologies) {
+        if(wantedTechnologies && wantedTechnologies.length > 0) {
+            $scope.refreshTechnologies();
         }
     }, true);
     
