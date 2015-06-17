@@ -59,7 +59,6 @@ module.exports = function (grunt) {
             dev: {
                 options: {
                     script: './server/server.js'
-
                 }
             }
         },
@@ -68,12 +67,14 @@ module.exports = function (grunt) {
             dev: {
                 files: {
                     'client/generated/main.css': ['client/less/main.less'],
-                    'client/generated/mainNew.css': ['client/less/mainNew.less']
+                    'client/generated/mainNew.css': ['client/less/mainNew.less'],
+                    'client/generated/angucomplete.css': ['client/less/angucomplete.less']
                 }
             },
             prod: {
                 files: {
-                    'client/generated/main.css': ['client/less/main.less']
+                    'client/generated/main.css': ['client/less/main.less'],
+                    'client/generated/angucomplete.css': ['client/less/angucomplete.less']
                 },
                 options: {
                     compress: true
@@ -137,6 +138,4 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['mochacli']);
     grunt.registerTask('develop', ['browserify:dev', 'watch']);
     grunt.registerTask('build', ['clean', 'browserify:prod', 'less:prod', 'compress']);
-
-
 };

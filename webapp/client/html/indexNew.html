@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app="whatToLearnNext">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <link rel="stylesheet" type="text/css" href="/mainNew.css" />
+    <link rel="stylesheet" type="text/css" href="/angucomplete.css" />
 
     <script src="/app.js"></script>
 
@@ -26,12 +27,12 @@
             <div class="searchSectionInnerBox">
                 <h1>What to learn next?</h1>
                 <form>
-                    <input type="text" ng-model="query" ng-keypress="keyPress($event)" />
+                    <!--<input type="text" ng-model="query" ng-keypress="keyPress($event)" />-->
+                    <div id="technologiesSearch" data-angucomplete data-searchfields="" data-titlefields="" data-minlength="1" data-selectedobject="selectedTechnology" data-searchstr="query" data-localdata="technologyPredictions" data-placeholder="Type what you already know..."></div>
                 </form>
-                <ul id="predictions" ng-if="technologyPredictions">
+                <!--<ul id="predictions" ng-if="technologyPredictions">
                     <li ng-repeat="t in technologyPredictions"><span ng-bind="t"></span></li>
-                </ul>
-                <h2 ng-if="suggestedTechnologies.length > 0">You should learn:</h2>
+                </ul>-->
 
                 <ul id="suggested" class="suggestedTags" ng-if="suggestedTechnologies.length > 0">
                     <li ng-repeat="t in suggestedTechnologies">
