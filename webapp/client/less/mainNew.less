@@ -138,11 +138,25 @@ footer {
     float: left;
     height: 26px;
     width: 26px;
-    margin: @activeButtonBorderWidth;
+    margin: @activeButtonBorderWidth 0 @activeButtonBorderWidth 0;
     outline: @activeColor solid @activeButtonBorderWidth;
     background-image: url('/images/POC_images_19_orange.png');
     background-repeat: no-repeat;
     background-position: center center;
+    display: none;
+}
+
+.technologyItemContent {
+    width: auto;
+    height: auto;
+}
+
+.technologyItemContent:hover .technologyRemoveButton {
+    display : block;
+}
+
+.technologyItemContent:hover .removableTechnologyTag {
+    background-color: #d3d3d3;
 }
 
 .technologyTitle {
@@ -174,9 +188,15 @@ footer {
     background-position: left center;
 }
 
+.technologiesList {
+    width: 100%;
+    float: left;
+    position: relative;
+}
+
 .technologyItem {
-    float: left; 
-    clear: both;
+    width: 100%;
+    float: left;
 }
 
 .technologyTag {
@@ -191,10 +211,6 @@ footer {
 
 .removableTechnologyTag {
     margin-bottom: 5px;
-}
-
-.removableTechnologyTag:hover {
-    background-color: #d3d3d3;
 }
 
 .suggestedTags {

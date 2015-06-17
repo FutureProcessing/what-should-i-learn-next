@@ -54,12 +54,14 @@
                 <div class="technologyTitle wantedTechnologyTitle">
                     <p>I want to learn that!</p>
                 </div>
-                <ul>
+                <ul class="technologiesList">
                     <li class="technologyItem" ng-repeat="t in wantedTechnologies">
-                        <div class="technologyTag removableTechnologyTag">
-                            <span ng-bind="t"></span>
+                        <div class="technologyItemContent">
+                            <div class="technologyTag removableTechnologyTag">
+                                <span ng-bind="t"></span>
+                            </div>
+                            <a href="" class="technologyRemoveButton" ng-click="removeWanted(t)"></a>
                         </div>
-                        <a href="" class="technologyRemoveButton" ng-click="removeWanted(t)"></a>
                     </li>
                 </ul>
             </section>
@@ -69,13 +71,15 @@
                 <div class="technologyTitle knownTechnologyTitle">
                     <p>I know that!</p>
                 </div>
-                <ul>
+                <ul class="technologiesList">
                     <li class="technologyItem" ng-repeat="t in knownTechnologies">
-                        <div class="technologyTag removableTechnologyTag">
-                            <span ng-bind="t"></span>
+                        <div class="technologyItemContent">
+                            <div class="technologyTag removableTechnologyTag">
+                                <span ng-bind="t"></span>
+                            </div>
+
+                            <a href="" class="technologyRemoveButton" ng-click="removeKnown(t)"></a>
                         </div>
-                        
-                        <a href="" class="technologyRemoveButton" ng-click="removeKnown(t)"></a>
                     </li>
                 </ul>
             </section>
@@ -85,12 +89,14 @@
                 <div class="technologyTitle avoidTechnologyTitle">
                     <p>I'm not interested</p>
                 </div>
-                <ul>
+                <ul class="technologiesList">
                     <li class="technologyItem" ng-repeat="t in avoidTechnologies">
+                        <div class="technologyItemContent">
                         <div class="technologyTag removableTechnologyTag">
-                            <span ng-bind="t"></span>
+                                <span ng-bind="t"></span>
+                            </div>
+                            <a href="" class="technologyRemoveButton" ng-click="removeAvoid(t)"></a>
                         </div>
-                        <a href="" class="technologyRemoveButton" ng-click="removeAvoid(t)"></a>
                     </li>
                 </ul>
             </section>
