@@ -51,7 +51,9 @@
             
             <!-- wanted technologies -->
             <section class="listSection" id="wantToLearn">
-                <h2>I want to learn that!</h2>  
+                <div class="technologyTitle wantedTechnologyTitle">
+                    <p>I want to learn that!</p>
+                </div>
                 <ul>
                     <li ng-repeat="t in wantedTechnologies">
                         <div class="technologyTag">
@@ -64,7 +66,9 @@
             
             <!-- known technologies -->
             <section class="listSection" id="knowThat">
-                <h2>I know that!</h2>
+                <div class="technologyTitle knownTechnologyTitle">
+                    <p>I know that!</p>
+                </div>
                 <ul>
                     <li ng-repeat="t in knownTechnologies">
                         <div class="technologyTag">
@@ -77,7 +81,9 @@
             
             <!-- avoided technologies -->
             <section class="listSection" id="notInterested">
-                <h2>I'm not interested</h2>
+                <div class="technologyTitle avoidTechnologyTitle">
+                    <p>I'm not interested</p>
+                </div>
                 <ul>
                     <li ng-repeat="t in avoidTechnologies">
                         <div class="technologyTag">
