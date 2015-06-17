@@ -34,6 +34,8 @@ public class ConfigurationWrapper {
         OptionSpec<Integer> portOption = optionParser.accepts(ELASTIC_PORT).withOptionalArg().ofType(Integer.class).defaultsTo(9300);
         OptionSpec<String> indexNameOption = optionParser.accepts(ELASTIC_INDEX_NAME).withOptionalArg().ofType(String.class).defaultsTo("indexName");
         OptionSpec<Integer> minTechnologiesConnections = optionParser.accepts(MIN_NUMBER_OF_TECHNOLOGIES_CONNECTIONS).withOptionalArg().ofType(Integer.class).defaultsTo(2);
+        OptionSpec<Boolean> omitPostOption = optionParser.accepts(OMIT_POSTS).withOptionalArg().ofType(Boolean.class).defaultsTo(true);
+        OptionSpec<Integer> mappingScope = optionParser.accepts(MAPPING_SCOPE).withOptionalArg().ofType(Integer.class).defaultsTo(5);
 
         OptionSet optionSet = optionParser.parse(args);
 
@@ -42,10 +44,16 @@ public class ConfigurationWrapper {
         configuration.setInt(ELASTIC_PORT, optionSet.valueOf(portOption));
         configuration.set(ELASTIC_INDEX_NAME, optionSet.valueOf(indexNameOption));
         configuration.setInt(MIN_NUMBER_OF_TECHNOLOGIES_CONNECTIONS, optionSet.valueOf(minTechnologiesConnections));
+        configuration.setBoolean(OMIT_POSTS, optionSet.has(omitPostOption));
+        configuration.setInt(MAPPING_SCOPE, optionSet.valueOf(mappingScope));
     }
 
     public boolean isUseElastic() {
         return configuration.getBoolean(USE_ELASTIC_OUTPUT, false);
+    }
+
+    public boolean isOmitPosts() {
+        return configuration.getBoolean(OMIT_POSTS, false);
     }
 
     public String getInputPath() {
@@ -66,5 +74,9 @@ public class ConfigurationWrapper {
 
     public int getMinimumNumberOfTechnologiesConnections() {
         return configuration.getInt(MIN_NUMBER_OF_TECHNOLOGIES_CONNECTIONS, 2);
+    }
+
+    public int getMappingScope() {
+        return configuration.getInt(MAPPING_SCOPE, 5);
     }
 }

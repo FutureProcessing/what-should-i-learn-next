@@ -8,4 +8,7 @@ public interface ConfigurationConstants {
     String ELASTIC_INDEX_NAME = "indexName";
 
     String MIN_NUMBER_OF_TECHNOLOGIES_CONNECTIONS = "minTechnologiesConnections";
+
+    String OMIT_POSTS = "omitPosts";
+    String MAPPING_SCOPE = "mappingScope";
 }
