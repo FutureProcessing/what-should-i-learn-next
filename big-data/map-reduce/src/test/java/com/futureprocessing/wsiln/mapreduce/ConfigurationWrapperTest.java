@@ -5,8 +5,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 public class ConfigurationWrapperTest {
 
     private ConfigurationWrapper configurationWrapper;
@@ -116,4 +114,30 @@ public class ConfigurationWrapperTest {
         //then
         Assertions.assertThat(configurationWrapper.getMinimumNumberOfTechnologiesConnections()).isEqualTo(2);
     }
+
+
+    @Test
+    public void shouldUsePostInMapperWhenNoOmitPostOptionProvided() {
+        //given
+        String[] args = toArgs("s3://some/file/on/S3");
+
+        //when
+        configurationWrapper.parseArguments(args);
+
+        //then
+        Assertions.assertThat(configurationWrapper.isOmitPosts()).isFalse();
+    }
+
+    @Test
+    public void shouldNotUsePostInMapperWhenOmitPostOptionProvided() {
+        //given
+        String[] args = toArgs("s3://some/file/on/S3 --omitPost");
+
+        //when
+        configurationWrapper.parseArguments(args);
+
+        //then
+        Assertions.assertThat(configurationWrapper.isOmitPosts()).isTrue();
+    }
+
 }

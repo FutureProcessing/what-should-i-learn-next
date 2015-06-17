@@ -2,6 +2,7 @@ package com.futureprocessing.wsiln.mapreduce;
 
 import com.futureprocessing.wsiln.mapreduce.map.MappingType;
 import com.futureprocessing.wsiln.mapreduce.map.RelationKey;
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -13,14 +14,22 @@ import static com.futureprocessing.wsiln.mapreduce.TechnologiesFormatter.removeV
 
 public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, MappingType> {
     private final static int MAPPING_SCOPE = 5;
+    private boolean omitPost;
 
+    @Override
+    protected void setup(Context context) throws IOException, InterruptedException {
+        Configuration configuration = context.getConfiguration();
+        omitPost = configuration.getBoolean(ConfigurationConstants.OMIT_POSTS, false);
+    }
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         try {
             ParserXML parser = new ParserXML(value.toString());
             mapTags(parser.getTags(), context);
-            mapPosts(parser.getBody(), context);
+            if (!omitPost) {
+                mapPosts(parser.getBody(), context);
+            }
         } catch (Exception e) {
             return;
         }
