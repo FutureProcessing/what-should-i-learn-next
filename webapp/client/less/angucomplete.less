@@ -19,30 +19,31 @@
     border-color: #ff9800;
     border-width: 0 2px 2px 2px;
     border-style: solid;
-    padding: 6px 1px;
+    padding: 0;
     cursor: pointer;
     z-index: 9999;
     position: absolute;
     /*top: 32px;
     left: 0px;
     */
-    margin-top: 2px;
-    left: -2px;
-    right: -2px;
+    left: 0;
+    right: 0;
     background-color: #ffffff;    
 }
 
 .angucomplete-searching {
     color: #acacac;
     font-size: 14px;
+    padding: 5px 14px;
 }
 
 .angucomplete-description {
     font-size: 14px;
+    padding: 5px 14px;
 }
 
 .angucomplete-row {
-    padding: 5px;
+    padding: 5px 14px;
     color: #000000;
     margin-bottom: 4px;
 
@@ -82,11 +83,12 @@
 /* Additional search elements - START */
 .angucomplete-holder input
 {
-    height: 46px;     
+    height: 50px;     
     border: 0;
     padding: 0 50px 0 14px;     
     width: 100%;
     box-sizing: border-box;     
+    border: 2px solid #d7d7d7;
 }
 
 .angucomplete-holder input:focus
@@ -108,11 +110,10 @@
 } 
 
 .searchInputContainer {
-    width: 100%;
-    border: 2px solid #d7d7d7;
+    width: 100%;    
     position: relative;
     margin-top: 50px;
-    height: 46px;
+    height: 50px;
 }
 
 .searchInputContainer:focus {
