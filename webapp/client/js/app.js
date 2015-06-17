@@ -41,17 +41,7 @@ angular.module('whatToLearnNext', [
         $scope.avoidTechnologies.push(tech);
         $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
     };
-    
-    $scope.keyPress = function (event) {
-        if (event.which === 13) {
-            // TODO find better selection;
-            if ($scope.technologyPredictions && $scope.technologyPredictions.length > 0) {
-                $scope.query = undefined;
-                $scope.knownTechnologies.push($scope.technologyPredictions[0]);
-            }
-        }
-    };
-    
+         
     $scope.$watch('query', function (query) {
         if (!query) {
             $scope.technologyPredictions = undefined;
@@ -63,6 +53,22 @@ angular.module('whatToLearnNext', [
         });
     });
 
+    $scope.$watch('selectedTechnology', function (selectedTechnology) {
+        if (!$scope.selectedTechnology)
+            return;
+
+        if ($scope.technologyPredictions && $scope.technologyPredictions.length > 0) {
+            var foundTechnology = _($scope.technologyPredictions).find(function (technologyName) {
+                return technologyName === selectedTechnology.originalObject;
+            });
+
+            if (foundTechnology) {
+                $scope.knownTechnologies.push(foundTechnology);
+                $scope.query = null;
+                $scope.selectedTechnology = null;
+            }
+        }
+    });
 
     $scope.$watch('knownTechnologies', function (knownTechnologies) {
         if(knownTechnologies && knownTechnologies.length > 0) {

@@ -237,10 +237,17 @@ angular.module('angucomplete', [] )
                         event.preventDefault;
                         event.stopPropagation();
                     } else {
-                        $scope.results = [];
-                        $scope.$apply();
-                        event.preventDefault;
-                        event.stopPropagation();
+                        if ($scope.searchStr && $scope.results && $scope.results.length > 0 && $scope.searchStr === $scope.results[0].originalObject) {
+                            $scope.selectResult($scope.results[0]);
+                            $scope.$apply();
+                            event.preventDefault;
+                            event.stopPropagation();
+                        } else {
+                            $scope.results = [];
+                            $scope.$apply();
+                            event.preventDefault;
+                            event.stopPropagation();
+                        }
                     }
 
                 } else if (event.which == 27) {
