@@ -1,9 +1,11 @@
 var angular = require('angular');
 var _ = require('underscore');
 require('./technologyService');
+require('./lib/angucomplete');
 
 angular.module('whatToLearnNext', [
-    'whatToLearnNext.technologyService'
+    'whatToLearnNext.technologyService',
+    "angucomplete"
 ])
 
 .controller('mainController', ['$scope', 'technologyService', function ($scope, technologyService) {
