@@ -21,7 +21,7 @@ html, body {
 
 h1 {
     font-family: @fontTitles;
-    font-size: 40px;
+    font-size: 48px;
     font-weight: 400;
 }
 
@@ -72,6 +72,11 @@ footer {
 }
 
 /* Search section - BEGIN */
+.searchSection input {
+    font-size: 17px;
+}
+
+
 .searchSectionInnerBox {
     width: 80%;
     margin: 88px auto 50px auto;
@@ -130,10 +135,10 @@ footer {
     width: 26px;
     margin: @activeButtonBorderWidth 0 @activeButtonBorderWidth 0;
     outline: @activeColor solid @activeButtonBorderWidth;
-    background-image: url('/images/POC_images_19_orange.png');
+    background-image: url('/images/removeActive.png');
     background-repeat: no-repeat;
     background-position: center center;
-    display: none;
+    opacity: 0.0;
 }
 
 .technologyItemContent {
@@ -142,7 +147,7 @@ footer {
 }
 
 .technologyItemContent:hover .technologyRemoveButton {
-    display : block;
+    opacity : 1.0;
 }
 
 .technologyItemContent:hover .removableTechnologyTag {
@@ -193,7 +198,7 @@ footer {
 .technologyTag {
     background-color: #e5e5e5;
     font-weight: 600;
-    font-size: 17px;
+    font-size: 19px;
     float: left;
     padding: 0px 10px;
     height: @technologyTagHeight;
