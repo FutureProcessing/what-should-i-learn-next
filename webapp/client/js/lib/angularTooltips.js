@@ -39,7 +39,7 @@
           , tryPosition = typeof attr.tooltipTry !== 'undefined' && attr.tooltipTry !== null ? $scope.$eval(attr.tooltipTry) : true
           , className = attr.tooltipClass || ''
           , speed = (attr.tooltipSpeed || 'medium').toLowerCase()
-          , delay = attr.tooltipDelay || 0
+          , delay = attr.tooltipDelay || 800
           , lazyMode = typeof attr.tooltipLazy !== 'undefined' && attr.tooltipLazy !== null ? $scope.$eval(attr.tooltipLazy) : true
           , hasCloseButton = typeof attr.tooltipCloseButton !== 'undefined' && attr.tooltipCloseButton !== null
           , closeButtonContent = attr.tooltipCloseButton || ''
