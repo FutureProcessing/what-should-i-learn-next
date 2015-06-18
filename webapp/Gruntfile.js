@@ -16,7 +16,8 @@ module.exports = function (grunt) {
         browserify: {
             dev: {
                 files: {
-                    'client/generated/app.js': ['client/js/app.js']
+                    'client/generated/app.js': ['client/js/app.js'],
+                    'client/generated/angularTooltips.js': ['client/js/lib/angularTooltips.js']
                 },
                 options: {
                     browserifyOptions: {
@@ -27,7 +28,8 @@ module.exports = function (grunt) {
             },
             prod: {
                 files: {
-                    'client/generated/app.js': ['client/js/app.js']
+                    'client/generated/app.js': ['client/js/app.js'],
+                    'client/generated/angularTooltips.js': ['client/js/lib/angularTooltips.js']
                 },
                 options: {
                     browserifyOptions: {
@@ -68,13 +70,15 @@ module.exports = function (grunt) {
                 files: {
                     'client/generated/main.css': ['client/less/main.less'],
                     'client/generated/mainNew.css': ['client/less/mainNew.less'],
-                    'client/generated/angucomplete.css': ['client/less/angucomplete.less']
+                    'client/generated/angucomplete.css': ['client/less/angucomplete.less'],
+                    'client/generated/angularTooltips.css': ['client/less/lib/angularTooltips.css']
                 }
             },
             prod: {
                 files: {
                     'client/generated/main.css': ['client/less/main.less'],
-                    'client/generated/angucomplete.css': ['client/less/angucomplete.less']
+                    'client/generated/angucomplete.css': ['client/less/angucomplete.less'],
+                    'client/generated/angularTooltips.css': ['client/less/lib/angularTooltips.css']
                 },
                 options: {
                     compress: true

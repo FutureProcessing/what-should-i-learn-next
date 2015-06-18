@@ -6,8 +6,10 @@
 
     <link rel="stylesheet" type="text/css" href="/mainNew.css" />
     <link rel="stylesheet" type="text/css" href="/angucomplete.css" />
+    <link rel="stylesheet" type="text/css" href="/angularTooltips.css" />
 
     <script src="/app.js"></script>
+    <script src="/angularTooltips.js"></script>
 
     <title>What to learn next?</title>
 </head>
@@ -40,9 +42,9 @@
                             <span ng-bind="t"></span>
                         </div>
                                                 
-                        <a href="" class="listItemLink notInterestedLink" ng-click="avoid(t)"></a>
-                        <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(t)"></a>
-                        <a href="" class="listItemLink wantedLink" ng-click="wanted(t)"></a>                        
+                        <a href="" class="listItemLink notInterestedLink" ng-click="avoid(t)" tooltips data-title="I'm not interested"></a>
+                        <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(t)" tooltips data-title="I want to learn that!"></a>
+                        <a href="" class="listItemLink wantedLink" ng-click="wanted(t)" tooltips data-title="I know that!"></a>                        
                     </li>
                 </ul>
             </div>
@@ -60,7 +62,7 @@
                             <div class="technologyTag removableTechnologyTag">
                                 <span ng-bind="t"></span>
                             </div>
-                            <a href="" class="technologyRemoveButton" ng-click="removeWanted(t)"></a>
+                            <a href="" class="technologyRemoveButton" ng-click="removeWanted(t)" tooltips data-title="Remove"></a>
                         </div>
                     </li>
                 </ul>
@@ -78,7 +80,7 @@
                                 <span ng-bind="t"></span>
                             </div>
 
-                            <a href="" class="technologyRemoveButton" ng-click="removeKnown(t)"></a>
+                            <a href="" class="technologyRemoveButton" ng-click="removeKnown(t)" tooltips data-title="Remove"></a>
                         </div>
                     </li>
                 </ul>
@@ -95,7 +97,7 @@
                         <div class="technologyTag removableTechnologyTag">
                                 <span ng-bind="t"></span>
                             </div>
-                            <a href="" class="technologyRemoveButton" ng-click="removeAvoid(t)"></a>
+                            <a href="" class="technologyRemoveButton" ng-click="removeAvoid(t)" tooltips data-title="Remove"></a>
                         </div>
                     </li>
                 </ul>

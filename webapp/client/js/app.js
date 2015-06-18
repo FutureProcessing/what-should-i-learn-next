@@ -2,10 +2,12 @@ var angular = require('angular');
 var _ = require('underscore');
 require('./technologyService');
 require('./lib/angucomplete');
+require('./lib/angularTooltips');
 
 angular.module('whatToLearnNext', [
     'whatToLearnNext.technologyService',
-    "angucomplete"
+    "angucomplete",
+    '720kb.tooltips'
 ])
 
 .controller('mainController', ['$scope', 'technologyService', function ($scope, technologyService) {
@@ -95,5 +97,4 @@ angular.module('whatToLearnNext', [
     }, true);
     
     console.log($scope);
-    $scope.ddd = "Welcome Angular";
 }]);
