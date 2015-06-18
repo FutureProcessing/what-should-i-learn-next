@@ -16,6 +16,7 @@ html, body {
     width: 100%;
     height: 100%;
     font-family: 'Source Sans Pro', sans-serif;
+    overflow-y: hidden;
 }
 
 h1 {
@@ -50,12 +51,17 @@ main {
     position: fixed;
     top: @headerHeight;
     bottom: @footerHeight;
-    width: 100%;   
+    width: 100%;  
+    overflow-y: auto; 
 }
 
 .searchSection, .listsSections {
     width: 50%;
     float: left;
+}
+
+.listsSections {
+    height: 100%;
 }
 
 .listSection {
@@ -86,7 +92,6 @@ footer {
 /* Search section - START */
 .searchSection, .listsSections {
     width: 50%;
-    height: 100%;
     float: left;
 }
 
