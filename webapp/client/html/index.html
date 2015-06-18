@@ -25,88 +25,88 @@
     
     <!-- main -->
     <main class="main">
-        <section class="searchSection" id="search">
-            <div class="searchSectionInnerBox">
-                <h1 class="searchSectionHeader">What to learn next?</h1>
-                
-                <div class="searchInputContainer">
-                    <div id="technologiesSearch" data-angucomplete data-searchfields="" data-titlefields="" data-minlength="1" data-selectedobject="selectedTechnology" data-searchstr="query" data-localdata="technologyPredictions" data-placeholder="Type what you already know...">
+        <div class="mainLayoutOuterContainer">
+            <div class="mainLayoutInnerContainer">
+                <section class="searchSection" id="search">
+                    <div class="searchSectionInnerBox">
+                        <h1 class="searchSectionHeader">What to learn next?</h1>
+
+                        <div class="searchInputContainer">
+                            <div id="technologiesSearch" data-angucomplete data-searchfields="" data-titlefields="" data-minlength="1" data-selectedobject="selectedTechnology" data-searchstr="query" data-localdata="technologyPredictions" data-placeholder="Type what you already know...">
+                            </div>
+                            <div class="magnifier"></div>
+                        </div>
+
+                        <ul id="suggested" class="suggestedTags" ng-if="suggestedTechnologies.length > 0">
+                            <li ng-repeat="t in suggestedTechnologies">
+                                <div class="technologyTag">
+                                    <span ng-bind="t"></span>
+                                </div>
+
+                                <a href="" class="listItemLink notInterestedLink" ng-click="avoid(t)" tooltips data-title="I'm not interested"></a>
+                                <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(t)" tooltips data-title="I want to learn that!"></a>
+                                <a href="" class="listItemLink wantedLink" ng-click="wanted(t)" tooltips data-title="I know that!"></a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="magnifier"></div>
-                </div>
+                </section>
 
-                <ul id="suggested" class="suggestedTags" ng-if="suggestedTechnologies.length > 0">
-                    <li ng-repeat="t in suggestedTechnologies">
-                        <div class="technologyTag">
-                            <span ng-bind="t"></span>
-                        </div>
-                                                
-                        <a href="" class="listItemLink notInterestedLink" ng-click="avoid(t)" tooltips data-title="I'm not interested"></a>
-                        <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(t)" tooltips data-title="I want to learn that!"></a>
-                        <a href="" class="listItemLink wantedLink" ng-click="wanted(t)" tooltips data-title="I know that!"></a>                        
-                    </li>
-                </ul>
+                <!-- wanted technologies -->
+                <section class="listSection" id="wantToLearn">
+                    <div class="technologyTitle wantedTechnologyTitle">
+                        <p>I want to learn that!</p>
+                    </div>
+                    <ul class="technologiesList">
+                        <li class="technologyItem" ng-repeat="t in wantedTechnologies">
+                            <div class="technologyItemContent">
+                                <div class="technologyTag removableTechnologyTag">
+                                    <span ng-bind="t"></span>
+                                </div>
+                                <a href="" class="technologyRemoveButton" ng-click="removeWanted(t)" tooltips data-title="Remove"></a>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- known technologies -->
+                <section class="listSection" id="knowThat">
+                    <div class="technologyTitle knownTechnologyTitle">
+                        <p>I know that!</p>
+                    </div>
+                    <ul class="technologiesList">
+                        <li class="technologyItem" ng-repeat="t in knownTechnologies">
+                            <div class="technologyItemContent">
+                                <div class="technologyTag removableTechnologyTag">
+                                    <span ng-bind="t"></span>
+                                </div>
+
+                                <a href="" class="technologyRemoveButton" ng-click="removeKnown(t)" tooltips data-title="Remove"></a>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- avoided technologies -->
+                <section class="listSection" id="notInterested">
+                    <div class="technologyTitle avoidTechnologyTitle">
+                        <p>I'm not interested</p>
+                    </div>
+                    <ul class="technologiesList">
+                        <li class="technologyItem" ng-repeat="t in avoidTechnologies">
+                            <div class="technologyItemContent">
+                                <div class="technologyTag removableTechnologyTag">
+                                    <span ng-bind="t"></span>
+                                </div>
+                                <a href="" class="technologyRemoveButton" ng-click="removeAvoid(t)" tooltips data-title="Remove"></a>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- download -->
+                <section class="downloadSection" id="download"></section>
             </div>
-        </section>
-        <section class="listsSections" id="lists">
-            
-            <!-- wanted technologies -->
-            <section class="listSection" id="wantToLearn">
-                <div class="technologyTitle wantedTechnologyTitle">
-                    <p>I want to learn that!</p>
-                </div>
-                <ul class="technologiesList">
-                    <li class="technologyItem" ng-repeat="t in wantedTechnologies">
-                        <div class="technologyItemContent">
-                            <div class="technologyTag removableTechnologyTag">
-                                <span ng-bind="t"></span>
-                            </div>
-                            <a href="" class="technologyRemoveButton" ng-click="removeWanted(t)" tooltips data-title="Remove"></a>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-            
-            <!-- known technologies -->
-            <section class="listSection" id="knowThat">
-                <div class="technologyTitle knownTechnologyTitle">
-                    <p>I know that!</p>
-                </div>
-                <ul class="technologiesList">
-                    <li class="technologyItem" ng-repeat="t in knownTechnologies">
-                        <div class="technologyItemContent">
-                            <div class="technologyTag removableTechnologyTag">
-                                <span ng-bind="t"></span>
-                            </div>
-
-                            <a href="" class="technologyRemoveButton" ng-click="removeKnown(t)" tooltips data-title="Remove"></a>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-            
-            <!-- avoided technologies -->
-            <section class="listSection" id="notInterested">
-                <div class="technologyTitle avoidTechnologyTitle">
-                    <p>I'm not interested</p>
-                </div>
-                <ul class="technologiesList">
-                    <li class="technologyItem" ng-repeat="t in avoidTechnologies">
-                        <div class="technologyItemContent">
-                        <div class="technologyTag removableTechnologyTag">
-                                <span ng-bind="t"></span>
-                            </div>
-                            <a href="" class="technologyRemoveButton" ng-click="removeAvoid(t)" tooltips data-title="Remove"></a>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-            
-            <!-- download -->
-            <section class="downloadSection" id="download">
-
-            </section>
-        </section>   
+        </div>
     </main>
     
     <!-- footer -->

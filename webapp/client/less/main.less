@@ -55,24 +55,6 @@ main {
     overflow-y: auto; 
 }
 
-.searchSection, .listsSections {
-    width: 50%;
-    float: left;
-}
-
-.listsSections {
-    height: 100%;
-}
-
-.listSection {
-    width: 33.33%;
-    float: left;
-    border-left: 1px solid #d7d7d7;
-    box-sizing: border-box;
-    height: 100%;
-    padding: 0 20px;
-}
-
 footer {
     position: absolute;
     bottom: 0;
@@ -89,15 +71,10 @@ footer {
     background: #ebebeb;
 }
 
-/* Search section - START */
-.searchSection, .listsSections {
-    width: 50%;
-    float: left;
-}
-
+/* Search section - BEGIN */
 .searchSectionInnerBox {
     width: 80%;
-    margin: 88px auto 0 auto;
+    margin: 88px auto 50px auto;
 }
 
 .searchSectionHeader {
@@ -205,6 +182,7 @@ footer {
     width: 100%;
     float: left;
     position: relative;
+    margin-bottom: 50px;
 }
 
 .technologyItem {
@@ -282,3 +260,30 @@ footer a:hover, a:active {
     border-left-style: solid;
     line-height: 10px;
 }
+
+
+/* Main layout - BEGIN */
+.searchSection {
+  width: 50%;
+  display: table-cell;
+  vertical-align: top;
+}
+
+.listSection {
+  width: 16.66%;
+  border-left: 1px solid #d7d7d7;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0 20px;
+  display: table-cell;
+  vertical-align: top;
+}
+.mainLayoutOuterContainer {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.mainLayoutInnerContainer {
+  display: table-row;
+}
+/* Main layout - END */
