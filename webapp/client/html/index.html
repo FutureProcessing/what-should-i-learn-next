@@ -2,6 +2,9 @@
 <html ng-app="whatToLearnNext">
 
 <head>
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <link rel="stylesheet" type="text/css" href="/main.css" />
@@ -11,7 +14,7 @@
     <script src="/app.js"></script>
     <script src="/angularTooltips.js"></script>
 
-    <title>What to learn next?</title>
+    <title>FP - What to learn next?</title>
 </head>
 
 <body ng-controller="mainController">
@@ -42,8 +45,8 @@
                         </div>
                                                 
                         <a href="" class="listItemLink notInterestedLink" ng-click="avoid(t)" tooltips data-title="I'm not interested"></a>
-                        <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(t)" tooltips data-title="I want to learn that!"></a>
-                        <a href="" class="listItemLink wantedLink" ng-click="wanted(t)" tooltips data-title="I know that!"></a>                        
+                        <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(t)" tooltips data-title="I know that!"></a>
+                        <a href="" class="listItemLink wantedLink" ng-click="wanted(t)" tooltips data-title="I want to learn that!"></a>                        
                     </li>
                 </ul>
             </div>
