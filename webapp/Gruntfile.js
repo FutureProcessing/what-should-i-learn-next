@@ -69,7 +69,6 @@ module.exports = function (grunt) {
             dev: {
                 files: {
                     'client/generated/main.css': ['client/less/main.less'],
-                    'client/generated/mainNew.css': ['client/less/mainNew.less'],
                     'client/generated/angucomplete.css': ['client/less/angucomplete.less'],
                     'client/generated/angularTooltips.css': ['client/less/lib/angularTooltips.css']
                 }
