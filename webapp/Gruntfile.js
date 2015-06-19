@@ -17,7 +17,6 @@ module.exports = function (grunt) {
             dev: {
                 files: {
                     'client/generated/app.js': ['client/js/app.js'],
-                    'client/generated/angularTooltips.js': ['client/js/lib/angularTooltips.js'],
                     'client/generated/mainController.js': ['client/js/controllers/mainController.js'],
                     'client/generated/technologiesList.js': ['client/js/directives/technologiesList.js']
                 },
@@ -31,7 +30,6 @@ module.exports = function (grunt) {
             prod: {
                 files: {
                     'client/generated/app.js': ['client/js/app.js'],
-                    'client/generated/angularTooltips.js': ['client/js/lib/angularTooltips.js'],
                     'client/generated/mainController.js': ['client/js/controllers/mainController.js'],
                     'client/generated/technologiesList.js.js': ['client/js/directives/technologiesList.js']
                 },
@@ -73,15 +71,13 @@ module.exports = function (grunt) {
             dev: {
                 files: {
                     'client/generated/main.css': ['client/less/main.less'],
-                    'client/generated/angucomplete.css': ['client/less/angucomplete.less'],
-                    'client/generated/angularTooltips.css': ['client/less/lib/angularTooltips.css']
+                    'client/generated/angucomplete.css': ['client/less/angucomplete.less']
                 }
             },
             prod: {
                 files: {
                     'client/generated/main.css': ['client/less/main.less'],
-                    'client/generated/angucomplete.css': ['client/less/angucomplete.less'],
-                    'client/generated/angularTooltips.css': ['client/less/lib/angularTooltips.css']
+                    'client/generated/angucomplete.css': ['client/less/angucomplete.less']
                 },
                 options: {
                     compress: true
