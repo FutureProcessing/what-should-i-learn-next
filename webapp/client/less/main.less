@@ -1,6 +1,6 @@
 @import "reset";
 @import "malleable";
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:600,700);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:600);
 
 @headerHeight: 50px;
 @footerHeight: 40px;
@@ -52,8 +52,8 @@ main {
     position: fixed;
     top: @headerHeight;
     bottom: @footerHeight;
-    width: 100%;  
-    overflow-y: auto; 
+    width: 100%;
+    overflow-y: auto;
 }
 
 footer {
@@ -79,12 +79,12 @@ footer {
 }
 
 .searchSectionHeader {
-  background-image: url('/images/icon.png');
-  background-repeat: no-repeat;
-  background-position: left center;
-  padding-left: 75px;
-  height: 42px;
-  line-height: 42px;
+    background-image: url('/images/icon.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 75px;
+    height: 42px;
+    line-height: 42px;
 }
 /* Search section - END */
 
@@ -94,7 +94,7 @@ footer {
     height: 26px;
     background-repeat: no-repeat;
     background-position: center center;
-    margin: 5px 5px 5px 8px; 
+    margin: 5px 5px 5px 8px;
 }
 
 .listItemLink:hover {
@@ -143,7 +143,7 @@ footer {
 }
 
 .technologyItemContent:hover .technologyRemoveButton {
-    opacity : 1.0;
+    opacity: 1.0;
 }
 
 .technologyItemContent:hover .removableTechnologyTag {
@@ -157,24 +157,23 @@ footer {
     padding-left: 28px;
     margin-left: 25px;
     margin: auto;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 26px;
 }
 
 .avoidTechnologyTitle {
-    background-image: url('/images/avoidedTechnology.png'); 
+    background-image: url('/images/avoidedTechnology.png');
     background-repeat: no-repeat;
     background-position: left center;
 }
 
 .knownTechnologyTitle {
-    background-image: url('/images/knownTechnology.png'); 
+    background-image: url('/images/knownTechnology.png');
     background-repeat: no-repeat;
     background-position: left center;
 }
 
 .wantedTechnologyTitle {
-    background-image: url('/images/wantedTechnology.png'); 
+    background-image: url('/images/wantedTechnology.png');
     background-repeat: no-repeat;
     background-position: left center;
 }
@@ -265,26 +264,35 @@ footer a:hover, a:active {
 
 /* Main layout - BEGIN */
 .searchSection {
-  width: 50%;
-  display: table-cell;
-  vertical-align: top;
+    width: 50%;
+    display: table-cell;
+    vertical-align: top;
 }
 
 .listSection {
-  width: 16.66%;
-  border-left: 1px solid #d7d7d7;
-  box-sizing: border-box;
-  height: 100%;
-  padding: 0 20px;
-  display: table-cell;
-  vertical-align: top;
+    width: 16.66%;
+    border-left: 1px solid #d7d7d7;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 0 20px;
+    display: table-cell;
+    vertical-align: top;
 }
+
 .mainLayoutOuterContainer {
-  display: table;
-  height: 100%;
-  width: 100%;
+    display: table;
+    height: 100%;
+    width: 100%;
+    table-layout: fixed;
 }
+
 .mainLayoutInnerContainer {
-  display: table-row;
+    display: table-row;
 }
 /* Main layout - END */
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
