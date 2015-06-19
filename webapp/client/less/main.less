@@ -12,11 +12,20 @@
 @technologyTagHeight: 30px;
 @activeButtonBorderWidth: 2px;
 
+/* http://codeboxers.com/ie10-responsive-design-fix-for-metro-snap/ */
+
+@-ms-viewport {
+    width: device-width;
+}
+
+@viewport {
+    width: device-width;
+}
+
 html, body {
     width: 100%;
     height: 100%;
-    font-family: 'Source Sans Pro', sans-serif;
-    overflow-y: hidden;
+    font-family: 'Source Sans Pro', sans-serif;    
 }
 
 h1 {
