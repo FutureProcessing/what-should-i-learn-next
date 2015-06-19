@@ -32,10 +32,11 @@ header {
     width: 100%;
     height: @headerHeight;
     background-image: url(images/headerBackground.jpg);
-    background-attachment: fixed;
+    background-position: 0 0;
+    background-repeat: repeat-x;
 }
 
-#headerLogo {
+header .logo {
     width: auto;
     margin-left: 24px;
     height: @headerHeight;
@@ -43,7 +44,7 @@ header {
     float: left;
 }
 
-#headerLogo img {
+header .logo img {
     vertical-align: middle;
 }
 
@@ -61,13 +62,8 @@ footer {
     left: 0;
     width: 100%;
     height: @footerHeight;
-    color: @footerColor;
-}
-
-#footerContent {
-    width: 100%;
-    height: @footerHeight;
     line-height: @footerHeight;
+    color: @footerColor;
     background: #ebebeb;
 }
 
