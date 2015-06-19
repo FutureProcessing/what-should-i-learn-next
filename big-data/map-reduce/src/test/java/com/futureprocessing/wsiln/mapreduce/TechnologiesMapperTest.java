@@ -73,7 +73,7 @@ public class TechnologiesMapperTest {
     @Test
     public void shouldMapWordPairFromText() throws IOException  {
         //given
-        Text input = new Text("<row Id=\"1\" Body=\"&lt;p&gt;One plus one is two, but one.&lt;/p&gt;&#xA;\"  />");
+        Text input = new Text("<row Id=\"1\" Body=\"&lt;&gt;One plus one is two, but one&lt;/&gt;&#xA;\"  />");
 
         List<Pair<RelationKey, MappingType>> map = new ArrayList<Pair<RelationKey, MappingType>>();
 
