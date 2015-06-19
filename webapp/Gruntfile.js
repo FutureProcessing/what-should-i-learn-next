@@ -17,7 +17,8 @@ module.exports = function (grunt) {
             dev: {
                 files: {
                     'client/generated/app.js': ['client/js/app.js'],
-                    'client/generated/angularTooltips.js': ['client/js/lib/angularTooltips.js']
+                    'client/generated/angularTooltips.js': ['client/js/lib/angularTooltips.js'],
+                    'client/generated/mainController.js': ['client/js/controllers/mainController.js']
                 },
                 options: {
                     browserifyOptions: {
@@ -29,7 +30,8 @@ module.exports = function (grunt) {
             prod: {
                 files: {
                     'client/generated/app.js': ['client/js/app.js'],
-                    'client/generated/angularTooltips.js': ['client/js/lib/angularTooltips.js']
+                    'client/generated/angularTooltips.js': ['client/js/lib/angularTooltips.js'],
+                    'client/generated/mainController.js': ['client/js/controllers/mainController.js']
                 },
                 options: {
                     browserifyOptions: {
