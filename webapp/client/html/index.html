@@ -58,7 +58,7 @@
                     <ul class="technologiesList">
                         <li class="technologyItem" ng-repeat="t in wantedTechnologies">
                             <div class="technologyItemContent">
-                                <div class="technologyTag removableTechnologyTag">
+                                <div class="technologyTag removableTechnologyTag ellipsis">
                                     <span ng-bind="t"></span>
                                 </div>
                                 <a href="" class="technologyRemoveButton" ng-click="removeWanted(t)" tooltips data-title="Remove"></a>
@@ -75,7 +75,7 @@
                     <ul class="technologiesList">
                         <li class="technologyItem" ng-repeat="t in knownTechnologies">
                             <div class="technologyItemContent">
-                                <div class="technologyTag removableTechnologyTag">
+                                <div class="technologyTag removableTechnologyTag ellipsis">
                                     <span ng-bind="t"></span>
                                 </div>
 
@@ -93,7 +93,7 @@
                     <ul class="technologiesList">
                         <li class="technologyItem" ng-repeat="t in avoidTechnologies">
                             <div class="technologyItemContent">
-                                <div class="technologyTag removableTechnologyTag">
+                                <div class="technologyTag removableTechnologyTag ellipsis">
                                     <span ng-bind="t"></span>
                                 </div>
                                 <a href="" class="technologyRemoveButton" ng-click="removeAvoid(t)" tooltips data-title="Remove"></a>
