@@ -126,7 +126,6 @@ footer {
 }
 
 .technologyRemoveButton {
-    float: left;
     height: 26px;
     width: 26px;
     margin: @activeButtonBorderWidth 0 @activeButtonBorderWidth 0;
@@ -135,6 +134,7 @@ footer {
     background-repeat: no-repeat;
     background-position: center center;
     opacity: 0.0;
+    position: absolute;
 }
 
 .technologyItemContent {
@@ -183,6 +183,8 @@ footer {
     float: left;
     position: relative;
     margin-bottom: 50px;
+    padding-right: 26px;
+    box-sizing: border-box;
 }
 
 .technologyItem {
@@ -198,6 +200,8 @@ footer {
     padding: 0px 10px;
     height: @technologyTagHeight;
     line-height: @technologyTagHeight;
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 .removableTechnologyTag {
