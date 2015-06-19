@@ -29,7 +29,7 @@
             <div class="mainLayoutInnerContainer">
                 <section class="searchSection" id="search">
                     <div class="searchSectionInnerBox">
-                        <h1 class="searchSectionHeader">What to learn next?</h1>
+                        <h1 class="searchSectionHeader ellipsis" title="What to learn next?">What to learn next?</h1>
 
                         <div class="searchInputContainer">
                             <div id="technologiesSearch" data-angucomplete data-searchfields="" data-titlefields="" data-minlength="1" data-selectedobject="selectedTechnology" data-searchstr="query" data-localdata="technologyPredictions" data-placeholder="Type what you already know...">
@@ -52,9 +52,9 @@
                 </section>
                 <!-- wanted technologies -->
                 <section class="listSection" id="wantToLearn">
-                    <div class="technologyTitle wantedTechnologyTitle">
-                        <p>I want to learn that!</p>
-                    </div>
+                    <h1 class="technologyTitle wantedTechnologyTitle ellipsis">
+                        I want to learn that!
+                    </h1>
                     <ul class="technologiesList">
                         <li class="technologyItem" ng-repeat="t in wantedTechnologies">
                             <div class="technologyItemContent">
@@ -69,9 +69,9 @@
 
                 <!-- known technologies -->
                 <section class="listSection" id="knowThat">
-                    <div class="technologyTitle knownTechnologyTitle">
-                        <p>I know that!</p>
-                    </div>
+                    <h1 class="technologyTitle knownTechnologyTitle ellipsis">
+                        I know that!
+                    </h1>
                     <ul class="technologiesList">
                         <li class="technologyItem" ng-repeat="t in knownTechnologies">
                             <div class="technologyItemContent">
@@ -87,9 +87,9 @@
 
                 <!-- avoided technologies -->
                 <section class="listSection" id="notInterested">
-                    <div class="technologyTitle avoidTechnologyTitle">
-                        <p>I'm not interested</p>
-                    </div>
+                    <h1 class="technologyTitle avoidTechnologyTitle ellipsis">
+                        I'm not interested
+                    </h1>
                     <ul class="technologiesList">
                         <li class="technologyItem" ng-repeat="t in avoidTechnologies">
                             <div class="technologyItemContent">
