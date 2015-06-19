@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="whatToLearnNext">
 
 <head>
@@ -10,6 +10,7 @@
 
     <script src="/app.js"></script>
     <script src="/mainController.js"></script>
+    <script src="/technologiesList.js"></script>
     <script src="/angularTooltips.js"></script>
 
     <title>FP - What to learn next?</title>
@@ -51,56 +52,32 @@
                         </ul>
                     </div>
                 </section>
+                
                 <!-- wanted technologies -->
-                <section class="listSection" id="wantToLearn">
-                    <h1 class="technologyTitle wantedTechnologyTitle ellipsis">
-                        I want to learn that!
-                    </h1>
-                    <ul class="technologiesList">
-                        <li class="technologyItem" ng-repeat="technology in wantedTechnologies">
-                            <div class="technologyItemContent">
-                                <div class="technologyTag removableTechnologyTag ellipsis">
-                                    <span ng-bind="technology" title="{{technology}}"></span>
-                                </div>
-                                <a href="" class="technologyRemoveButton" ng-click="removeWanted(technology)" tooltips data-title="Remove"></a>
-                            </div>
-                        </li>
-                    </ul>
+                <section class="listSection" id="wantToLearn"
+                         data-technologies-list 
+                         data-title="'I want to learn that!'"
+                         data-title-style="'wantedTechnologyTitle'"
+                         data-technologies="wantedTechnologies"
+                         data-remove="removeWanted(technology)">
                 </section>
 
                 <!-- known technologies -->
-                <section class="listSection" id="knowThat">
-                    <h1 class="technologyTitle knownTechnologyTitle ellipsis">
-                        I know that!
-                    </h1>
-                    <ul class="technologiesList">
-                        <li class="technologyItem" ng-repeat="technology in knownTechnologies">
-                            <div class="technologyItemContent">
-                                <div class="technologyTag removableTechnologyTag ellipsis">
-                                    <span ng-bind="technology" title="{{technology}}"></span>
-                                </div>
-
-                                <a href="" class="technologyRemoveButton" ng-click="removeKnown(technology)" tooltips data-title="Remove"></a>
-                            </div>
-                        </li>
-                    </ul>
+                <section class="listSection" id="knowThat"
+                         data-technologies-list 
+                         data-title="'I know that!'"
+                         data-title-style="'knownTechnologyTitle'"
+                         data-technologies="knownTechnologies"
+                         data-remove="removeKnown(technology)">
                 </section>
 
                 <!-- avoided technologies -->
-                <section class="listSection" id="notInterested">
-                    <h1 class="technologyTitle avoidTechnologyTitle ellipsis">
-                        I'm not interested
-                    </h1>
-                    <ul class="technologiesList">
-                        <li class="technologyItem" ng-repeat="technology in avoidTechnologies">
-                            <div class="technologyItemContent">
-                                <div class="technologyTag removableTechnologyTag ellipsis">
-                                    <span ng-bind="technology" title="{{technology}}"></span>
-                                </div>
-                                <a href="" class="technologyRemoveButton" ng-click="removeAvoid(technology)" tooltips data-title="Remove"></a>
-                            </div>
-                        </li>
-                    </ul>
+                <section class="listSection" id="notInterested"
+                         data-technologies-list 
+                         data-title="'I\'m not interested'"
+                         data-title-style="'avoidTechnologyTitle'"
+                         data-technologies="avoidTechnologies"
+                         data-remove="removeAvoid(technology)">
                 </section>
 
                 <!-- download -->
