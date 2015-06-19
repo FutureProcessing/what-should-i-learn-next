@@ -300,3 +300,67 @@ footer a:hover, a:active {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+@media (max-width: 1000px) {
+    html, body {
+        overflow-y: initial;
+    }
+
+    .searchSectionInnerBox {
+        width: 90%;
+    }
+
+    main {
+        position: relative;    
+        top: auto;
+        bottom: auto;
+        margin-top:50px    
+    }
+
+    .mainLayoutOuterContainer {
+        display: block;
+        height: auto;
+    }
+
+    .mainLayoutInnerContainer {
+        display: block;
+    }
+
+    .searchSection {
+        width: 100%;
+        display: block;
+        vertical-align: auto;
+    }
+
+    .listSection {
+        width: 90%;
+        border-left: 0;
+        box-sizing: border-box;
+        height: auto;
+        display: block;
+        vertical-align: auto;
+        margin: auto;
+        padding: 0;
+    }
+
+    .technologiesList {
+        padding-right: 0;
+    }
+
+    .technologyTitle {
+        box-shadow: 0px 7px 10px -9px #888888;
+        margin-bottom: 30px;
+    }
+
+    .technologyItem {
+        border-bottom: solid #d7d7d7 1px;
+        padding: 8px 0;
+        overflow: hidden;
+    }
+
+    footer {
+        position: relative;
+        bottom: auto;
+        left: auto;
+    }
+}
