@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app="whatToLearnNext">
 
 <head>
@@ -38,14 +38,14 @@
                         </div>
 
                         <ul id="suggested" class="suggestedTags" ng-if="suggestedTechnologies.length > 0">
-                            <li ng-repeat="t in suggestedTechnologies">
+                            <li ng-repeat="technology in suggestedTechnologies">
                                 <div class="technologyTag">
-                                    <span ng-bind="t"></span>
+                                    <span ng-bind="technology" title="{{technology}}"></span>
                                 </div>
 
-                                <a href="" class="listItemLink notInterestedLink" ng-click="avoid(t)" tooltips data-title="I'm not interested"></a>
-                                <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(t)" tooltips data-title="I want to learn that!"></a>
-                                <a href="" class="listItemLink wantedLink" ng-click="wanted(t)" tooltips data-title="I know that!"></a>
+                                <a href="" class="listItemLink notInterestedLink" ng-click="avoid(technology)" tooltips data-title="I'm not interested"></a>
+                                <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(technology)" tooltips data-title="I want to learn that!"></a>
+                                <a href="" class="listItemLink wantedLink" ng-click="wanted(technology)" tooltips data-title="I know that!"></a>
                             </li>
                         </ul>
                     </div>
@@ -56,12 +56,12 @@
                         I want to learn that!
                     </h1>
                     <ul class="technologiesList">
-                        <li class="technologyItem" ng-repeat="t in wantedTechnologies">
+                        <li class="technologyItem" ng-repeat="technology in wantedTechnologies">
                             <div class="technologyItemContent">
                                 <div class="technologyTag removableTechnologyTag ellipsis">
-                                    <span ng-bind="t"></span>
+                                    <span ng-bind="technology" title="{{technology}}"></span>
                                 </div>
-                                <a href="" class="technologyRemoveButton" ng-click="removeWanted(t)" tooltips data-title="Remove"></a>
+                                <a href="" class="technologyRemoveButton" ng-click="removeWanted(technology)" tooltips data-title="Remove"></a>
                             </div>
                         </li>
                     </ul>
@@ -73,13 +73,13 @@
                         I know that!
                     </h1>
                     <ul class="technologiesList">
-                        <li class="technologyItem" ng-repeat="t in knownTechnologies">
+                        <li class="technologyItem" ng-repeat="technology in knownTechnologies">
                             <div class="technologyItemContent">
                                 <div class="technologyTag removableTechnologyTag ellipsis">
-                                    <span ng-bind="t"></span>
+                                    <span ng-bind="technology" title="{{technology}}"></span>
                                 </div>
 
-                                <a href="" class="technologyRemoveButton" ng-click="removeKnown(t)" tooltips data-title="Remove"></a>
+                                <a href="" class="technologyRemoveButton" ng-click="removeKnown(technology)" tooltips data-title="Remove"></a>
                             </div>
                         </li>
                     </ul>
@@ -91,12 +91,12 @@
                         I'm not interested
                     </h1>
                     <ul class="technologiesList">
-                        <li class="technologyItem" ng-repeat="t in avoidTechnologies">
+                        <li class="technologyItem" ng-repeat="technology in avoidTechnologies">
                             <div class="technologyItemContent">
                                 <div class="technologyTag removableTechnologyTag ellipsis">
-                                    <span ng-bind="t"></span>
+                                    <span ng-bind="technology" title="{{technology}}"></span>
                                 </div>
-                                <a href="" class="technologyRemoveButton" ng-click="removeAvoid(t)" tooltips data-title="Remove"></a>
+                                <a href="" class="technologyRemoveButton" ng-click="removeAvoid(technology)" tooltips data-title="Remove"></a>
                             </div>
                         </li>
                     </ul>
