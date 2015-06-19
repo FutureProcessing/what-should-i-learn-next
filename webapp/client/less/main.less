@@ -34,10 +34,7 @@ h1 {
     font-weight: 400;
 }
 
-header {
-    position: absolute;
-    top: 0;
-    left: 0;
+header {    
     width: 100%;
     height: @headerHeight;
     background-image: url(images/headerBackground.jpg);
@@ -66,7 +63,7 @@ main {
 }
 
 footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -92,7 +89,6 @@ footer {
     background-repeat: no-repeat;
     background-position: left center;
     padding-left: 75px;
-    height: 42px;
     line-height: 42px;
 }
 /* Search section - END */
@@ -167,6 +163,9 @@ footer {
     margin-left: 25px;
     margin: auto;
     font-size: 26px;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .avoidTechnologyTitle {
@@ -211,6 +210,7 @@ footer {
     line-height: @technologyTagHeight;
     box-sizing: border-box;
     max-width: 100%;
+    margin-top: 3px;
 }
 
 .removableTechnologyTag {
@@ -218,7 +218,11 @@ footer {
 }
 
 .suggestedTags {
-    margin-top: 42px;
+    margin-top: 42px;    
+}
+
+.suggestedTagsFixed {
+    min-height: 530px;
 }
 
 .suggestedTags li {
@@ -313,22 +317,32 @@ footer a:hover, a:active {
 @media (max-width: 1000px) {
     html, body {
         overflow-y: initial;
-    }
-
-    .searchSectionInnerBox {
-        width: 90%;
-    }
+    }    
 
     main {
         position: relative;    
         top: auto;
         bottom: auto;
-        margin-top:50px    
+    }
+    
+    .searchSectionInnerBox {
+        width: 90%;
+        margin: 50px auto 50px auto;
+    }
+
+    .searchSectionHeader {
+        text-overflow: initial;
+        white-space: normal;
+        overflow: initial;
     }
 
     .mainLayoutOuterContainer {
         display: block;
         height: auto;
+        table-layout: auto;
+
+        /* TODO: Temporary fix for IE. It has to be removed. */
+        display: table;
     }
 
     .mainLayoutInnerContainer {
@@ -382,5 +396,17 @@ footer a:hover, a:active {
         position: relative;
         bottom: auto;
         left: auto;
+        text-align: center;
+        height: auto;
+    }
+
+    #footerCopyrights {
+        float: none;
+        margin-left: auto;
+    }
+
+    #footerLinks {
+        float: none;
+        margin-right: auto;
     }
 }

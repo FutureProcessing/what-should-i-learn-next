@@ -1,110 +1,110 @@
 ﻿<!DOCTYPE html>
 <html ng-app="whatToLearnNext">
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=no" />
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=no" />
 
-    <link rel="stylesheet" type="text/css" href="/main.css" />
-    <link rel="stylesheet" type="text/css" href="/angucomplete.css" />
+        <link rel="stylesheet" type="text/css" href="/main.css" />
+        <link rel="stylesheet" type="text/css" href="/angucomplete.css" />
 
-    <script src="/app.js"></script>
-    <script src="/mainController.js"></script>
-    <script src="/technologiesList.js"></script>
-    <script src="/technologiesSearch.js"></script>
+        <script src="/app.js"></script>
+        <script src="/mainController.js"></script>
+        <script src="/technologiesList.js"></script>
+        <script src="/technologiesSearch.js"></script>
 
-    <title>FP - What to learn next?</title>
-</head>
+        <title>FP - What to learn next?</title>
+    </head>
 
-<body ng-controller="mainController">
+    <body ng-controller="mainController">
 
-    <!-- header -->
-    <header>
-        <div class="logo">
-            <img src="images/logo.png" alt="Project logo" />
-        </div>
-    </header>
-
-    <!-- main -->
-    <main class="main">
-        <div class="mainLayoutOuterContainer">
-            <div class="mainLayoutInnerContainer">
-                <section class="searchSection" id="search">
-                    <div class="searchSectionInnerBox">
-                        
-                        <!-- title -->
-                        <h1 class="searchSectionHeader ellipsis" title="What to learn next?">What to learn next?</h1>
-
-                        <!-- search -->
-                        <div data-technologies-search
-                             data-selected-technology="selectedTechnology"
-                             data-technology-predictions="technologyPredictions"
-                             data-query="query"></div>
-
-                        <!-- suggestions -->
-                        <ul id="suggested" class="suggestedTags" ng-if="suggestedTechnologies.length > 0">
-                            <li ng-repeat="technology in suggestedTechnologies">
-                                <div class="technologyTag">
-                                    <span ng-bind="technology" title="{{technology}}"></span>
-                                </div>
-
-                                <a href="" class="listItemLink notInterestedLink" ng-click="avoid(technology)" title="I'm not interested"></a>
-                                <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(technology)" title="I want to learn that!"></a>
-                                <a href="" class="listItemLink wantedLink" ng-click="wanted(technology)" title="I know that!"></a>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-                
-                <!-- wanted technologies -->
-                <section class="listSection" id="wantToLearn"
-                         data-technologies-list 
-                         data-title="'I want to learn that!'"
-                         data-title-style="'wantedTechnologyTitle'"
-                         data-technologies="wantedTechnologies"
-                         data-remove="removeWanted(technology)">
-                </section>
-
-                <!-- known technologies -->
-                <section class="listSection" id="knowThat"
-                         data-technologies-list 
-                         data-title="'I know that!'"
-                         data-title-style="'knownTechnologyTitle'"
-                         data-technologies="knownTechnologies"
-                         data-remove="removeKnown(technology)">
-                </section>
-
-                <!-- avoided technologies -->
-                <section class="listSection" id="notInterested"
-                         data-technologies-list 
-                         data-title="'I\'m not interested'"
-                         data-title-style="'avoidTechnologyTitle'"
-                         data-technologies="avoidTechnologies"
-                         data-remove="removeAvoid(technology)">
-                </section>
-
-                <!-- download -->
-                <section class="downloadSection" id="download"></section>
+        <!-- header -->
+        <header>
+            <div class="logo">
+                <img src="images/logo.png" alt="Project logo" />
             </div>
-        </div>
-    </main>
+        </header>
 
-    <!-- footer -->
-    <footer>
-        <!-- Copyrights -->
-        <div id="footerCopyrights">
-            &copy;Future Processing Sp z o.o.
-        </div>
+        <!-- main -->
+        <main class="main">
+            <div class="mainLayoutOuterContainer">
+                <div class="mainLayoutInnerContainer">
+                    <section class="searchSection" id="search">
+                        <div class="searchSectionInnerBox">
+                        
+                            <!-- title -->
+                            <h1 class="searchSectionHeader ellipsis" title="What to learn next?">What to learn next?</h1>
 
-        <!-- Links -->
-        <div id="footerLinks">
-            <ul>
-                <li><a href="/licence" target="_blank">Licence</a></li>
-                <li><a href="https://github.com/FutureProcessing/what-should-i-learn-next/" target="_blank">GitHub Source</a></li>
-                <li><a href="http://www.future-processing.com/contact/" target="_blank">Contact</a></li>
-            </ul>
-        </div>
-    </footer>
-</body>
+                            <!-- search -->
+                            <div data-technologies-search
+                                 data-selected-technology="selectedTechnology"
+                                 data-technology-predictions="technologyPredictions"
+                                 data-query="query"></div>
+
+                            <!-- suggestions -->
+                            <ul id="suggested" class="suggestedTags" data-ng-class="{'suggestedTagsFixed': suggestedTechnologies.length >= 9}" ng-if="suggestedTechnologies.length > 0">
+                                <li ng-repeat="technology in suggestedTechnologies">
+                                    <div class="technologyTag">
+                                        <span ng-bind="technology" title="{{technology}}"></span>
+                                    </div>
+
+                                    <a href="" class="listItemLink notInterestedLink" ng-click="avoid(technology)" title="I'm not interested"></a>
+                                    <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(technology)" title="I want to learn that!"></a>
+                                    <a href="" class="listItemLink wantedLink" ng-click="wanted(technology)" title="I know that!"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                
+                    <!-- wanted technologies -->
+                    <section class="listSection" id="wantToLearn"
+                             data-technologies-list 
+                             data-title="'I want to learn that!'"
+                             data-title-style="'wantedTechnologyTitle'"
+                             data-technologies="wantedTechnologies"
+                             data-remove="removeWanted(technology)">
+                    </section>
+
+                    <!-- known technologies -->
+                    <section class="listSection" id="knowThat"
+                             data-technologies-list 
+                             data-title="'I know that!'"
+                             data-title-style="'knownTechnologyTitle'"
+                             data-technologies="knownTechnologies"
+                             data-remove="removeKnown(technology)">
+                    </section>
+
+                    <!-- avoided technologies -->
+                    <section class="listSection" id="notInterested"
+                             data-technologies-list 
+                             data-title="'I\'m not interested'"
+                             data-title-style="'avoidTechnologyTitle'"
+                             data-technologies="avoidTechnologies"
+                             data-remove="removeAvoid(technology)">
+                    </section>
+
+                    <!-- download -->
+                    <section class="downloadSection" id="download"></section>
+                </div>
+            </div>
+        </main>
+
+        <!-- footer -->
+        <footer>
+            <!-- Copyrights -->
+            <div id="footerCopyrights">
+                &copy;Future Processing Sp z o.o.
+            </div>
+
+            <!-- Links -->
+            <div id="footerLinks">
+                <ul>
+                    <li><a href="/licence" target="_blank">Licence</a></li>
+                    <li><a href="https://github.com/FutureProcessing/what-should-i-learn-next/" target="_blank">GitHub Source</a></li>
+                    <li><a href="http://www.future-processing.com/contact/" target="_blank">Contact</a></li>
+                </ul>
+            </div>
+        </footer>
+    </body>
 
 </html>
