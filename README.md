@@ -23,6 +23,8 @@ Try to use this example yourself
 You can use Docker container to setup Hadoop very quickly for PoC. 
 This image will help you: [Hadoop on Docker](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/)
 
+Here is tutorial how to run [Hadoop Single Node in Docker](big-data/hadoop-in-docker/README.md)
+
 If you want to install Hadoop manually, you can use [this  cheatsheet](big-data/hadoop-instalation/Hadoop Cluster - manual instalation cheatsheet.md).
 
 ### Install Elastic
@@ -40,7 +42,7 @@ The easiest way to put Posts.xml int hdfs.
 2. Put Posts.xml into hadoop
 ```
 cd $HADOOP_HOME;
-bin/hadoop fs -put Posts.xml /user/root/input/Posts.xml
+$HADOOP_PREFIX/bin/hadoop fs -put Posts.xml /user/root/input/Posts.xml
 ```
 It'll put Posts.xml file into HDFS into directory /user/root/input
 
@@ -64,7 +66,7 @@ node initializeIndices.js elasticHost:9200 technologies
 On Hadoop machine start Hadoop job
 ```
 cd $HADOOP_HOME
-bin/hadoop jar map-reduce-1.0-SNAPSHOT-jar-with-dependencies.jar  /user/root/input/Posts.xml --elasticHost=yourElasticHost --indexName=technologies
+$HADOOP_PREFIX/bin/hadoop jar map-reduce-1.0-SNAPSHOT-jar-with-dependencies.jar  /user/root/input/Posts.xml --elasticHost=yourElasticHost --indexName=technologies
 ```
 
 Job will execute and results will be uploaded to Elastic index.
