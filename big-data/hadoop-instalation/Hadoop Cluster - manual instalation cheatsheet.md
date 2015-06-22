@@ -132,8 +132,6 @@ Edit `$HADOOP_PREFIX/etc/hadoop/yarn-site.xml`: with your master hostname.
     
     <property>
         <name>yarn.resourcemanager.hostname</name>
-        <!-- On master machine set MASTER_HOSTNAME to `0.0.0.0`. -->
-        <!-- On slave machines set MASTER_HOSTNAME to actual hostname of master -->
         <value>MASTER_HOSTNAME</value>
     </property>
 
