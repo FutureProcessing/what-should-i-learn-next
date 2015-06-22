@@ -32,7 +32,7 @@ module.exports = function (grunt) {
                 files: {
                     'client/generated/app.js': ['client/js/app.js'],
                     'client/generated/mainController.js': ['client/js/controllers/mainController.js'],
-                    'client/generated/technologiesList.js.js': ['client/js/directives/technologiesList.js'],
+                    'client/generated/technologiesList.js': ['client/js/directives/technologiesList.js'],
                     'client/generated/technologiesSearch.js': ['client/js/directives/technologiesSearch.js']
                 },
                 options: {
@@ -46,14 +46,6 @@ module.exports = function (grunt) {
                                 src: 'client/js/**/*.js',
                                 expose: '',
                                 cwd: __dirname
-                            }]
-                        ],
-                        [
-                            'minifyify',
-                            [{
-                                options: {
-                                    map: false
-                                }
                             }]
                         ]
                     ]
