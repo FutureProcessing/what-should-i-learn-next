@@ -237,7 +237,8 @@ angular.module('angucomplete', [] )
                         event.preventDefault;
                         event.stopPropagation();
                     } else {
-                        if ($scope.searchStr && $scope.results && $scope.results.length > 0 && $scope.searchStr === $scope.results[0].originalObject) {
+                        // Selecting the first element in a list after pressing enter button works only in a case when searching fields are not defined.
+                        if (!$scope.searchFields && $scope.searchStr && $scope.results && $scope.results.length > 0 && $scope.searchStr.toLowerCase() === $scope.results[0].originalObject.toLowerCase()) {
                             $scope.selectResult($scope.results[0]);
                             $scope.$apply();
                             event.preventDefault;

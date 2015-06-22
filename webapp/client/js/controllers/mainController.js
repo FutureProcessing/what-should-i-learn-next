@@ -38,7 +38,7 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
             return;
         }
         
-        technologyService.getTechnologyPredictions(query).then( function (technologies) {
+        technologyService.getTechnologyPredictions(query.toLowerCase()).then( function (technologies) {
             $scope.technologyPredictions = _(technologies).difference($scope.knownTechnologies.concat($scope.wantedTechnologies));
         });
     });
