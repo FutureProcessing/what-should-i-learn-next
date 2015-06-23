@@ -1,7 +1,7 @@
 package com.futureprocessing.wsiln.mapreduce;
 
 public class InputFormatter {
-    private static final String UNWANTED_CHARACTERS = "<p>|</p>|&lt;|&gt;|&#xA;|/p|[ ;\"'\\/.,_=&<>]";
+    private static final String UNWANTED_CHARACTERS = "&gt;|&lt;|[^A-Za-z0-9#+.-]+";
     private static final String WHITE_CHARACTERS = "\\s+";
 
 

@@ -22,7 +22,7 @@ public class InputForrmaterText {
     @Test
     public void shouldSplitPostInputString() {
         //given
-        String post = "&lt;<p>&gt;When I am downloading large files I need to stop my phone from sleeping.&lt;/p&gt;&#xA;";
+        String post = "&lt;&gt;When I am downloading large files I need to stop my phone from sleeping&lt;&gt;";
         //when
 
         String[] result = InputFormatter.splitInputString(post);
