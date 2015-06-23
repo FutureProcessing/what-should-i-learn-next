@@ -127,6 +127,4 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
             $scope.refreshTechnologies();
         }
     }, true);
-    
-    console.log($scope);
 }]);
