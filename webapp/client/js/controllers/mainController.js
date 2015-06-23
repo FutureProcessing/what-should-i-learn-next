@@ -1,4 +1,5 @@
 whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 'localStorageService', function ($scope, technologyService, localStorageService) {
+    $scope.isCoverVisible = false;
 
     // Init application and restore its state.
     (function () {
@@ -29,6 +30,8 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
     };
     
     $scope.alreadyKnow = function (tech) {
+        $scope.isCoverVisible = true;
+
         $scope.knownTechnologies.push(tech);
         localStorageService.setItem("knownTechnologies", $scope.knownTechnologies);
 
@@ -37,6 +40,8 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
     };
     
     $scope.wanted = function (tech) {
+        $scope.isCoverVisible = true;
+
         $scope.wantedTechnologies.push(tech);
         localStorageService.setItem("wantedTechnologies", $scope.wantedTechnologies);
 
@@ -45,6 +50,8 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
     };
 
     $scope.avoid = function (tech) {
+        $scope.isCoverVisible = true;
+
         $scope.avoidTechnologies.push(tech);
         localStorageService.setItem("avoidTechnologies", $scope.avoidTechnologies);
 
@@ -90,10 +97,17 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
         }
     });
 
-    $scope.refreshTechnologies = function(){
-        technologyService.getTechnologySuggestions($scope.knownTechnologies.concat($scope.wantedTechnologies), $scope.avoidTechnologies).then(function (technologies) {
-            $scope.suggestedTechnologies = technologies;
-        });
+    $scope.refreshTechnologies = function () {
+        technologyService.getTechnologySuggestions($scope.knownTechnologies.concat($scope.wantedTechnologies), $scope.avoidTechnologies).then(
+            function (technologies) {
+                $scope.isCoverVisible = false;
+                $scope.suggestedTechnologies = technologies;
+            },            
+            function () {
+                // error handler
+                $scope.isCoverVisible = false;
+            }
+        );
     };
     
     $scope.$watch('knownTechnologies', function (knownTechnologies) {

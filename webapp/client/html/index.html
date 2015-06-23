@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app="whatToLearnNext">
 
     <head>
@@ -45,17 +45,20 @@
                             <a href="" data-ng-if="suggestedTechnologies.length > 0" class="clearAll" ng-click="clearStorage()" title="Clear all">Clear all</a>
                             
                             <!-- suggestions -->
-                            <ul id="suggested" class="suggestedTags" data-ng-class="{'suggestedTagsFixed': suggestedTechnologies.length >= 9}" ng-if="suggestedTechnologies.length > 0">
-                                <li ng-repeat="technology in suggestedTechnologies">
-                                    <div class="technologyTag">
-                                        <span ng-bind="technology" title="{{technology}}"></span>
-                                    </div>
+                            <div class="suggestedTagsContainer">
+                                <ul id="suggested" class="suggestedTags" data-ng-class="{'suggestedTagsFixed': suggestedTechnologies.length >= 9}" ng-if="suggestedTechnologies.length > 0">
+                                    <li ng-repeat="technology in suggestedTechnologies">
+                                        <div class="technologyTag">
+                                            <span ng-bind="technology" title="{{technology}}"></span>
+                                        </div>
 
-                                    <a href="" class="listItemLink notInterestedLink" ng-click="avoid(technology)" title="I'm not interested"></a>
-                                    <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(technology)" title="I know this!"></a>
-                                    <a href="" class="listItemLink wantedLink" ng-click="wanted(technology)" title="I want to learn this!"></a>
-                                </li>
-                            </ul>                           
+                                        <a href="" class="listItemLink notInterestedLink" ng-click="avoid(technology)" title="I'm not interested"></a>
+                                        <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(technology)" title="I know this!"></a>
+                                        <a href="" class="listItemLink wantedLink" ng-click="wanted(technology)" title="I want to learn this!"></a>
+                                    </li>
+                                </ul>
+                                <div class="suggestedTagsCover" data-ng-if="isCoverVisible"></div>
+                            </div>                           
                         </div>
                     </section>
                 
