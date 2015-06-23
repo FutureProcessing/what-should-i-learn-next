@@ -2,25 +2,26 @@
 ========================
 
 # What it is
-This is a sample Proof of Concept of operating on BIG DATA using Hadoop and Elastic.
+This is a sample Proof of Concept for BIG DATA analysis using [Hadoop](https://hadoop.apache.org/) and [Elastic](https://www.elastic.co/).
 
 ## What it does
-Front-end application allows user to search for technologies that he might be interested in based on technologies that he already knows. 
+The application allows user to browse through technologies that he might be interested in based on technologies that he already knows.
 
 
 ## How does it work:
 1.	Data dump from [StackOverflow](https://archive.org/details/stackexchange) is downloaded;
-2.	Using Hadoop [the data is analyzed](big-data/map-reduce/README.md) in terms of connections between technologies;
-3.	Results of the analysis is processed by Elastic (search index works like a database);
-4.	Final results from Elastic are displayed in a simple webapp.
+2.	[The data is analyzed](big-data/map-reduce/README.md) with Hadoop. We’re looking for connections between technologies;
+3. Results of the analysis are processed by Elastic;
+4. Final results from Elastic are presented in the application. You can search for a particular technology and we’ll list others, closely related to it.
+5. Then you can select which technologies you’d enjoy learning, which you already know and which you would not be interested in at all.
 
 
 # Data
 ### Input:
-* 35 GB xml file – StackOverflow posts.
+* 35 GB XML dump file – StackOverflow posts.
 
 ### Output:
-* 135MB file – Map of technologies and connections between them based on tags added by SO users;
+* 135MB file – Map of technologies and connections between them based on tags added by StackOverflow users;
 * There are ca. 6 000 000 mappings;
 * 32000 unique technology entries.
 
@@ -28,7 +29,7 @@ Front-end application allows user to search for technologies that he might be in
 # DIY tutorial
 ## Try to use example yourself
 1. Configure and run [Hadoop Single Node in Docker](big-data/hadoop-in-docker/README.md);
-2. Try understand how map-reduce works [Map-reduce algorithm](big-data/map-reduce/README.md);
-3. Run node.js application to visualize results [GUI application](webapp/README.md).
+2. Try to understand how our map-reduce algorithm works: [Map-reduce algorithm](big-data/map-reduce/README.md);
+3. Run node.js application to visualize results and play with it: [GUI application](webapp/README.md).
 
 
