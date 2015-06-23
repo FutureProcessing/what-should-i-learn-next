@@ -43,7 +43,7 @@
                                  data-query="query"></div>
 
                             <!-- clear button -->
-                            <a href="" class="clearAll" ng-click="clearStorage()" title="Clear all">Clear all</a>
+                            <a href="" data-ng-if="suggestedTechnologies.length > 0" class="clearAll" ng-click="clearStorage()" title="Clear all">Clear all</a>
                             
                             <!-- suggestions -->
                             <ul id="suggested" class="suggestedTags" data-ng-class="{'suggestedTagsFixed': suggestedTechnologies.length >= 9}" ng-if="suggestedTechnologies.length > 0">
