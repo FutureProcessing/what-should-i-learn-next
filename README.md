@@ -5,8 +5,7 @@
 This is a sample Proof of Concept of operating on BIG DATA using Hadoop and Elastic.
 
 ## What it does
-Front-end application allows user to search for technologies that he knows and basing on that suggesting 
-another technologies that he might be interested in. 
+Front-end application allows user to search for technologies that he might be interested in based on technologies that he already knows. 
 
 
 ## How does it work:
