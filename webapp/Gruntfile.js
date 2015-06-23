@@ -64,13 +64,13 @@ module.exports = function (grunt) {
         less: {
             dev: {
                 files: {
-                    'client/generated/main.css': ['client/less/main.less'],
+                    'client/generated/master.css': ['client/less/master.less'],
                     'client/generated/angucomplete.css': ['client/less/angucomplete.less']
                 }
             },
             prod: {
                 files: {
-                    'client/generated/main.css': ['client/less/main.less'],
+                    'client/generated/master.css': ['client/less/master.less'],
                     'client/generated/angucomplete.css': ['client/less/angucomplete.less']
                 },
                 options: {
@@ -80,6 +80,7 @@ module.exports = function (grunt) {
         },
 
         mochacli: {
+            
             all: ['test/*.js']
         },
 
