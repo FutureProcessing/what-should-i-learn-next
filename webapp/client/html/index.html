@@ -41,6 +41,9 @@
                                  data-technology-predictions="technologyPredictions"
                                  data-query="query"></div>
 
+                            <!-- clear button -->
+                            <a href="" data-ng-if="suggestedTechnologies.length > 0" class="clearAll" ng-click="clearStorage()" title="Clear all">Clear all</a>
+                            
                             <!-- suggestions -->
                             <ul id="suggested" class="suggestedTags" data-ng-class="{'suggestedTagsFixed': suggestedTechnologies.length >= 9}" ng-if="suggestedTechnologies.length > 0">
                                 <li ng-repeat="technology in suggestedTechnologies">
@@ -52,7 +55,7 @@
                                     <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(technology)" title="I know this!"></a>
                                     <a href="" class="listItemLink wantedLink" ng-click="wanted(technology)" title="I want to learn this!"></a>
                                 </li>
-                            </ul>
+                            </ul>                           
                         </div>
                     </section>
                 
