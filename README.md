@@ -9,11 +9,11 @@ The application allows user to browse through technologies that he might be inte
 
 
 ## How does it work
-When user enters some technology he already knows, an application searches through its database (elastic) for technologies related to the given one. This relationship is mainly determined by how often those technologies are mentioned together on StackOverflow. User can further expand list of technologies he knows and likes or dislikes and the application updates results accordingly.
+When user enters some a technology he already knows, the application searches through its database (Elastic) for technologies related to the given one. This relationship is mainly determined by how often those technologies are mentioned together on StackOverflow. User can further expand list of technologies he knows and likes or dislikes and the application updates results accordingly.
 
- The whole process of preparing data and running the application looks like:
+ The whole process of preparing data and running the application looks as follows:
 1.	Data dump from [StackOverflow](https://archive.org/details/stackexchange) is downloaded;
-2.	[The data is analyzed](big-data/map-reduce/README.md) with Hadoop. During the analysis connections between terms related to technologies are found;
+2.	[The data is analyzed](big-data/map-reduce/README.md) with Hadoop. The goal of the analysis is to determine connections between technologies (i.e. find sets of related technologies);
 3. Results of the analysis are processed by Elastic;
 4. Final results from Elastic are presented in the application. You can search for a particular technology and we’ll list others, closely related to it.
 5. Then you can select which technologies you’d enjoy learning, which you already know and which you would not be interested in at all.
