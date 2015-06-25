@@ -1,0 +1,178 @@
+.listItemLink {
+    float: right;
+    width: 26px;
+    height: 26px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin: 5px 5px 5px 8px;
+}
+
+.listItemLink:hover {
+    outline: @activeColor solid @activeButtonBorderWidth;
+}
+
+.alreadyKnowLink {
+    background-image: url('/images/knownTechnology.png');
+}
+
+.alreadyKnowLink:hover {
+    background-image: url('/images/knownTechnologyActive.png');
+}
+
+.wantedLink {
+    background-image: url('/images/wantedTechnology.png');
+}
+
+.wantedLink:hover {
+    background-image: url('/images/wantedTechnologyActive.png');
+}
+
+.notInterestedLink {
+    background-image: url('/images/avoidedTechnology.png');
+}
+
+.notInterestedLink:hover {
+    background-image: url('/images/avoidedTechnologyActive.png');
+}
+
+.technologyRemoveButton {
+    height: 26px;
+    width: 26px;
+    margin: 5px 0 @activeButtonBorderWidth 0;
+    outline: @activeColor solid @activeButtonBorderWidth;
+    background-image: url('/images/removeActive.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.0;
+    position: absolute;
+}
+
+.technologyItemContent {
+    width: auto;
+    height: auto;
+}
+
+.technologyItemContent:hover .technologyRemoveButton {
+    opacity: 1.0;
+}
+
+.technologyItemContent:hover .removableTechnologyTag {
+    background-color: #d3d3d3;
+}
+
+.technologyTitle {
+    height: 70px;
+    line-height: 70px;
+    text-align: left;
+    padding-left: 28px;
+    margin-left: 25px;
+    margin: auto;
+    font-size: 26px;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.avoidTechnologyTitle {
+    background-image: url('/images/avoidedTechnology.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+.knownTechnologyTitle {
+    background-image: url('/images/knownTechnology.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+.wantedTechnologyTitle {
+    background-image: url('/images/wantedTechnology.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+.technologiesList {
+    width: 100%;
+    float: left;
+    position: relative;
+    margin-bottom: 50px;
+    padding-right: 26px;
+    box-sizing: border-box;
+}
+
+.technologyItem {
+    width: 100%;
+    float: left;
+}
+
+.technologyTag {
+    background-color: #e5e5e5;
+    font-weight: 600;
+    font-size: 19px;
+    float: left;
+    padding: 0px 10px;
+    height: @technologyTagHeight;
+    line-height: @technologyTagHeight;
+    box-sizing: border-box;
+    max-width: 100%;
+    margin-top: 3px;
+}
+
+.removableTechnologyTag {
+    margin-bottom: 5px;
+}
+
+.suggestedTags {
+    margin-top: 21px;    
+}
+
+.suggestedTagsFixed {
+    min-height: 530px;
+}
+
+.suggestedTags li {
+    border-bottom: solid @defaultBorderColor 1px;
+    padding: 8px 0;
+    overflow: hidden;
+}
+
+.suggestedTagsContainer {
+    position: relative;
+}
+
+.suggestedTagsCover {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@media (max-width: @mobileViewMaxWidth) {
+ 
+    .technologiesList {
+        padding-right: 0;
+    }
+
+    .technologyTitle {
+        box-shadow: 0px 7px 10px -9px #888888;
+        margin-bottom: 30px;
+    }
+
+    .technologyItem {
+        border-bottom: solid @defaultBorderColor 1px;
+        padding: 8px 0;
+        overflow: hidden;
+    }
+
+    .technologyRemoveButton {
+        right: 5px;
+        background-image: url('/images/removePortable.png');
+        outline: 0;
+        opacity: 1;
+    }
+
+    .technologyRemoveButton:hover {
+        outline: #df1010 solid @activeButtonBorderWidth;
+    }
+}

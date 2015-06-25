@@ -1,17 +1,3 @@
-@import "reset";
-@import "malleable";
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:600);
-
-@headerHeight: 50px;
-@footerHeight: 40px;
-@footerFontSize: 12px;
-@footerColor: #3c3c3c;
-@activeColor: #ff9800;
-@fontTitles: 'Malleable', 'PT Sans', Helvetica, Arial, sans-serif;
-@fontStandard: 'Source Sans Pro', sans-serif;
-@technologyTagHeight: 30px;
-@activeButtonBorderWidth: 2px;
-
 /* http://codeboxers.com/ie10-responsive-design-fix-for-metro-snap/ */
 
 @-ms-viewport {
@@ -34,25 +20,6 @@ h1 {
     font-weight: 400;
 }
 
-header {    
-    width: 100%;
-    height: @headerHeight;
-    background-image: url(images/headerBackground.jpg);
-    background-position: 0 0;
-    background-repeat: repeat-x;
-}
-
-header .logo {
-    width: auto;
-    margin-left: 24px;
-    height: @headerHeight;
-    line-height: @headerHeight;
-    float: left;
-}
-
-header .logo img {
-    vertical-align: middle;
-}
 
 main {
     position: fixed;
@@ -62,233 +29,9 @@ main {
     overflow-y: auto;
 }
 
-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: @footerHeight;
-    line-height: @footerHeight;
-    color: @footerColor;
-    background: #ebebeb;
-}
-
-/* Search section - BEGIN */
-.searchSection input {
-    font-size: 17px;
-}
-
-
-.searchSectionInnerBox {
-    width: 80%;
-    margin: 88px auto 50px auto;
-}
-
-.searchSectionHeader {
-    background-image: url('/images/icon.png');
-    background-repeat: no-repeat;
-    background-position: left center;
-    padding-left: 75px;
-    line-height: 42px;
-}
-/* Search section - END */
-
-.listItemLink {
-    float: right;
-    width: 26px;
-    height: 26px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    margin: 5px 5px 5px 8px;
-}
-
-.listItemLink:hover {
-    outline: @activeColor solid @activeButtonBorderWidth;
-}
-
-.alreadyKnowLink {
-    background-image: url('/images/knownTechnology.png');
-}
-
-.alreadyKnowLink:hover {
-    background-image: url('/images/knownTechnologyActive.png');
-}
-
-.wantedLink {
-    background-image: url('/images/wantedTechnology.png');
-}
-
-.wantedLink:hover {
-    background-image: url('/images/wantedTechnologyActive.png');
-}
-
-.notInterestedLink {
-    background-image: url('/images/avoidedTechnology.png');
-}
-
-.notInterestedLink:hover {
-    background-image: url('/images/avoidedTechnologyActive.png');
-}
-
-.technologyRemoveButton {
-    height: 26px;
-    width: 26px;
-    margin: 5px 0 @activeButtonBorderWidth 0;
-    outline: @activeColor solid @activeButtonBorderWidth;
-    background-image: url('/images/removeActive.png');
-    background-repeat: no-repeat;
-    background-position: center center;
-    opacity: 0.0;
-    position: absolute;
-}
-
-.technologyItemContent {
-    width: auto;
-    height: auto;
-}
-
-.technologyItemContent:hover .technologyRemoveButton {
-    opacity: 1.0;
-}
-
-.technologyItemContent:hover .removableTechnologyTag {
-    background-color: #d3d3d3;
-}
-
-.technologyTitle {
-    height: 70px;
-    line-height: 70px;
-    text-align: left;
-    padding-left: 28px;
-    margin-left: 25px;
-    margin: auto;
-    font-size: 26px;
-    float: left;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.avoidTechnologyTitle {
-    background-image: url('/images/avoidedTechnology.png');
-    background-repeat: no-repeat;
-    background-position: left center;
-}
-
-.knownTechnologyTitle {
-    background-image: url('/images/knownTechnology.png');
-    background-repeat: no-repeat;
-    background-position: left center;
-}
-
-.wantedTechnologyTitle {
-    background-image: url('/images/wantedTechnology.png');
-    background-repeat: no-repeat;
-    background-position: left center;
-}
-
-.technologiesList {
-    width: 100%;
-    float: left;
-    position: relative;
-    margin-bottom: 50px;
-    padding-right: 26px;
-    box-sizing: border-box;
-}
-
-.technologyItem {
-    width: 100%;
-    float: left;
-}
-
-.technologyTag {
-    background-color: #e5e5e5;
-    font-weight: 600;
-    font-size: 19px;
-    float: left;
-    padding: 0px 10px;
-    height: @technologyTagHeight;
-    line-height: @technologyTagHeight;
-    box-sizing: border-box;
-    max-width: 100%;
-    margin-top: 3px;
-}
-
-.removableTechnologyTag {
-    margin-bottom: 5px;
-}
-
-.suggestedTags {
-    margin-top: 42px;    
-}
-
-.suggestedTagsFixed {
-    min-height: 530px;
-}
-
-.suggestedTags li {
-    border-bottom: solid #d7d7d7 1px;
-    padding: 8px 0;
-    overflow: hidden;
-}
-
-footer a {
-    text-decoration: none;
-}
-
-footer a:link, a:visited {
-    color: @footerColor;
-}
-
-footer a:hover, a:active {
-    color: @activeColor;
-}
-
-#footerCopyrights {
-    float: left;
-    width: auto;
-    margin-left: 25px;
-    font-size: @footerFontSize;
-}
-
-#footerLinks {
-    float: right;
-    width: auto;
-    margin-right: 5px;
-}
-
-#footerLinks ul {
-    font-size: 0;
-    height: @footerHeight;
-}
-
-#footerLinks li {
-    width: auto;
-    font-size: @footerFontSize;
-    display: inline-block;
-}
-
-#footerLinks li a {
-    padding: 0px 10px;
-}
-
-#footerLinks li:not(:first-child) a {
-    border-left-width: 1px;
-    border-left-color: @footerColor;
-    border-left-style: solid;
-    line-height: 10px;
-}
-
-
-/* Main layout - BEGIN */
-.searchSection {
-    width: 50%;
-    display: table-cell;
-    vertical-align: top;
-}
-
 .listSection {
     width: 16.66%;
-    border-left: 1px solid #d7d7d7;
+    border-left: 1px solid @defaultBorderColor;
     box-sizing: border-box;
     height: 100%;
     padding: 0 20px;
@@ -306,7 +49,6 @@ footer a:hover, a:active {
 .mainLayoutInnerContainer {
     display: table-row;
 }
-/* Main layout - END */
 
 .ellipsis {
     white-space: nowrap;
@@ -314,7 +56,15 @@ footer a:hover, a:active {
     text-overflow: ellipsis;
 }
 
-@media (max-width: 1000px) {
+.clearAll {
+    margin-top: 21px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width: @mobileViewMaxWidth) {
+    
     html, body {
         overflow-y: initial;
     }    
@@ -325,17 +75,6 @@ footer a:hover, a:active {
         bottom: auto;
     }
     
-    .searchSectionInnerBox {
-        width: 90%;
-        margin: 50px auto 50px auto;
-    }
-
-    .searchSectionHeader {
-        text-overflow: initial;
-        white-space: normal;
-        overflow: initial;
-    }
-
     .mainLayoutOuterContainer {
         display: block;
         height: auto;
@@ -349,12 +88,6 @@ footer a:hover, a:active {
         display: block;
     }
 
-    .searchSection {
-        width: 100%;
-        display: block;
-        vertical-align: auto;
-    }
-
     .listSection {
         width: 90%;
         border-left: 0;
@@ -364,49 +97,5 @@ footer a:hover, a:active {
         vertical-align: auto;
         margin: auto;
         padding: 0;
-    }
-
-    .technologiesList {
-        padding-right: 0;
-    }
-
-    .technologyTitle {
-        box-shadow: 0px 7px 10px -9px #888888;
-        margin-bottom: 30px;
-    }
-
-    .technologyItem {
-        border-bottom: solid #d7d7d7 1px;
-        padding: 8px 0;
-        overflow: hidden;
-    }
-
-    .technologyRemoveButton {
-        right: 5px;
-        background-image: url('/images/removePortable.png');
-        outline: 0;
-        opacity: 1;
-    }
-
-    .technologyRemoveButton:hover {
-        outline: #df1010 solid @activeButtonBorderWidth;
-    }
-
-    footer {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        text-align: center;
-        height: auto;
-    }
-
-    #footerCopyrights {
-        float: none;
-        margin-left: auto;
-    }
-
-    #footerLinks {
-        float: none;
-        margin-right: auto;
     }
 }

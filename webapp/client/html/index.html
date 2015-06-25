@@ -5,15 +5,27 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=no" />
 
-        <link rel="stylesheet" type="text/css" href="/main.css" />
-        <link rel="stylesheet" type="text/css" href="/angucomplete.css" />
+        <link rel="stylesheet" type="text/css" href="/master.css" />
+        <link rel="icon" type="image/png" href="/images/favicon.png">
 
         <script src="/app.js"></script>
         <script src="/mainController.js"></script>
         <script src="/technologiesList.js"></script>
         <script src="/technologiesSearch.js"></script>
 
-        <title>FP - What to learn next?</title>
+        <title>FP - What should I learn next?</title>
+
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-64418864-1', 'auto');
+            ga('send', 'pageview');
+        </script>
     </head>
 
     <body ng-controller="mainController">
@@ -33,7 +45,7 @@
                         <div class="searchSectionInnerBox">
                         
                             <!-- title -->
-                            <h1 class="searchSectionHeader ellipsis" title="What to learn next?">What to learn next?</h1>
+                            <h1 class="searchSectionHeader ellipsis" title="What should I learn next?">What should I learn next?</h1>
 
                             <!-- search -->
                             <div data-technologies-search
@@ -41,18 +53,24 @@
                                  data-technology-predictions="technologyPredictions"
                                  data-query="query"></div>
 
+                            <!-- clear button -->
+                            <a href="" data-ng-if="suggestedTechnologies.length > 0" class="clearAll" ng-click="clearStorage()" title="Clear all">Clear all</a>
+                            
                             <!-- suggestions -->
-                            <ul id="suggested" class="suggestedTags" data-ng-class="{'suggestedTagsFixed': suggestedTechnologies.length >= 9}" ng-if="suggestedTechnologies.length > 0">
-                                <li ng-repeat="technology in suggestedTechnologies">
-                                    <div class="technologyTag">
-                                        <span ng-bind="technology" title="{{technology}}"></span>
-                                    </div>
+                            <div class="suggestedTagsContainer">
+                                <ul id="suggested" class="suggestedTags" data-ng-class="{'suggestedTagsFixed': suggestedTechnologies.length >= 9}" ng-if="suggestedTechnologies.length > 0">
+                                    <li ng-repeat="technology in suggestedTechnologies">
+                                        <div class="technologyTag">
+                                            <span ng-bind="technology" title="{{technology}}"></span>
+                                        </div>
 
-                                    <a href="" class="listItemLink notInterestedLink" ng-click="avoid(technology)" title="I'm not interested"></a>
-                                    <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(technology)" title="I know this!"></a>
-                                    <a href="" class="listItemLink wantedLink" ng-click="wanted(technology)" title="I want to learn this!"></a>
-                                </li>
-                            </ul>
+                                        <a href="" class="listItemLink notInterestedLink" ng-click="avoid(technology)" title="I'm not interested"></a>
+                                        <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(technology)" title="I know this!"></a>
+                                        <a href="" class="listItemLink wantedLink" ng-click="wanted(technology)" title="I want to learn this!"></a>
+                                    </li>
+                                </ul>
+                                <div class="suggestedTagsCover" data-ng-if="isCoverVisible"></div>
+                            </div>                           
                         </div>
                     </section>
                 

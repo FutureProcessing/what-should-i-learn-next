@@ -54,5 +54,14 @@ app.get('/technologySuggestions', function (req, res) {
 
 });
 
+// Error handler for 404
+app.use(function(req, res, next) {
+    res.writeHead(404, {'Content-Type': 'text/html'});
+    res.write('<!DOCTYPE html><html><head><title>FP - Page Not Found</title></head><body>');
+    res.write('<div style="position: fixed; top: 0; height: 90%; width: 100%; display: flex; justify-content: center; align-items: center;"><img src="images/404.png"></img></div>');
+    res.write('</body></html>');
+    res.end();
+});
+
 app.listen(config.http.port);
 console.log("Listening on port: " + config.http.port)
