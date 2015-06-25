@@ -12,11 +12,8 @@
                      data-technology-predictions="technologyPredictions"
                      data-query="query"></div>
 
-                <!-- clear button -->
-                <a href="" data-ng-if="suggestedTechnologies.length > 0" class="clearAll" ng-click="clearStorage()" title="Clear all">Clear all</a>
-
                 <!-- suggestions -->
-                <div class="suggestedTagsContainer">
+                <div class="suggestedTagsContainer noSelect">
                     <ul id="suggested" class="suggestedTags" data-ng-class="{'suggestedTagsFixed': suggestedTechnologies.length >= 9}" ng-if="suggestedTechnologies.length > 0">
                         <li ng-repeat="technology in suggestedTechnologies">
                             <div class="technologyTag">
@@ -63,4 +60,7 @@
         <!-- download -->
         <section class="downloadSection" id="download"></section>
     </div>
+
+    <!-- clear button -->
+    <a href="" data-ng-if="suggestedTechnologies.length > 0" class="clearAll" ng-click="clearStorage()" title="Clear all"></a>
 </div>
