@@ -111,19 +111,19 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
     };
     
     $scope.$watch('knownTechnologies', function (knownTechnologies) {
-        if(knownTechnologies && knownTechnologies.length > 0) {
+        if(knownTechnologies) {
             $scope.refreshTechnologies();
         }
     }, true);
 
     $scope.$watch('avoidTechnologies', function (avoidTechnologies) {
-        if(avoidTechnologies && avoidTechnologies.length > 0) {
+        if(avoidTechnologies) {
             $scope.refreshTechnologies();
         }
     }, true);
     
     $scope.$watch('wantedTechnologies', function (wantedTechnologies) {
-        if(wantedTechnologies && wantedTechnologies.length > 0) {
+        if(wantedTechnologies) {
             $scope.refreshTechnologies();
         }
     }, true);

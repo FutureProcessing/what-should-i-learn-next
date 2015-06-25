@@ -1,0 +1,66 @@
+<div class="mainLayoutOuterContainer">
+    <div class="mainLayoutInnerContainer">
+        <section class="searchSection" id="search">
+            <div class="searchSectionInnerBox">
+
+                <!-- title -->
+                <h1 class="searchSectionHeader ellipsis" title="What should I learn next?">What should I learn next?</h1>
+
+                <!-- search -->
+                <div data-technologies-search
+                     data-selected-technology="selectedTechnology"
+                     data-technology-predictions="technologyPredictions"
+                     data-query="query"></div>
+
+                <!-- clear button -->
+                <a href="" data-ng-if="suggestedTechnologies.length > 0" class="clearAll" ng-click="clearStorage()" title="Clear all">Clear all</a>
+
+                <!-- suggestions -->
+                <div class="suggestedTagsContainer">
+                    <ul id="suggested" class="suggestedTags" data-ng-class="{'suggestedTagsFixed': suggestedTechnologies.length >= 9}" ng-if="suggestedTechnologies.length > 0">
+                        <li ng-repeat="technology in suggestedTechnologies">
+                            <div class="technologyTag">
+                                <span ng-bind="technology" title="{{technology}}"></span>
+                            </div>
+
+                            <a href="" class="listItemLink notInterestedLink" ng-click="avoid(technology)" title="I'm not interested"></a>
+                            <a href="" class="listItemLink alreadyKnowLink" ng-click="alreadyKnow(technology)" title="I know this!"></a>
+                            <a href="" class="listItemLink wantedLink" ng-click="wanted(technology)" title="I want to learn this!"></a>
+                        </li>
+                    </ul>
+                    <div class="suggestedTagsCover" data-ng-if="isCoverVisible"></div>
+                </div>                           
+            </div>
+        </section>
+
+        <!-- wanted technologies -->
+        <section class="listSection" id="wantToLearn"
+                 data-technologies-list 
+                 data-title="'I want to learn this!'"
+                 data-title-style="'wantedTechnologyTitle'"
+                 data-technologies="wantedTechnologies"
+                 data-remove="removeWanted(technology)">
+        </section>
+
+        <!-- known technologies -->
+        <section class="listSection" id="knowThat"
+                 data-technologies-list 
+                 data-title="'I know this!'"
+                 data-title-style="'knownTechnologyTitle'"
+                 data-technologies="knownTechnologies"
+                 data-remove="removeKnown(technology)">
+        </section>
+
+        <!-- avoided technologies -->
+        <section class="listSection" id="notInterested"
+                 data-technologies-list 
+                 data-title="'I\'m not interested'"
+                 data-title-style="'avoidTechnologyTitle'"
+                 data-technologies="avoidTechnologies"
+                 data-remove="removeAvoid(technology)">
+        </section>
+
+        <!-- download -->
+        <section class="downloadSection" id="download"></section>
+    </div>
+</div>
