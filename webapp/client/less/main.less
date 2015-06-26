@@ -75,11 +75,10 @@ main {
     width: 56px;
     height: 56px;
     position: fixed;    
-    bottom: 12px;
+    bottom: 55px;
     z-index: 9999;
     margin: 0 auto;
-    left: 0; 
-    right: 0;
+    right: 38px;
     border: 2px solid @defaultBorderColor;
 }
 
@@ -92,8 +91,7 @@ main {
     user-select: none;
 }
 
-@media (max-width: @mobileViewMaxWidth) {
-    
+@media (max-width: @mobileViewMaxWidth) {    
     html, body {
         overflow-y: initial;
     }    
@@ -126,5 +124,13 @@ main {
         vertical-align: auto;
         margin: auto;
         padding: 0;
+    }
+
+    .clearAll {
+        position: absolute;    
+        bottom: 15px;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
     }
 }

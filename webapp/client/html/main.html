@@ -13,7 +13,7 @@
                      data-query="query"></div>
 
                 <!-- Suggestion header -->
-                <h2 class="ellipsis" title="These are technologies you might be interested in:">These are technologies you might be interested in:</h2>
+                <h2 ng-if="suggestedTechnologies.length > 0" class="ellipsis" title="These are technologies you might be interested in:">These are technologies you might be interested in:</h2>
 
                 <!-- suggestions -->
                 <div class="suggestedTagsContainer noSelect">
@@ -50,7 +50,7 @@
                  data-remove="removeKnown(technology)"></section>
 
         <!-- avoided technologies -->
-        <section class="listSection" id="notInterested"
+        <section class="listSection avoidedSection" id="notInterested"
                  data-technologies-list
                  data-title="'I\'m not interested'"
                  data-title-style="'avoidTechnologyTitle'"

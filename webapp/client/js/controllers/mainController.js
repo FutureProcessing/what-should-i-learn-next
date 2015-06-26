@@ -109,9 +109,7 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
             }
         );
     };
-
-    // var detectScroll function ()
-    
+          
     $scope.$watch('knownTechnologies', function (knownTechnologies) {
         if(knownTechnologies) {
             $scope.refreshTechnologies();
