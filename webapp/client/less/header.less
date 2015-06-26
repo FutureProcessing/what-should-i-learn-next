@@ -47,12 +47,18 @@ header .menu {
 }
 
 .menu li {
+    box-sizing: border-box;
+    height: @headerHeight;
     width: auto;
     font-size: 20px;
-    line-height: @headerHeight;;
+    line-height: @headerHeight;
     display: inline-block;
     margin-left: 10px;
     margin-right: 10px;
     padding-left: 10px;
     padding-right: 10px
+}
+
+.selectedMenuItem {
+    border-bottom: 3px solid #ffb12e;
 }

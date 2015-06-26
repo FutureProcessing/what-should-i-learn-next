@@ -11,6 +11,7 @@
         <script src="/app.js"></script>
         <script src="/routes.js"></script>
         <script src="/mainController.js"></script>
+        <script src="/menuController.js"></script>
         <script src="/technologiesList.js"></script>
         <script src="/technologiesSearch.js"></script>
 
@@ -37,13 +38,13 @@
                 <img src="images/logo.png" alt="Project logo" />
             </div>
             
-            <div class="menu">
+            <div class="menu" ng-controller="menuController">
                 <ul>
-                    <li>
-                        <a href="#/">Dashboard</a>
+                    <li ng-class="{selectedMenuItem: selected === 'main'}">
+                        <a href="#/" Title="Dashboard">Dashboard</a>
                     </li>
-                    <li>
-                        <a href="#/about">About project</a>
+                    <li ng-class="{selectedMenuItem: selected === 'about'}">
+                        <a href="#/about" Title="About project">About project</a>
                     </li>
                 </ul>
             </div>
