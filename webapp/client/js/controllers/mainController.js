@@ -30,33 +30,39 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
     };
     
     $scope.alreadyKnow = function (tech) {
-        $scope.isCoverVisible = true;
+        if (!_.contains($scope.knownTechnologies, tech)) {
+            $scope.isCoverVisible = true;
 
-        $scope.knownTechnologies.push(tech);
-        localStorageService.setItem("knownTechnologies", $scope.knownTechnologies);
+            $scope.knownTechnologies.push(tech);
+            localStorageService.setItem("knownTechnologies", $scope.knownTechnologies);
 
-        $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
-        localStorageService.setItem("suggestedTechnologies", $scope.suggestedTechnologies);
+            $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
+            localStorageService.setItem("suggestedTechnologies", $scope.suggestedTechnologies);
+        }
     };
     
     $scope.wanted = function (tech) {
-        $scope.isCoverVisible = true;
+        if (!_.contains($scope.wantedTechnologies, tech)) {
+            $scope.isCoverVisible = true;
 
-        $scope.wantedTechnologies.push(tech);
-        localStorageService.setItem("wantedTechnologies", $scope.wantedTechnologies);
+            $scope.wantedTechnologies.push(tech);
+            localStorageService.setItem("wantedTechnologies", $scope.wantedTechnologies);
 
-        $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
-        localStorageService.setItem("suggestedTechnologies", $scope.suggestedTechnologies);
+            $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
+            localStorageService.setItem("suggestedTechnologies", $scope.suggestedTechnologies);
+        }
     };
 
     $scope.avoid = function (tech) {
-        $scope.isCoverVisible = true;
+        if (!_.contains($scope.avoidTechnologies, tech)) {
+            $scope.isCoverVisible = true;
 
-        $scope.avoidTechnologies.push(tech);
-        localStorageService.setItem("avoidTechnologies", $scope.avoidTechnologies);
+            $scope.avoidTechnologies.push(tech);
+            localStorageService.setItem("avoidTechnologies", $scope.avoidTechnologies);
 
-        $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
-        localStorageService.setItem("suggestedTechnologies", $scope.suggestedTechnologies);
+            $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
+            localStorageService.setItem("suggestedTechnologies", $scope.suggestedTechnologies);
+        }
     };
 
     $scope.clearAll = function () {
@@ -90,7 +96,7 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
                 return technologyName === selectedTechnology.originalObject;
             });
 
-            if (foundTechnology) {
+            if (foundTechnology && !_.contains($scope.knownTechnologies, foundTechnology)) {
                 $scope.knownTechnologies.push(foundTechnology);
                 localStorageService.setItem("knownTechnologies", $scope.knownTechnologies);
                 $scope.query = null;
