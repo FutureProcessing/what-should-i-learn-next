@@ -17,3 +17,42 @@ header .logo {
 header .logo img {
     vertical-align: middle;
 }
+
+header a {
+    text-decoration: none;
+}
+
+header .menu a:link,
+header .menu  a:visited {
+    color: white;
+}
+
+header .menu a:hover,
+header .menu  a:active {
+    color: white;
+}
+
+header .menu {
+    float: left;
+    position: relative;
+    color: white;
+    text-transform: uppercase;
+    font-family: @fontTitles;
+    margin-left: 20px;
+}
+
+.menu ul {
+    font-size: 0;
+    height: @headerHeight;
+}
+
+.menu li {
+    width: auto;
+    font-size: 20px;
+    line-height: @headerHeight;;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px
+}
