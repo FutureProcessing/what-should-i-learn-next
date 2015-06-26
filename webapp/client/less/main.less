@@ -35,7 +35,7 @@ p {
 }
 
 main {
-    position: fixed;
+    position: absolute;
     top: @headerHeight;
     bottom: @footerHeight;
     width: 100%;
@@ -70,6 +70,11 @@ main {
     text-overflow: ellipsis;
 }
 
+.clearAllContainer {
+    position: relative;
+    width: 100%;
+}
+
 .clearAll {
     background-image: url('images/trash.png');
     width: 56px;
@@ -77,9 +82,8 @@ main {
     position: fixed;    
     bottom: 55px;
     z-index: 9999;
-    margin: 0 auto;
     right: 38px;
-    border: 2px solid @defaultBorderColor;
+    border: 2px solid @defaultBorderColor;    
 }
 
 .noSelect {
@@ -105,10 +109,7 @@ main {
     .mainLayoutOuterContainer {
         display: block;
         height: auto;
-        table-layout: auto;
-
-        /* TODO: Temporary fix for IE. It has to be removed. */
-        display: table;
+        table-layout: auto;        
     }
 
     .mainLayoutInnerContainer {
