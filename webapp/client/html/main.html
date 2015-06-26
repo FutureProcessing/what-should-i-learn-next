@@ -1,5 +1,5 @@
 <div class="mainLayoutOuterContainer">
-    <div class="mainLayoutInnerContainer">
+    <div class="mainLayoutInnerContainer" data-scroll-checker>
         <section class="searchSection" id="search">
             <div class="searchSectionInnerBox">
 
@@ -11,6 +11,9 @@
                      data-selected-technology="selectedTechnology"
                      data-technology-predictions="technologyPredictions"
                      data-query="query"></div>
+
+                <!-- Suggestion header -->
+                <h2 class="ellipsis" title="These are technologies you might be interested in:">These are technologies you might be interested in:</h2>
 
                 <!-- suggestions -->
                 <div class="suggestedTagsContainer noSelect">
@@ -26,36 +29,33 @@
                         </li>
                     </ul>
                     <div class="suggestedTagsCover" data-ng-if="isCoverVisible"></div>
-                </div>                           
+                </div>
             </div>
         </section>
 
         <!-- wanted technologies -->
         <section class="listSection" id="wantToLearn"
-                 data-technologies-list 
+                 data-technologies-list
                  data-title="'I want to learn this!'"
                  data-title-style="'wantedTechnologyTitle'"
                  data-technologies="wantedTechnologies"
-                 data-remove="removeWanted(technology)">
-        </section>
+                 data-remove="removeWanted(technology)"></section>
 
         <!-- known technologies -->
         <section class="listSection" id="knowThat"
-                 data-technologies-list 
+                 data-technologies-list
                  data-title="'I know this!'"
                  data-title-style="'knownTechnologyTitle'"
                  data-technologies="knownTechnologies"
-                 data-remove="removeKnown(technology)">
-        </section>
+                 data-remove="removeKnown(technology)"></section>
 
         <!-- avoided technologies -->
         <section class="listSection" id="notInterested"
-                 data-technologies-list 
+                 data-technologies-list
                  data-title="'I\'m not interested'"
                  data-title-style="'avoidTechnologyTitle'"
                  data-technologies="avoidTechnologies"
-                 data-remove="removeAvoid(technology)">
-        </section>
+                 data-remove="removeAvoid(technology)"></section>
 
         <!-- download -->
         <section class="downloadSection" id="download"></section>
