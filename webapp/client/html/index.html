@@ -11,10 +11,9 @@
         <script src="/app.js"></script>
         <script src="/routes.js"></script>
         <script src="/mainController.js"></script>
-        <script src="/menuController.js"></script>
         <script src="/technologiesList.js"></script>
         <script src="/technologiesSearch.js"></script>
-        <script src="/scrollChecker.js"></script>
+        <script src="/menu.js"></script>
 
         <title>FP - What should I learn next?</title>
 
@@ -39,20 +38,11 @@
                 <img src="images/logo.png" alt="Project logo" />
             </div>
             
-            <div class="menu" ng-controller="menuController">
-                <ul>
-                    <li ng-class="{selectedMenuItem: selected === 'main'}">
-                        <a href="#/" Title="Dashboard">Dashboard</a>
-                    </li>
-                    <li ng-class="{selectedMenuItem: selected === 'about'}">
-                        <a href="#/about" Title="About project">About project</a>
-                    </li>
-                </ul>
-            </div>
+            <div data-menu></div>
         </header>
 
         <!-- main -->
-        <main class="main" ng-view></main>        
+        <main class="main" ng-view></main>
 
         <!-- footer -->
         <footer>
