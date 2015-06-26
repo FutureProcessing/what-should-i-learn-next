@@ -9,7 +9,7 @@ The application allows user to browse through technologies that he might be inte
 
 
 ## How does it work
-When user enters some a technology he already knows, the application searches through its database (Elastic) for technologies related to the given one. This relationship is mainly determined by how often those technologies are mentioned together on StackOverflow. User can further expand list of technologies he knows and likes or dislikes and the application updates results accordingly.
+When user enters a technology he already knows, the application searches through its database (Elastic) for technologies related to the given one. This relationship is mainly determined by how often those technologies are mentioned together on StackOverflow. User can further expand list of technologies he knows and likes or dislikes and the application updates results accordingly.
 
 The whole process of preparing data and running the application looks as follows:
 
