@@ -117,7 +117,7 @@ public class ConfigurationWrapperTest {
 
 
     @Test
-    public void shouldUsePostInMapperWhenNoOmitPostOptionProvided() {
+    public void shouldUsePostsInMapperWhenNoOmitPostsOptionProvided() {
         //given
         String[] args = toArgs("s3://some/file/on/S3");
 
@@ -129,7 +129,7 @@ public class ConfigurationWrapperTest {
     }
 
     @Test
-    public void shouldNotUsePostInMapperWhenOmitPostOptionProvided() {
+    public void shouldNotUsePostsInMapperWhenOmitPostsOptionProvided() {
         //given
         String[] args = toArgs("s3://some/file/on/S3 --omitPost");
 
