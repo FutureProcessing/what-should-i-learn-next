@@ -59,13 +59,15 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
         localStorageService.setItem("suggestedTechnologies", $scope.suggestedTechnologies);
     };
 
-    $scope.clearStorage = function () {
+    $scope.clearAll = function () {
         localStorageService.clear();
 
         $scope.knownTechnologies = [];
         $scope.wantedTechnologies = [];
         $scope.avoidTechnologies = [];
         $scope.suggestedTechnologies = [];
+
+        $scope.query = '';
     };
          
     $scope.$watch('query', function (query) {
