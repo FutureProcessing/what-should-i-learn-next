@@ -11,7 +11,8 @@
 html, body {
     width: 100%;
     height: 100%;
-    font-family: 'Source Sans Pro', sans-serif;    
+    font-family: 'Source Sans Pro', sans-serif;  
+    font-size: 18px;  
 }
 
 h1 {
@@ -20,13 +21,26 @@ h1 {
     font-weight: 400;
 }
 
+h2 {
+    font-family: @fontTitles;
+    font-size: 26px;
+    font-weight: 400;
+    margin-top: 25px;    
+    line-height: normal;
+}
+
+p {
+    line-height: 25px; 
+    margin-top: 15px;    
+}
 
 main {
-    position: fixed;
+    position: absolute;
     top: @headerHeight;
     bottom: @footerHeight;
     width: 100%;
     overflow-y: auto;
+    z-index: 1;
 }
 
 .listSection {
@@ -56,15 +70,32 @@ main {
     text-overflow: ellipsis;
 }
 
-.clearAll {
-    margin-top: 21px;
-    display: block;
+.clearAllContainer {
+    position: relative;
     width: 100%;
-    text-align: center;
 }
 
-@media (max-width: @mobileViewMaxWidth) {
-    
+.clearAll {
+    background-image: url('images/trash.png');
+    width: 56px;
+    height: 56px;
+    position: fixed;    
+    bottom: 55px;
+    z-index: 9999;
+    right: 38px;
+    border: 2px solid @defaultBorderColor;    
+}
+
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (max-width: @mobileViewMaxWidth) {    
     html, body {
         overflow-y: initial;
     }    
@@ -78,10 +109,7 @@ main {
     .mainLayoutOuterContainer {
         display: block;
         height: auto;
-        table-layout: auto;
-
-        /* TODO: Temporary fix for IE. It has to be removed. */
-        display: table;
+        table-layout: auto;        
     }
 
     .mainLayoutInnerContainer {
@@ -97,5 +125,13 @@ main {
         vertical-align: auto;
         margin: auto;
         padding: 0;
+    }
+
+    .clearAll {
+        position: absolute;    
+        bottom: 15px;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
     }
 }

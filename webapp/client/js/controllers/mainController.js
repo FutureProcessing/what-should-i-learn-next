@@ -30,42 +30,50 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
     };
     
     $scope.alreadyKnow = function (tech) {
-        $scope.isCoverVisible = true;
+        if (!_.contains($scope.knownTechnologies, tech)) {
+            $scope.isCoverVisible = true;
 
-        $scope.knownTechnologies.push(tech);
-        localStorageService.setItem("knownTechnologies", $scope.knownTechnologies);
+            $scope.knownTechnologies.push(tech);
+            localStorageService.setItem("knownTechnologies", $scope.knownTechnologies);
 
-        $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
-        localStorageService.setItem("suggestedTechnologies", $scope.suggestedTechnologies);
+            $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
+            localStorageService.setItem("suggestedTechnologies", $scope.suggestedTechnologies);
+        }
     };
     
     $scope.wanted = function (tech) {
-        $scope.isCoverVisible = true;
+        if (!_.contains($scope.wantedTechnologies, tech)) {
+            $scope.isCoverVisible = true;
 
-        $scope.wantedTechnologies.push(tech);
-        localStorageService.setItem("wantedTechnologies", $scope.wantedTechnologies);
+            $scope.wantedTechnologies.push(tech);
+            localStorageService.setItem("wantedTechnologies", $scope.wantedTechnologies);
 
-        $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
-        localStorageService.setItem("suggestedTechnologies", $scope.suggestedTechnologies);
+            $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
+            localStorageService.setItem("suggestedTechnologies", $scope.suggestedTechnologies);
+        }
     };
 
     $scope.avoid = function (tech) {
-        $scope.isCoverVisible = true;
+        if (!_.contains($scope.avoidTechnologies, tech)) {
+            $scope.isCoverVisible = true;
 
-        $scope.avoidTechnologies.push(tech);
-        localStorageService.setItem("avoidTechnologies", $scope.avoidTechnologies);
+            $scope.avoidTechnologies.push(tech);
+            localStorageService.setItem("avoidTechnologies", $scope.avoidTechnologies);
 
-        $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
-        localStorageService.setItem("suggestedTechnologies", $scope.suggestedTechnologies);
+            $scope.suggestedTechnologies = _($scope.suggestedTechnologies).without(tech);
+            localStorageService.setItem("suggestedTechnologies", $scope.suggestedTechnologies);
+        }
     };
 
-    $scope.clearStorage = function () {
+    $scope.clearAll = function () {
         localStorageService.clear();
 
         $scope.knownTechnologies = [];
         $scope.wantedTechnologies = [];
         $scope.avoidTechnologies = [];
         $scope.suggestedTechnologies = [];
+
+        $scope.query = '';
     };
          
     $scope.$watch('query', function (query) {
@@ -88,7 +96,7 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
                 return technologyName === selectedTechnology.originalObject;
             });
 
-            if (foundTechnology) {
+            if (foundTechnology && !_.contains($scope.knownTechnologies, foundTechnology)) {
                 $scope.knownTechnologies.push(foundTechnology);
                 localStorageService.setItem("knownTechnologies", $scope.knownTechnologies);
                 $scope.query = null;
@@ -109,21 +117,21 @@ whatToLearnNextApp.controller('mainController', ['$scope', 'technologyService', 
             }
         );
     };
-    
+          
     $scope.$watch('knownTechnologies', function (knownTechnologies) {
-        if(knownTechnologies && knownTechnologies.length > 0) {
+        if(knownTechnologies) {
             $scope.refreshTechnologies();
         }
     }, true);
 
     $scope.$watch('avoidTechnologies', function (avoidTechnologies) {
-        if(avoidTechnologies && avoidTechnologies.length > 0) {
+        if(avoidTechnologies) {
             $scope.refreshTechnologies();
         }
     }, true);
     
     $scope.$watch('wantedTechnologies', function (wantedTechnologies) {
-        if(wantedTechnologies && wantedTechnologies.length > 0) {
+        if(wantedTechnologies) {
             $scope.refreshTechnologies();
         }
     }, true);

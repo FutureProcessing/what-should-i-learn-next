@@ -17,9 +17,11 @@ module.exports = function (grunt) {
             dev: {
                 files: {
                     'client/generated/app.js': ['client/js/app.js'],
+                    'client/generated/routes.js': ['client/js/routes.js'],
                     'client/generated/mainController.js': ['client/js/controllers/mainController.js'],
                     'client/generated/technologiesList.js': ['client/js/directives/technologiesList.js'],
-                    'client/generated/technologiesSearch.js': ['client/js/directives/technologiesSearch.js']
+                    'client/generated/technologiesSearch.js': ['client/js/directives/technologiesSearch.js'],
+                    'client/generated/menu.js': ['client/js/directives/menu.js']
                 },
                 options: {
                     browserifyOptions: {
@@ -31,9 +33,11 @@ module.exports = function (grunt) {
             prod: {
                 files: {
                     'client/generated/app.js': ['client/js/app.js'],
+                    'client/generated/routes.js': ['client/js/routes.js'],
                     'client/generated/mainController.js': ['client/js/controllers/mainController.js'],
                     'client/generated/technologiesList.js': ['client/js/directives/technologiesList.js'],
-                    'client/generated/technologiesSearch.js': ['client/js/directives/technologiesSearch.js']
+                    'client/generated/technologiesSearch.js': ['client/js/directives/technologiesSearch.js'],
+                    'client/generated/menu.js': ['client/js/directives/menu.js']
                 },
                 options: {
                     browserifyOptions: {

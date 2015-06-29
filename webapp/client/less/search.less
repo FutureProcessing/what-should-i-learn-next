@@ -8,7 +8,7 @@
 
 .searchSectionInnerBox {
     width: 80%;
-    margin: 88px auto 50px auto;
+    margin: 88px auto 25px auto;
 }
 
 .searchSectionHeader {
@@ -26,10 +26,15 @@
 }
 
 @media (max-width: @mobileViewMaxWidth) {
-
     .searchSectionInnerBox {
         width: 90%;
         margin: 50px auto 50px auto;
+    }
+
+    .searchSectionInnerBox h2 {
+        text-overflow: initial;
+        white-space: normal;
+        overflow: initial;
     }
 
     .searchSectionHeader {

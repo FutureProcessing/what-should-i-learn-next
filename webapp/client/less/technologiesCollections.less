@@ -95,7 +95,7 @@
     width: 100%;
     float: left;
     position: relative;
-    margin-bottom: 50px;
+    margin-bottom: 80px;
     padding-right: 26px;
     box-sizing: border-box;
 }
@@ -148,10 +148,14 @@
     left: 0;
 }
 
-@media (max-width: @mobileViewMaxWidth) {
- 
+@media (max-width: @mobileViewMaxWidth) { 
     .technologiesList {
         padding-right: 0;
+        margin-bottom: 50px;
+    }
+
+    .avoidedSection .technologiesList {
+        margin-bottom: 88px;
     }
 
     .technologyTitle {
@@ -174,5 +178,9 @@
 
     .technologyRemoveButton:hover {
         outline: #df1010 solid @activeButtonBorderWidth;
+    }    
+
+    .technologiesContainer{
+        overflow: hidden;
     }
 }
