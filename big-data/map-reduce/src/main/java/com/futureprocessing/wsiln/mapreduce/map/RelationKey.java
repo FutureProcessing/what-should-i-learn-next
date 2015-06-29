@@ -1,5 +1,6 @@
 package com.futureprocessing.wsiln.mapreduce.map;
 
+import com.google.common.base.Splitter;
 import org.apache.hadoop.io.BinaryComparable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.WritableComparable;
@@ -8,7 +9,7 @@ import org.apache.log4j.Logger;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.Iterator;
 
 public class RelationKey extends BinaryComparable implements WritableComparable<BinaryComparable> {
     static Logger log = Logger.getLogger(RelationKey.class);
@@ -40,7 +41,8 @@ public class RelationKey extends BinaryComparable implements WritableComparable<
     }
 
     public boolean hasCorrectData() {
-        return firstTechnology != null && secondTechnology != null;
+        return firstTechnology != null && firstTechnology.length() > 0
+                && secondTechnology != null && secondTechnology.length() > 0;
     }
 
 
@@ -65,11 +67,16 @@ public class RelationKey extends BinaryComparable implements WritableComparable<
     @Override
     public void readFields(DataInput in) throws IOException {
         String line = in.readLine();
-        Scanner scanner = new Scanner(line);
-        scanner.useDelimiter("\t");
+
+        Iterable<String> split = Splitter.on("\t").split(line);
+        Iterator<String> scanner = split.iterator();
+
+//        Scanner scanner = new Scanner(line);
+//        scanner.useDelimiter("\t");
         firstTechnology = scanner.hasNext() ? scanner.next() : null;
         if (scanner.hasNext()) {
             secondTechnology = scanner.next();
+//
         } else {
             log.warn("Can't create key:'first\tsecond' from input stream: " + line);
         }

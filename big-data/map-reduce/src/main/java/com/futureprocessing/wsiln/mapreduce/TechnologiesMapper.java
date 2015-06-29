@@ -10,6 +10,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 import java.util.List;
 
+import static com.futureprocessing.wsiln.mapreduce.TechnologiesFormatter.log;
 import static com.futureprocessing.wsiln.mapreduce.TechnologiesFormatter.removeVersion;
 
 public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, MappingType> {
@@ -33,7 +34,7 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, 
                 mapPosts(parser.getBody(), context);
             }
         } catch (Exception e) {
-            return;
+            log.error("Error on map", e);
         }
     }
 
@@ -57,15 +58,19 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, 
         return false;
     }
 
-    private boolean mapPosts(String value, Context context) throws IOException, InterruptedException {
-
+    private void mapPosts(String value, Context context) throws IOException, InterruptedException {
         String[] words = InputFormatter.splitInputString(value);
         if (words == null) {
-            return true;
+            return;
         }
 
         List<String> postsList = removeVersion(words);
+        createPairs(context, postsList);
+    }
+
+    private void createPairs(Context context, List<String> postsList) throws IOException, InterruptedException {
         for (int i = 0; i < postsList.size(); i++) {
+
             String firstElement = postsList.get(i);
             int scope = (i + mappingScope) < postsList.size() - 1 ? i + mappingScope : postsList.size() - 1;
             for (int j = i + 1; j < scope + 1; j++) {
@@ -73,11 +78,10 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, 
                 if (!firstElement.equals(secondElement)) {
                     context.write(new RelationKey(firstElement, secondElement), MappingType.POST);
                     context.write(new RelationKey(secondElement, firstElement), MappingType.POST);
+
                 }
             }
         }
-        return false;
     }
-
 
 }
