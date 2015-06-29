@@ -1,56 +1,65 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app="whatToLearnNext">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    
-    <link rel="stylesheet" type="text/css" href="/main.css"/>
-    
-    <script src="/app.js"></script>
-    
-    <title>What to learn next?</title>
-</head>
 
-<body ng-controller="mainController">
-    <header>
-        <h1>What to learn next?</h1>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=no" />
 
-    </header>
-    <main>
-        <h2>What do you already know?</h2>
-        
-        <ul id="known" >
-            <li ng-repeat="t in knownTechnologies">
-                <span ng-bind="t"></span><a href="" ng-click="removeKnown(t)">&Chi;</a>
-            </li>
-        </ul>
+        <link rel="stylesheet" type="text/css" href="/master.css" />
+        <link rel="icon" type="image/png" href="/images/favicon.png">
 
-        <h2 ng-if="avoidTechnologies.length > 0">What you don't want to learn?</h2>
+        <script src="/app.js"></script>
+        <script src="/routes.js"></script>
+        <script src="/mainController.js"></script>
+        <script src="/technologiesList.js"></script>
+        <script src="/technologiesSearch.js"></script>
+        <script src="/menu.js"></script>
 
-        <ul ng-if="avoidTechnologies.length > 0" id="avoid" >
-            <li ng-repeat="t in avoidTechnologies">
-                <span ng-bind="t"></span><a href="" ng-click="removeAvoid(t)">&Chi;</a>
-            </li>
-        </ul>
+        <title>FP - What should I learn next?</title>
 
-        <form>
-            <input type="text" ng-model="query" ng-keypress="keyPress($event)"/>
-        </form>
-        <ul id="predictions" ng-if="technologyPredictions">
-            <li ng-repeat="t in technologyPredictions"><span ng-bind="t"></span></li>
-        </ul>
-        
-        <h2 ng-if="suggestedTechnologies.length > 0">You should learn:</h2>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-64418864-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </head>
+
+    <body>
+
+        <!-- header -->
+        <header>
+            <div class="logo">
+                <img src="images/logo.png" alt="Project logo" />
+            </div>
             
-        <ul id="suggested" ng-if="suggestedTechnologies.length > 0">
-            <li ng-repeat="t in suggestedTechnologies">
-                <span ng-bind="t"></span>
-                - <a href="" ng-click="alreadyKnow(t)">I already know that</a>
-                - <a href="" ng-click="avoid(t)">I don't want to learn that</a>
-            </li>
-        </ul>
-    </main>
-    <footer>
-        &copy;Future Processing Sp z o.o.
-    </footer>
-</body>
+            <div data-menu></div>
+        </header>
+
+        <!-- main -->
+        <main class="main" ng-view></main>
+
+        <!-- footer -->
+        <footer>
+            <!-- Copyrights -->
+            <div id="footerCopyrights">
+                &copy; Future Processing Sp z o.o.
+            </div>
+
+            <!-- Links -->
+            <div id="footerLinks">
+                <ul>
+                    <li><a href="https://github.com/FutureProcessing/what-should-i-learn-next/blob/develop/LICENCE.md" target="_blank">Licence</a></li>
+                    <li><a href="https://github.com/FutureProcessing/what-should-i-learn-next/" target="_blank">GitHub Source</a></li>
+                    <li><a href="http://www.future-processing.com/contact/" target="_blank">Contact</a></li>
+                </ul>
+            </div>
+        </footer>
+    </body>
+
 </html>

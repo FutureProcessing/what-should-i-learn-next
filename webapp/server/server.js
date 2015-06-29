@@ -12,6 +12,9 @@ app.use(morgan('combined'));
 app.use(express.static(__dirname + '/build/static'));
 app.use(express.static(__dirname + '/../client/generated'));
 app.use(express.static(__dirname + '/../client/html'));
+app.use('/fonts', express.static(__dirname + '/../client/fonts'));
+app.use('/images', express.static(__dirname + '/../client/images'));
+
 
 app.get('/technologyPredictions', function (req, res) {
     var query = req.query.q;
@@ -49,6 +52,12 @@ app.get('/technologySuggestions', function (req, res) {
         });
     });
 
+});
+
+// Error handler for 404
+app.use(function(req, res, next) {
+    res.writeHead(302, { 'Location': '/#/404' });
+    res.end();
 });
 
 app.listen(config.http.port);

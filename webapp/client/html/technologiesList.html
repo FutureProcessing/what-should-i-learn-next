@@ -1,0 +1,22 @@
+<div class="technologiesContainer">
+    <!-- title -->
+    <h1 class="technologyTitle ellipsis {{titleStyle}}">
+        {{title}}
+    </h1>
+    
+    <!-- technologies collection -->
+    <ul class="technologiesList">
+        <li class="technologyItem" ng-repeat="technology in technologies">
+            <div class="technologyItemContent">
+                        
+                <!-- technology tab -->
+                <div class="technologyTag removableTechnologyTag ellipsis">
+                    <span ng-bind="technology" title="{{technology}}"></span>
+                </div>
+                                                                     
+                <!-- remove button -->
+                <a href="" class="technologyRemoveButton" ng-click="remove({technology: technology})" title="Remove"></a>
+            </div>
+        </li>
+    </ul>
+</div>

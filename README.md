@@ -2,78 +2,38 @@
 ========================
 
 # What it is
-This is a sample Proof of Concept of operating on BIG DATA using Hadoop and Elastic.
+This is a sample Proof of Concept for BIG DATA analysis using [Hadoop](https://hadoop.apache.org/) and [Elastic](https://www.elastic.co/).
 
-### What it does
-Front-end application allows user to search for technologies that he knows and basing on that suggesting 
-another technologies that he might be interested in. 
+## What it does
+The application allows user to browse through technologies that he might be interested in based on technologies that he already knows.
 
-### How
-Data is downloaded from StackOverflow Data Dump
-[https://archive.org/details/stackexchange]
 
-It is then inserted into Hadoop HDFS and processed by Hadoop job. Results are put into Elastic index.
+## How does it work
+When user enters a technology he already knows, the application searches through its database (Elastic) for technologies related to the given one. This relationship is mainly determined by how often those technologies are mentioned together on StackOverflow. User can further expand list of technologies he knows and likes or dislikes and the application updates results accordingly.
+
+The whole process of preparing data and running the application looks as follows:
+
+1. Data dump from [StackOverflow](https://archive.org/details/stackexchange) is downloaded;
+2. [The data is analyzed](big-data/map-reduce/README.md) with Hadoop. The goal of the analysis is to determine connections between technologies (i.e. find sets of related technologies);
+3. Results of the analysis are processed by Elastic;
+4. Final results from Elastic are presented in the application. You can search for a particular technology and we’ll list others, closely related to it;
+5. Then you can select which technologies you’d enjoy learning, which you already know and which you would not be interested in at all.
+
+
+# Data
+### Input
+* 35 GB XML dump file – StackOverflow posts.
+
+### Output
+* 135MB file – Map of technologies and connections between them based on tags added by StackOverflow users;
+* There are ca. 6 000 000 mappings;
+* 32000 unique technology entries.
+
 
 # DIY tutorial
-Try to use this example yourself
-
-## Prepare Environment
-
-### Install Hadoop
-You can use Docker container to setup Hadoop very quickly for PoC. 
-This image will help you: [Hadoop on Docker](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/)
-
-If you want to install Hadoop manually, you can use [this  cheatsheet](big-data/hadoop-instalation/Hadoop Cluster - manual instalation cheatsheet.md).
-
-### Install Elastic
-You can use this Docker image [Elastic](https://registry.hub.docker.com/_/elasticsearch/)
-Expose ports 9200 and 9300
-
-
-## Download data 
-Download data dump from [StackOverlow](https://archive.org/details/stackexchange)
-In PoC we're using only stackoverflow.com-Posts\Posts.xml
- 
-## Put Posts.xml into HDFS
-The easiest way to put Posts.xml int hdfs.
-1. Copy Posts.xml onto machine where Hadoop is installed.
-2. Put Posts.xml into hadoop
-```
-cd $HADOOP_HOME;
-bin/hadoop fs -put Posts.xml /user/root/input/Posts.xml
-```
-It'll put Posts.xml file into HDFS into directory /user/root/input
-
-## Prepare JAR file with job
-Go to big-data/map-reduce directory and compile and packagemap-reduce job:
-```
-cd big-data/map-reduce
-mvn clean package
-```
-It'll create a file map-reduce-1.0-SNAPSHOT-jar-with-dependencies.jar.
-Copy it onto a Hadoop machine.
-
-## Prepare indexes in Elastic
-```
-cd big-data/elastic-upload
-npm install
-node initializeIndices.js elasticHost:9200 technologies
-```
-
-## Execute Haddop job
-On Hadoop machine start Hadoop job
-```
-cd $HADOOP_HOME
-bin/hadoop jar map-reduce-1.0-SNAPSHOT-jar-with-dependencies.jar  /user/root/input/Posts.xml --elasticHost=yourElasticHost --indexName=technologies
-```
-
-Job will execute and results will be uploaded to Elastic index.
-
-## Host frontend application
-```
-cd webapp
-npm install
-grunt develop
-```
+## Try to use example yourself
+1. Configure and run [Hadoop Single Node in Docker](big-data/hadoop-in-docker/README.md);
+2. Try to understand how our map-reduce algorithm works: [Map-reduce algorithm](big-data/map-reduce/README.md);
+3. Run node.js application to visualize results and play with it: [GUI application](webapp/README.md).
 
 

@@ -1,5 +1,6 @@
 package com.futureprocessing.wsiln.mapreduce.output;
 
+import com.futureprocessing.wsiln.elastic.ElasticWriter;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.RecordWriter;
@@ -20,22 +21,11 @@ import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
 public class ElasticRecordWriter extends RecordWriter<Text, IntWritable> {
 
-    private static Logger log = LoggerFactory.getLogger(ElasticRecordWriter.class);
 
-    private final Client client;
-    private final String indexName;
-    private final Semaphore semaphore;
-    private final ElasticResponseHandler elasticResponseHandler;
+    private final ElasticWriter elasticWriter;
 
     public ElasticRecordWriter(String indexName, String elasticHost, int elasticPort) {
-        this.indexName = indexName;
-        log.info("Preparing client to Elastic");
-        log.info("Client connection to host and port: " + elasticHost + " : " + elasticPort);
-        log.info("Index name: " + indexName);
-        this.client = new TransportClient().addTransportAddress(new InetSocketTransportAddress(elasticHost, elasticPort));
-        log.info("Client created: " + client.toString());
-        this.semaphore = new Semaphore(50, true);
-        this.elasticResponseHandler = new ElasticResponseHandler();
+        elasticWriter = new ElasticWriter(indexName, elasticHost, elasticPort);
     }
 
     @Override
@@ -44,53 +34,13 @@ public class ElasticRecordWriter extends RecordWriter<Text, IntWritable> {
         String t1 = scanner.next();
         String t2 = scanner.next();
 
-        final String elasticKey = t1 + "_" + t2;
+        elasticWriter.write(t1, t2, value.get());
 
-        semaphore.acquire();
-        client.prepareIndex(indexName, "relations", elasticKey + "1")
-                .setSource(jsonBuilder()
-                                .startObject()
-                                .field("t1", t1)
-                                .field("t2", t2)
-                                .field("plus", true)
-                                .field("v", value.get())
-                )
-                .execute().addListener(elasticResponseHandler);
-
-        semaphore.acquire();
-        client.prepareIndex(indexName, "relations", elasticKey + "0")
-                .setSource(jsonBuilder()
-                                .startObject()
-                                .field("t1", t1)
-                                .field("t2", t2)
-                                .field("plus", false)
-                                .field("v", 0 - value.get())
-                )
-                .execute().addListener(elasticResponseHandler);
-
-        semaphore.acquire();
-        client.prepareIndex(indexName, "list", t1)
-                .setSource(jsonBuilder()
-                                .startObject()
-                                .field("name", t1)
-                )
-                .execute().addListener(elasticResponseHandler);
     }
 
-    private class ElasticResponseHandler implements ActionListener<IndexResponse> {
-
-        public void onResponse(IndexResponse indexResponse) {
-            semaphore.release();
-        }
-
-        public void onFailure(Throwable e) {
-            log.error("Error happened while waiting for response from elastic", e);
-            semaphore.release();
-        }
-    }
 
     @Override
     public void close(TaskAttemptContext context) throws IOException, InterruptedException {
-        client.close();
+        elasticWriter.close();
     }
 }

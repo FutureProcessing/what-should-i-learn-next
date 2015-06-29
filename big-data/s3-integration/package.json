@@ -1,0 +1,9 @@
+{
+  "name": "s3-integration",
+  "version": "0.0.1",
+  "dependencies": {
+    "aws-sdk": "^2.1.34",
+    "minimist": "^1.1.1",
+    "s3-upload-stream": "^1.0.7"
+  }
+}

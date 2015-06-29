@@ -1,0 +1,52 @@
+<article class="aboutArticle">
+    <div style="max-width: 768px; margin: 88px auto 50px auto;">
+        <!-- title -->
+        <h1 class="ellipsis" title="About project">About project</h1>
+
+        <!-- What it is? -->
+        <section>
+            <h2 title="What it is">What it is</h2>
+
+            <p>This is a sample Proof of Concept for BIG DATA analysis using Hadoop and Elastic.</p>
+        </section>
+
+        <!-- What it does? -->
+        <section>
+            <h2 title="What it does">What it does</h2>
+
+            <p>
+                The application allows user to browse through technologies that he might be interested
+                in based on technologies that he already knows.
+            </p>
+        </section>
+
+        <!-- How does it work? -->
+        <section>
+            <h2 title="How does it work">How does it work</h2>
+
+            <p>
+                When user enters a technology he already knows, the application searches through its database (Elastic) for technologies related to the given one. This relationship is mainly determined by how often those technologies are mentioned together on StackOverflow. User can further expand list of technologies he knows and likes or dislikes and the application updates results accordingly.
+            </p>
+            <p>
+                The whole process of preparing data and running the application looks as follows:
+            </p>
+            <ul>
+                <li>
+                    1. Data dump from StackOverflow is downloaded;
+                </li>
+                <li>
+                    2. The data is analyzed with Hadoop. The goal of the analysis is to determine connections between technologies (i.e. find sets of related technologies);
+                </li>
+                <li>
+                    3. Results of the analysis are processed by Elastic;
+                </li>
+                <li>
+                    4. Final results from Elastic are presented in the application. You can search for a particular technology and we'll list others, closely related to it;
+                </li>
+                <li>
+                    5. Then you can select which technologies you'd enjoy learning, which you already know and which you would not be interested in at all.
+                </li>
+            </ul>
+        </section>
+    </div>
+</article>

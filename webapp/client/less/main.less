@@ -1,113 +1,137 @@
-@import "reset";
+/* http://codeboxers.com/ie10-responsive-design-fix-for-metro-snap/ */
 
-body {
-    background-color: #2c3e50;
-    font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+@-ms-viewport {
+    width: device-width;
 }
 
-header, main, footer {
-    width: 1024px;
-    margin: 0 auto;
+@viewport {
+    width: device-width;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Source Sans Pro', sans-serif;  
+    font-size: 18px;  
 }
 
 h1 {
-    color: #2ecc71;
-    text-align: center;
-    font-size: 50px;
-    font-weight: bold;
-    line-height: 100px;
-    text-shadow: 1px 1px 1px #27ae60;
+    font-family: @fontTitles;
+    font-size: 48px;
+    font-weight: 400;
 }
 
 h2 {
-    color: #a468bd;
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    line-height: 60px;
-    text-shadow: 1px 1px 1px #8e44ad;
+    font-family: @fontTitles;
+    font-size: 26px;
+    font-weight: 400;
+    margin-top: 25px;    
+    line-height: normal;
 }
 
-input {
-    background-color: #2c3e50;
-    border: 3px solid #f1c40f;
+p {
+    line-height: 25px; 
+    margin-top: 15px;    
+}
+
+main {
+    position: absolute;
+    top: @headerHeight;
+    bottom: @footerHeight;
     width: 100%;
-    color: #f1c40f;
-    padding: 10px;
-    font-size: 24px;
-    border-radius: 12px;
+    overflow-y: auto;
+    z-index: 1;
+}
+
+.listSection {
+    width: 16.66%;
+    border-left: 1px solid @defaultBorderColor;
     box-sizing: border-box;
+    height: 100%;
+    padding: 0 20px;
+    display: table-cell;
+    vertical-align: top;
 }
 
-ul#known, ul#avoid {
-    padding-bottom: 20px;
-    list-style: none;
-
-    li {
-        display: inline-block;
-        background-color: #f1c40f;
-        padding: 10px 20px;
-        font-size: 20px;
-        line-height: 20px;
-        border-radius: 20px;
-        margin-right: 10px;
-        
-        a {
-            display: none;
-        }
-        
-        &:hover {
-            padding: 10px 10px;
-            a {
-                display: inline-block;
-                width: 20px;
-                padding-left: 10px;
-                text-align: center;
-                box-sizing: border-box;
-                color: #000;
-                text-decoration: none;
-            }
-        }
-    }
-    
-}
-
-ul#predictions {
-    list-style: none;
-    line-height: 30px;
+.mainLayoutOuterContainer {
+    display: table;
+    height: 100%;
     width: 100%;
+    table-layout: fixed;
+}
+
+.mainLayoutInnerContainer {
+    display: table-row;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.clearAllContainer {
+    position: relative;
+    width: 100%;
+}
+
+.clearAll {
+    background-image: url('images/trash.png');
+    width: 56px;
+    height: 56px;
+    position: fixed;    
+    bottom: 55px;
+    z-index: 9999;
+    right: 38px;
+    border: 2px solid @defaultBorderColor;    
+}
+
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (max-width: @mobileViewMaxWidth) {    
+    html, body {
+        overflow-y: initial;
+    }    
+
+    main {
+        position: relative;    
+        top: auto;
+        bottom: auto;
+    }
     
-    li {
+    .mainLayoutOuterContainer {
         display: block;
-        background-color: #f1c40f;
-        color: #2c3e50;
-        font-size: 24px;
+        height: auto;
+        table-layout: auto;        
+    }
+
+    .mainLayoutInnerContainer {
+        display: block;
+    }
+
+    .listSection {
+        width: 90%;
+        border-left: 0;
         box-sizing: border-box;
-        padding-left: 20px;
-        margin: 0 10px;
+        height: auto;
+        display: block;
+        vertical-align: auto;
+        margin: auto;
+        padding: 0;
     }
-}
 
-ul#suggested {
-    font-size: 20px;
-    color: #f1c40f;
-    list-style: none;
-    
-    a {
-        text-decoration: none;
-        color: #389adc;
-        
-        &:hover {
-            color: #2980b9;
-        }
+    .clearAll {
+        position: absolute;    
+        bottom: 15px;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
     }
-}
-
-footer {
-    color: #bdc3c7;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
 }
