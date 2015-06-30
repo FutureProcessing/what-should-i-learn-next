@@ -91,4 +91,16 @@ public class ConfigurationWrapper {
     public int getMappingScope() {
         return configuration.getInt(MAPPING_SCOPE, 5);
     }
+
+    public String getElasticIndexName() {
+        return configuration.get(ELASTIC_INDEX_NAME);
+    }
+
+
+    @Override
+    public String toString() {
+        return "Elastic host: " + getElasticHost() +
+                " Elastic port: " + getElasticPort() +
+                " Elastic index name: " + getElasticIndexName();
+    }
 }
