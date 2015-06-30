@@ -2,7 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var Technologies = require('./technologies.js');
 var config = require("./config.json");
-
+var path = require('path');
 
 var app = express();
 var technologies = new Technologies(config.elastic.address, config.elastic.indexName);
@@ -56,8 +56,22 @@ app.get('/technologySuggestions', function (req, res) {
 
 // Error handler for 404
 app.use(function(req, res, next) {
-    res.writeHead(302, { 'Location': '/#/404' });
-    res.end();
+  res.status(404);
+
+  // respond with html page
+  if (req.accepts('html')) {
+    res.sendFile(path.resolve(__dirname + '/../client/html/server-404.html'));
+    return;
+  }
+
+  // respond with json
+  if (req.accepts('json')) {
+    res.send({ error: 'Not found' });
+    return;
+  }
+
+  // default to plain-text. send()
+  res.type('txt').send('Not found');
 });
 
 app.listen(config.http.port);
