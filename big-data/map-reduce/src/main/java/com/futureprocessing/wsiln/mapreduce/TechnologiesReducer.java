@@ -20,8 +20,8 @@ public class TechnologiesReducer extends Reducer<RelationKey, MappingType, Text,
 
     @Override
     protected void setup(Context context) throws IOException, InterruptedException {
-        Configuration configuration = context.getConfiguration();
-        minNumberOfConnections = configuration.getInt(ConfigurationConstants.MIN_NUMBER_OF_TECHNOLOGIES_CONNECTIONS, 2);
+        ConfigurationWrapper configuration = new ConfigurationWrapper(context.getConfiguration());
+        minNumberOfConnections = configuration.getMinimumNumberOfTechnologiesConnections();
     }
     
     @Override

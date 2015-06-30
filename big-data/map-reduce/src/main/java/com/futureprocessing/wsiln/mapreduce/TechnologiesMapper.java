@@ -2,7 +2,6 @@ package com.futureprocessing.wsiln.mapreduce;
 
 import com.futureprocessing.wsiln.mapreduce.map.MappingType;
 import com.futureprocessing.wsiln.mapreduce.map.RelationKey;
-import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -10,18 +9,18 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 import java.util.List;
 
+import static com.futureprocessing.wsiln.mapreduce.TechnologiesFormatter.log;
 import static com.futureprocessing.wsiln.mapreduce.TechnologiesFormatter.removeVersion;
 
 public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, MappingType> {
-    private final static int MAPPING_SCOPE = 5;
-    private boolean omitPost;
+    private boolean includePostsBody;
     private int mappingScope;
 
     @Override
     protected void setup(Context context) throws IOException, InterruptedException {
-        Configuration configuration = context.getConfiguration();
-        omitPost = configuration.getBoolean(ConfigurationConstants.OMIT_POSTS, false);
-        mappingScope = configuration.getInt(ConfigurationConstants.MAPPING_SCOPE, 5);
+        ConfigurationWrapper configuration = new ConfigurationWrapper(context.getConfiguration());
+        includePostsBody = configuration.isIncludePostsBody();
+        mappingScope = configuration.getMappingScope();
     }
 
     @Override
@@ -29,11 +28,11 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, 
         try {
             ParserXML parser = new ParserXML(value.toString());
             mapTags(parser.getTags(), context);
-            if (!omitPost) {
-                mapPosts(parser.getBody(), context);
+            if (includePostsBody) {
+                mapPostsBody(parser.getBody(), context);
             }
         } catch (Exception e) {
-            return;
+            log.error("Error on map", e);
         }
     }
 
@@ -57,15 +56,19 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, 
         return false;
     }
 
-    private boolean mapPosts(String value, Context context) throws IOException, InterruptedException {
-
+    private void mapPostsBody(String value, Context context) throws IOException, InterruptedException {
         String[] words = InputFormatter.splitInputString(value);
         if (words == null) {
-            return true;
+            return;
         }
 
         List<String> postsList = removeVersion(words);
+        createPairs(context, postsList);
+    }
+
+    private void createPairs(Context context, List<String> postsList) throws IOException, InterruptedException {
         for (int i = 0; i < postsList.size(); i++) {
+
             String firstElement = postsList.get(i);
             int scope = (i + mappingScope) < postsList.size() - 1 ? i + mappingScope : postsList.size() - 1;
             for (int j = i + 1; j < scope + 1; j++) {
@@ -73,11 +76,10 @@ public class TechnologiesMapper extends Mapper<LongWritable, Text, RelationKey, 
                 if (!firstElement.equals(secondElement)) {
                     context.write(new RelationKey(firstElement, secondElement), MappingType.POST);
                     context.write(new RelationKey(secondElement, firstElement), MappingType.POST);
+
                 }
             }
         }
-        return false;
     }
-
 
 }

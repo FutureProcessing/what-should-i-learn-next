@@ -15,8 +15,6 @@ import org.apache.hadoop.util.ToolRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.futureprocessing.wsiln.mapreduce.ConfigurationConstants.*;
-
 public class TechnologiesFromTagsJob extends Configured implements Tool {
 
     private static Logger log = LoggerFactory.getLogger(TechnologiesFromTagsJob.class);
@@ -38,7 +36,7 @@ public class TechnologiesFromTagsJob extends Configured implements Tool {
 
         setUpOutput(job, configuration);
 
-        logConfiguration(job);
+        logConfiguration(configuration);
 
         return job.waitForCompletion(true) ? 0 : 1;
     }
@@ -53,12 +51,8 @@ public class TechnologiesFromTagsJob extends Configured implements Tool {
         }
     }
 
-    private void logConfiguration(Job job) {
-        Configuration configuration = job.getConfiguration();
-        log.info("Starting job with following configuration: ");
-        log.info("Elastic host: {}", configuration.get(ELASTIC_HOST));
-        log.info("Elastic port: {}", configuration.get(ELASTIC_PORT));
-        log.info("Elastic index name: {}", configuration.get(ELASTIC_INDEX_NAME));
+    private void logConfiguration(ConfigurationWrapper configuration) {
+        log.info("Starting job with following configuration: ()", configuration);
     }
 
     private ConfigurationWrapper parseArguments(String[] args, Configuration configuration) {

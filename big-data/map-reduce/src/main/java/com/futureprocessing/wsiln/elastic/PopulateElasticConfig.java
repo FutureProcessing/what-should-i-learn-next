@@ -4,12 +4,17 @@ import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 
-import static com.futureprocessing.wsiln.mapreduce.ConfigurationConstants.*;
+import static com.futureprocessing.wsiln.elastic.PopulateElasticConfig.Constants.*;
 
 public class PopulateElasticConfig {
 
-    private static final String S3_BUCKET = "s3Bucket";
-    private static final String S3_KEY = "s3Key";
+    interface Constants {
+        String S3_BUCKET = "s3Bucket";
+        String S3_KEY = "s3Key";
+        String ELASTIC_HOST = "elasticHost";
+        String ELASTIC_PORT = "elasticPort";
+        String ELASTIC_INDEX_NAME = "indexName";
+    }
 
     private final OptionSet optionSet;
     private final OptionSpec<String> s3BucketOption;
@@ -27,9 +32,6 @@ public class PopulateElasticConfig {
         elasticHostOption = optionParser.accepts(ELASTIC_HOST).withOptionalArg().ofType(String.class).defaultsTo("localhost");
         elasticPortOption = optionParser.accepts(ELASTIC_PORT).withOptionalArg().ofType(Integer.class).defaultsTo(9300);
         elasticIndexNameOption = optionParser.accepts(ELASTIC_INDEX_NAME).withOptionalArg().ofType(String.class).defaultsTo("technologies");
-        OptionSpec<Integer> minTechnologiesConnections = optionParser.accepts(MIN_NUMBER_OF_TECHNOLOGIES_CONNECTIONS).withOptionalArg().ofType(Integer.class).defaultsTo(2);
-        OptionSpec<Boolean> omitPostOption = optionParser.accepts(OMIT_POSTS).withOptionalArg().ofType(Boolean.class).defaultsTo(true);
-        OptionSpec<Integer> mappingScope = optionParser.accepts(MAPPING_SCOPE).withOptionalArg().ofType(Integer.class).defaultsTo(5);
 
         optionSet = optionParser.parse(args);
     }

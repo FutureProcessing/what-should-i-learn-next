@@ -6,6 +6,10 @@ var create = function (host, index, callback) {
     });
 
 
+    var handleError = function (error) {
+        console.error('Error occured', error);
+    };
+
     var createRelationsMapping = function () {
         return client.indices.putMapping({
             index: index,
@@ -66,9 +70,9 @@ var create = function (host, index, callback) {
             }
         }
     })
-        .then(createRelationsMapping)
-        .then(createListMapping)
-        .then(callback);
+        .then(createRelationsMapping, handleError)
+        .then(createListMapping, handleError)
+        .then(callback, handleError);
 
 };
 

@@ -22,5 +22,19 @@ public class PopulateElasticConfigTest {
         assertThat(config.getElasticIndexName()).isEqualTo("fairytale");
     }
 
+    @Test
+    public void shouldHaveDefaultElasticPortTo9300(){
+        //given
+        String argLine = "";
+        String[] args = argLine.split(" ");
+
+        //when
+        PopulateElasticConfig config = new PopulateElasticConfig(args);
+
+        //then
+        assertThat(config.getElasticPort()).isEqualTo(9300);
+    }
+
+
 
 }

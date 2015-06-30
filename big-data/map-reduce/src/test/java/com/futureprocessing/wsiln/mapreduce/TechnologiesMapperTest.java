@@ -71,7 +71,7 @@ public class TechnologiesMapperTest {
     }
 
     @Test
-    public void shouldMapWordPairFromText() throws IOException  {
+    public void shouldMapWordPairFromText() throws IOException {
         //given
         Text input = new Text("<row Id=\"1\" Body=\"&lt;&gt;One plus one is two, but one&lt;/&gt;&#xA;\"  />");
 
@@ -148,8 +148,11 @@ public class TechnologiesMapperTest {
 
 
         //when
-        new MapDriver<LongWritable, Text, RelationKey, MappingType>()
-                .withMapper(new TechnologiesMapper())
+        MapDriver<LongWritable, Text, RelationKey, MappingType> driver = new MapDriver<>();
+        ConfigurationWrapper config = new ConfigurationWrapper(driver.getConfiguration());
+        config.parseArguments(new String[]{"--includePostsBody"});
+
+        driver.withMapper(new TechnologiesMapper())
                 .withInput(new LongWritable(1l), input)
 
                         //then
