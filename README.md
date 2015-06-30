@@ -25,9 +25,9 @@ The whole process of preparing data and running the application looks as follows
 * 35 GB XML dump file – StackOverflow posts.
 
 ### Output
-* 135MB file – Map of technologies and connections between them based on tags added by StackOverflow users;
-* There are ca. 6 000 000 mappings;
-* 32000 unique technology entries.
+* ~50 MB in output part files – Map of technologies and connections between them based on tags added by StackOverflow users;
+* There are ca. 4 800 000 mappings;
+* 37 000 unique technology entries.
 
 
 # DIY tutorial
