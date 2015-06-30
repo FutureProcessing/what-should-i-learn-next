@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var elasticSearch = require('elasticsearch');
 var Technologies = require('../server/technologies');
-var initializeIndices = require('../../big-data/elastic-upload/initializeIndices');
+var initializeIndices = require('../../big-data/elastic-initialization/initializeIndices');
 
 
 var host = 'localhost:9200';

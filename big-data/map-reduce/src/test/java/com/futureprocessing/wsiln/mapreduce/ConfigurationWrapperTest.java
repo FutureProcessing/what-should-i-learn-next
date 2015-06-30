@@ -1,9 +1,10 @@
 package com.futureprocessing.wsiln.mapreduce;
 
 import org.apache.hadoop.conf.Configuration;
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConfigurationWrapperTest {
 
@@ -23,7 +24,7 @@ public class ConfigurationWrapperTest {
         configurationWrapper.parseArguments(args);
 
         //then
-        Assertions.assertThat(configurationWrapper.getInputPath()).isEqualTo("s3://some/file/on/S3");
+        assertThat(configurationWrapper.getInputPath()).isEqualTo("s3://some/file/on/S3");
     }
 
     private String[] toArgs(String s) {
@@ -39,7 +40,7 @@ public class ConfigurationWrapperTest {
         configurationWrapper.parseArguments(args);
 
         //then
-        Assertions.assertThat(configurationWrapper.getElasticHost()).isEqualTo("some-host");
+        assertThat(configurationWrapper.getElasticHost()).isEqualTo("some-host");
     }
 
     @Test
@@ -51,7 +52,7 @@ public class ConfigurationWrapperTest {
         configurationWrapper.parseArguments(args);
 
         //then
-        Assertions.assertThat(configurationWrapper.getElasticPort()).isEqualTo(9300);
+        assertThat(configurationWrapper.getElasticPort()).isEqualTo(9300);
     }
 
     @Test
@@ -63,7 +64,7 @@ public class ConfigurationWrapperTest {
         configurationWrapper.parseArguments(args);
 
         //then
-        Assertions.assertThat(configurationWrapper.getElasticPort()).isEqualTo(6666);
+        assertThat(configurationWrapper.getElasticPort()).isEqualTo(6666);
     }
 
 
@@ -76,7 +77,7 @@ public class ConfigurationWrapperTest {
         configurationWrapper.parseArguments(args);
 
         //then
-        Assertions.assertThat(configurationWrapper.isUseElastic()).isFalse();
+        assertThat(configurationWrapper.isUseElastic()).isFalse();
     }
 
     @Test
@@ -88,7 +89,7 @@ public class ConfigurationWrapperTest {
         configurationWrapper.parseArguments(args);
 
         //then
-        Assertions.assertThat(configurationWrapper.isUseElastic()).isTrue();
+        assertThat(configurationWrapper.isUseElastic()).isTrue();
     }
 
     @Test
@@ -100,7 +101,7 @@ public class ConfigurationWrapperTest {
         configurationWrapper.parseArguments(args);
 
         //then
-        Assertions.assertThat(configurationWrapper.getElasticHost()).isEqualTo("localhost");
+        assertThat(configurationWrapper.getElasticHost()).isEqualTo("localhost");
     }
 
     @Test
@@ -112,12 +113,12 @@ public class ConfigurationWrapperTest {
         configurationWrapper.parseArguments(args);
 
         //then
-        Assertions.assertThat(configurationWrapper.getMinimumNumberOfTechnologiesConnections()).isEqualTo(2);
+        assertThat(configurationWrapper.getMinimumNumberOfTechnologiesConnections()).isEqualTo(2);
     }
 
 
     @Test
-    public void shouldUsePostsInMapperWhenNoOmitPostsOptionProvided() {
+    public void shouldNotUsePostsBodyInMapperWhenNoIncludePostsBodyOptionProvided() {
         //given
         String[] args = toArgs("s3://some/file/on/S3");
 
@@ -125,24 +126,24 @@ public class ConfigurationWrapperTest {
         configurationWrapper.parseArguments(args);
 
         //then
-        Assertions.assertThat(configurationWrapper.isOmitPosts()).isFalse();
+        assertThat(configurationWrapper.isIncludePostsBody()).isFalse();
     }
 
     @Test
-    public void shouldNotUsePostsInMapperWhenOmitPostsOptionProvided() {
+    public void shouldUsePostsBodyInMapperWhenIncludePostsBodyOptionProvided() {
         //given
-        String[] args = toArgs("s3://some/file/on/S3 --omitPost");
+        String[] args = toArgs("s3://some/file/on/S3 --includePostsBody");
 
         //when
         configurationWrapper.parseArguments(args);
 
         //then
-        Assertions.assertThat(configurationWrapper.isOmitPosts()).isTrue();
+        assertThat(configurationWrapper.isIncludePostsBody()).isTrue();
     }
 
 
     @Test
-    public void shouldDefaultMappingScope() {
+    public void shouldDefaultMappingScopeTo5() {
         //given
         String[] args = toArgs("s3://some/file/on/S3");
 
@@ -150,7 +151,7 @@ public class ConfigurationWrapperTest {
         configurationWrapper.parseArguments(args);
 
         //then
-        Assertions.assertThat(configurationWrapper.getMappingScope()).isEqualTo(5);
+        assertThat(configurationWrapper.getMappingScope()).isEqualTo(5);
     }
 
     @Test
@@ -162,7 +163,7 @@ public class ConfigurationWrapperTest {
         configurationWrapper.parseArguments(args);
 
         //then
-        Assertions.assertThat(configurationWrapper.getMappingScope()).isEqualTo(4);
+        assertThat(configurationWrapper.getMappingScope()).isEqualTo(4);
     }
 
 }

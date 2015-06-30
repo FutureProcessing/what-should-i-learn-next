@@ -5,6 +5,8 @@ import com.amazonaws.services.s3.iterable.S3Objects;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +14,8 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class PopulateElastic {
+
+    private static final Logger log = LoggerFactory.getLogger(PopulateElastic.class);
 
     private final PopulateElasticConfig config;
 
@@ -33,11 +37,15 @@ public class PopulateElastic {
 
         final ElasticWriter elasticWriter = new ElasticWriter(config.getElasticIndexName(), config.getElasticHost(), config.getElasticPort());
 
+        int count = 0;
         for (S3ObjectSummary s3ObjectSummary : s3Objects) {
             s3ObjectSummary.getKey();
 
             S3Object object = s3Client.getObject(s3ObjectSummary.getBucketName(), s3ObjectSummary.getKey());
+            log.info("Downloading content of: {}", object.getKey());
+
             S3ObjectInputStream objectContentStream = object.getObjectContent();
+
             BufferedReader reader = new BufferedReader(new InputStreamReader(objectContentStream));
 
             String line = null;
@@ -49,7 +57,10 @@ public class PopulateElastic {
                 Integer value = scanner.nextInt();
 
                 elasticWriter.write(t1, t2, value);
+                count++;
             }
+
+            log.info("Wrote {} pairs", count);
         }
     }
 }
