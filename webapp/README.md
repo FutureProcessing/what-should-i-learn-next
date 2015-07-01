@@ -1,38 +1,52 @@
-How to run GUI
+How to run Web App
 ===========================
 ## Install:
 1. Node [https://nodejs.org/]
 2. Grunt [https://www.npmjs.com/package/grunt]
 
 # Production
-How to run on production
+This document describes how to build and run webapp part of application on production
 
-## Build
+## 1. Build
 To build application:
+
 ```
 npm install
 grunt build
 ```
 
-## Run
-To run application:
+## 2. Run
+
+### 2a. Run in the Docker container
+
+In distribution directory is a [Dockerfile](distribution/Dockerfile) that is used to run the application.
+Use it to build an image and run an application.
+
 ```
-cd distribution
+#Build Image
+docker built -t wsiln .
+
+#Run container
+docker run -d --name wsiln -p 8081:8081
+```
+
+### 2b. Run outside the container
+Unzip `app.zip` to your location.
+
+Then run        
+
+```
 npm start
 ```
 
 Application is running on port **8081**
 
-
 # Development
-How to develop
-
-## Build & Run
+Use this script to start an application locally to develop.
 
 ```
 npm install
 grunt develop
 ```
-
 
 Application is running on port **8081**
