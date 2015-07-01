@@ -59,6 +59,59 @@ footer a:active {
     line-height: 10px;
 }
 
+.footerShareLinks {
+    overflow: hidden;
+    padding: 5px 0;
+    width: 81px;
+    margin: 0 auto;
+    display: none;
+}
+
+.footerShareLinks a {
+    width: 25px;
+    height: 25px;
+    display: block;
+    background-color: black;
+}
+
+.footerShareLinks li {
+    float: left;    
+}
+
+.footerGitHub {
+    background-image: url('images/gitHubSmall.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    
+}
+
+.footerLinkedIn {
+    background-image: url('images/spriteSocial.png');
+    background-position: 0 -75px;
+    margin-left: 3px;
+}
+
+.footerTwitter {
+    background-image: url('images/spriteSocial.png');
+    background-position: 0 0;
+    margin-left: 3px;
+}
+
+.footerTwitter:hover {
+    background-color: #1dcaff;   
+    transition: background .5s; 
+}
+
+.footerLinkedIn:hover {
+    background-color: #007bb6;
+    transition: background .5s;
+}
+
+.footerGitHub:hover {
+    background-color: #bbbbbb;
+    transition: background .5s;
+}
+
 @media (max-width: @mobileViewMaxWidth) {
     footer {
         position: relative;
@@ -71,10 +124,15 @@ footer a:active {
     #footerCopyrights {
         float: none;
         margin-left: auto;
+        border-top: 2px solid white;
     }
 
     #footerLinks {
         float: none;
         margin-right: auto;
+    }
+
+    .footerShareLinks {
+        display: block;
     }
 }
