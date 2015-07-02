@@ -17,13 +17,14 @@ Upload `Posts.xml` file to S3 into `hadoop-input` bucket.
 Build map-reduce jar-with-dependencies.
 Upload it to S3.
 
+### Prepare directory structure on S3.
+
 ### Create new Cluster within Amazon EMR.
 1. Add Custom Jar Step.
 2. Name it as you will.
 3. Select `JAR location` from your S3 bucket.
 4. Pass arguments in form: <inputPath> <outputPath>
 ```
-s3://ss-hadoop/input/SmallPosts.xml s3://ss-hadoop/output
+s3://wsiln-hadoop/input/Posts.xml s3://wsiln-hadoop/output/output02
 ```
-
 Your job will be distributed on Hadoop cluster. After a while, you should see status `Completed` next to step details.

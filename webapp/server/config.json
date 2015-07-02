@@ -1,9 +1,9 @@
 {
-  "http": {
-    "port": 8081
-  },
-  "elastic": {
-    "address": "vm-wsiln-01:9200",
-    "indexName": "technologies"
-  }
+	"http": {
+		"port": 8081
+	},
+	"elastic": {
+		"address": "vm-wsiln-02:9200",
+		"indexName": "technologies"
+	}
 }

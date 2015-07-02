@@ -20,22 +20,19 @@ RUN npm update
 RUN npm install -g bower grunt-cli
 
 #==============
-# Copying start.sh script
-#==============
-COPY start.sh /usr/local/bin/start.sh
-RUN  chmod +x /usr/local/bin/start.sh
-
-#==============
 # Adding app sources
 #==============
 
 ADD app.zip /var/app.zip
 RUN unzip /var/app.zip -d /app
-RUN cd /app/app && npm install
+
+WORKDIR /app/app
+
+RUN npm install
 
 EXPOSE 8081	
 	
-CMD ["/usr/local/bin/start.sh"]
+CMD ["npm", "start"]
     
 
 

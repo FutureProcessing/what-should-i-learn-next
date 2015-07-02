@@ -8,6 +8,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-mocha-cli');
+    grunt.loadNpmTasks('grunt-json-replace');
 
 
     grunt.initConfig({
@@ -84,7 +85,7 @@ module.exports = function (grunt) {
         },
 
         mochacli: {
-            
+
             all: ['test/*.js']
         },
 
@@ -133,11 +134,28 @@ module.exports = function (grunt) {
 
         clean: {
             build: ["client/generated/*.*"]
+        },
+
+        "json-replace": {
+            options: {
+                replace: {
+                    elastic: {
+                        address: (grunt.option('elastichost') || 'localhost') + ':9200'
+                    }
+                }
+            },
+            "server-config": {
+                files: [{
+                    src: "server/config.json",
+                    dest: "server/config.json"
+                }]
+            }
         }
 
     });
 
     grunt.registerTask('test', ['mochacli']);
     grunt.registerTask('develop', ['browserify:dev', 'watch']);
-    grunt.registerTask('build', ['clean', 'browserify:prod', 'less:prod', 'compress']);
+    grunt.registerTask('build', ['clean', 'json-replace', 'browserify:prod', 'less:prod', 'compress']);
+
 };
