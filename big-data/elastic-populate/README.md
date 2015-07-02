@@ -1,7 +1,7 @@
 Populate Elastic usage
 ======================
 
-Use this command to populate elastic index with results from hadoop stored in s3
+Use this command to populate Elastic index with results from Hadoop, that are stored on S3
 
 ``` bash
 java -cp map-reduce-1.0-SNAPSHOT-jar-with-dependencies.jar com.futureprocessing.wsiln.elastic.PopulateElastic --s3Bucket=s3bucket --s3Key=output/output01/part --elasticHost=your-host --indexName=technologies
