@@ -10,23 +10,23 @@
     "request": "^2.55.0",
     "underscore": "1.8.x",
     "webdriver-manager": "^5.2.0",
-    "elasticsearch":"4.1.x"
+    "elasticsearch": "4.1.x"
   },
   "devDependencies": {
+    "chai": "3.0.x",
     "grunt": "^0.4.5",
     "grunt-browserify": "3.5.x",
-    "remapify": "2.0.x",
-    "minifyify": "7.0.x",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-compress": "^0.13.0",
     "grunt-contrib-less": "1.0.x",
     "grunt-contrib-watch": "0.6.x",
     "grunt-express-server": "0.4.x",
+    "grunt-json-replace": "^0.1.2",
     "grunt-keepalive": "0.0.1",
-    "grunt-contrib-compress": "^0.13.0",
-    "grunt-contrib-less": "1.0.x",
-    "grunt-contrib-clean": "^0.6.0",
     "grunt-mocha-cli": "1.13.0",
-    "chai": "3.0.x",
-    "mocha": "2.2.x"
+    "minifyify": "7.0.x",
+    "mocha": "2.2.x",
+    "remapify": "2.0.x"
   },
   "scripts": {
     "start": "npm install && node server/server.js"
